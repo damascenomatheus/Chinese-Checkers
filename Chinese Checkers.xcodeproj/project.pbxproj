@@ -9,25 +9,25 @@
 /* Begin PBXBuildFile section */
 		77BDD46022FED06F00A5FFEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BDD45F22FED06F00A5FFEB /* AppDelegate.swift */; };
 		77BDD46222FED06F00A5FFEB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 77BDD46122FED06F00A5FFEB /* GameScene.sks */; };
-		77BDD46422FED06F00A5FFEB /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 77BDD46322FED06F00A5FFEB /* Actions.sks */; };
 		77BDD46622FED06F00A5FFEB /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BDD46522FED06F00A5FFEB /* GameScene.swift */; };
 		77BDD46822FED06F00A5FFEB /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BDD46722FED06F00A5FFEB /* GameViewController.swift */; };
 		77BDD46B22FED06F00A5FFEB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77BDD46922FED06F00A5FFEB /* Main.storyboard */; };
 		77BDD46D22FED07200A5FFEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77BDD46C22FED07200A5FFEB /* Assets.xcassets */; };
 		77BDD47022FED07200A5FFEB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77BDD46E22FED07200A5FFEB /* LaunchScreen.storyboard */; };
+		77BDD47822FED0EE00A5FFEB /* HexGrid.sks in Resources */ = {isa = PBXBuildFile; fileRef = 77BDD47722FED0EE00A5FFEB /* HexGrid.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		77BDD45C22FED06F00A5FFEB /* Chinese Checkers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chinese Checkers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77BDD45F22FED06F00A5FFEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77BDD46122FED06F00A5FFEB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		77BDD46322FED06F00A5FFEB /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		77BDD46522FED06F00A5FFEB /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		77BDD46722FED06F00A5FFEB /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		77BDD46A22FED06F00A5FFEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		77BDD46C22FED07200A5FFEB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77BDD46F22FED07200A5FFEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77BDD47122FED07200A5FFEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77BDD47722FED0EE00A5FFEB /* HexGrid.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HexGrid.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,13 +62,13 @@
 			children = (
 				77BDD45F22FED06F00A5FFEB /* AppDelegate.swift */,
 				77BDD46122FED06F00A5FFEB /* GameScene.sks */,
-				77BDD46322FED06F00A5FFEB /* Actions.sks */,
 				77BDD46522FED06F00A5FFEB /* GameScene.swift */,
 				77BDD46722FED06F00A5FFEB /* GameViewController.swift */,
 				77BDD46922FED06F00A5FFEB /* Main.storyboard */,
 				77BDD46C22FED07200A5FFEB /* Assets.xcassets */,
 				77BDD46E22FED07200A5FFEB /* LaunchScreen.storyboard */,
 				77BDD47122FED07200A5FFEB /* Info.plist */,
+				77BDD47722FED0EE00A5FFEB /* HexGrid.sks */,
 			);
 			path = "Chinese Checkers";
 			sourceTree = "<group>";
@@ -131,11 +131,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77BDD47822FED0EE00A5FFEB /* HexGrid.sks in Resources */,
 				77BDD46B22FED06F00A5FFEB /* Main.storyboard in Resources */,
 				77BDD46222FED06F00A5FFEB /* GameScene.sks in Resources */,
 				77BDD46D22FED07200A5FFEB /* Assets.xcassets in Resources */,
 				77BDD47022FED07200A5FFEB /* LaunchScreen.storyboard in Resources */,
-				77BDD46422FED06F00A5FFEB /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
