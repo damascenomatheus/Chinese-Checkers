@@ -18,6 +18,20 @@ class GameViewController: UIViewController {
     
     fileprivate let cellId = "CellId"
     
+    let chatMessages = [
+        [
+            ChatMessage(text: "Lorem ipsum dolor sit amet", isComing: true, date: Date()),
+            ChatMessage(text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit", isComing: true, date: Date.dateFromCustomString(customString: "01/04/2019")),
+        ],
+        [
+            ChatMessage(text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at laoreet ex, et malesuada enim. Vestibulum porttitor magna lacus", isComing: true, date: Date.dateFromCustomString(customString: "15/05/2019")),
+            ChatMessage(text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at laoreet ex, et malesuada enim. Vestibulum porttitor magna lacus. Quisque et ultrices arcu.", isComing: false, date: Date.dateFromCustomString(customString: "02/06/2019"))
+        ],
+        [
+            ChatMessage(text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at laoreet ex, et malesuada enim. Vestibulum porttitor magna lacus. Quisque et ultrices arcu. Maecenas eget ipsum aliquet, imperdiet nibh at, porttitor sapien.", isComing: true, date: Date.dateFromCustomString(customString: "12/07/2019"))
+        ]
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,8 +54,9 @@ class GameViewController: UIViewController {
             view.showsNodeCount = true
         }
         
-        chatTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        chatTableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         
+        chatTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         let chatMessageCellNib = UINib(nibName: "ChatMessageCell", bundle: nil)
         chatTableView.register(chatMessageCellNib, forCellReuseIdentifier: "ChatMessageCell")
     }
@@ -63,16 +78,40 @@ class GameViewController: UIViewController {
     }
 }
 
-extension GameViewController: UITableViewDataSource, UITabBarDelegate {
+extension GameViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return chatMessages.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return chatMessages[section].count
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let dateHeaderView = Bundle.main.loadNibNamed("DateHeaderView", owner: self, options: nil)?.first as! DateHeaderView
+        dateHeaderView.dateLabel.text = Date.customStringFromDate(date: chatMessages[section].first?.date ?? Date())
+        return dateHeaderView
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if let firstMessageInSection = chatMessages[section].first {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy"
+            let dateString = dateFormatter.string(from: firstMessageInSection.date)
+            return dateString
+        }
+        return "\(Date())"
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChatMessageCell", for: indexPath) as? ChatMessageCell else {
             return ChatMessageCell()
         }
-        cell.messageLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at laoreet ex, et malesuada enim. Vestibulum porttitor magna lacus. Quisque et ultrices arcu. Maecenas eget ipsum aliquet, imperdiet nibh at, porttitor sapien."
+        
+        let chatMessage = chatMessages[indexPath.section][indexPath.row]
+        cell.chatMessage = chatMessage
+        
         return cell
     }
     

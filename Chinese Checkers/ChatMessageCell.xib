@@ -15,23 +15,23 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatMessageCell" rowHeight="80" id="KGk-i7-Jjw" customClass="ChatMessageCell" customModule="Chinese_Checkers" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ImR-dv-7kE">
-                        <rect key="frame" x="16" y="16" width="282" height="47.5"/>
+                        <rect key="frame" x="16" y="16" width="74" height="47.5"/>
                         <color key="backgroundColor" red="0.44031619970000002" green="1" blue="0.4124529945" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="5"/>
+                                <integer key="value" value="12"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SYa-Z2-VAS">
-                        <rect key="frame" x="32" y="32" width="250" height="15.5"/>
+                        <rect key="frame" x="32" y="32" width="42" height="15.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="250" id="Hdr-X7-TkE"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="Hdr-X7-TkE"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -41,6 +41,7 @@
                 <constraints>
                     <constraint firstItem="SYa-Z2-VAS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="3Uv-1U-1na"/>
                     <constraint firstItem="ImR-dv-7kE" firstAttribute="trailing" secondItem="SYa-Z2-VAS" secondAttribute="trailing" constant="16" id="9Xb-BQ-zua"/>
+                    <constraint firstAttribute="trailing" secondItem="SYa-Z2-VAS" secondAttribute="trailing" constant="32" id="Eup-Mi-wbZ"/>
                     <constraint firstItem="ImR-dv-7kE" firstAttribute="bottom" secondItem="SYa-Z2-VAS" secondAttribute="bottom" constant="16" id="JOa-fB-qv6"/>
                     <constraint firstItem="SYa-Z2-VAS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="32" id="Jql-wh-ZQk"/>
                     <constraint firstAttribute="bottom" secondItem="SYa-Z2-VAS" secondAttribute="bottom" constant="32" id="K7v-ar-p4X"/>
@@ -50,7 +51,10 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="bubbleBackgroundView" destination="ImR-dv-7kE" id="Ffo-QZ-rcn"/>
                 <outlet property="messageLabel" destination="SYa-Z2-VAS" id="BT9-pj-dID"/>
+                <outlet property="messageLabelLeadingConstraint" destination="3Uv-1U-1na" id="18b-CY-p5v"/>
+                <outlet property="messageLabelTrailingConstraint" destination="Eup-Mi-wbZ" id="hgr-Lc-lmZ"/>
             </connections>
             <point key="canvasLocation" x="57.971014492753625" y="195.53571428571428"/>
         </tableViewCell>
