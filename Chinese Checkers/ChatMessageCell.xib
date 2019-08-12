@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatMessageCell" rowHeight="80" id="KGk-i7-Jjw" customClass="ChatMessageCell" customModule="Chinese_Checkers" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ImR-dv-7kE">
+                        <rect key="frame" x="16" y="16" width="282" height="47.5"/>
+                        <color key="backgroundColor" red="0.44031619970000002" green="1" blue="0.4124529945" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SYa-Z2-VAS">
+                        <rect key="frame" x="32" y="32" width="250" height="15.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="250" id="Hdr-X7-TkE"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="SYa-Z2-VAS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="3Uv-1U-1na"/>
+                    <constraint firstItem="ImR-dv-7kE" firstAttribute="trailing" secondItem="SYa-Z2-VAS" secondAttribute="trailing" constant="16" id="9Xb-BQ-zua"/>
+                    <constraint firstItem="ImR-dv-7kE" firstAttribute="bottom" secondItem="SYa-Z2-VAS" secondAttribute="bottom" constant="16" id="JOa-fB-qv6"/>
+                    <constraint firstItem="SYa-Z2-VAS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="32" id="Jql-wh-ZQk"/>
+                    <constraint firstAttribute="bottom" secondItem="SYa-Z2-VAS" secondAttribute="bottom" constant="32" id="K7v-ar-p4X"/>
+                    <constraint firstItem="ImR-dv-7kE" firstAttribute="leading" secondItem="SYa-Z2-VAS" secondAttribute="leading" constant="-16" id="oUE-en-PHf"/>
+                    <constraint firstItem="ImR-dv-7kE" firstAttribute="top" secondItem="SYa-Z2-VAS" secondAttribute="top" constant="-16" id="zSF-nQ-f1G"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="messageLabel" destination="SYa-Z2-VAS" id="BT9-pj-dID"/>
+            </connections>
+            <point key="canvasLocation" x="57.971014492753625" y="195.53571428571428"/>
+        </tableViewCell>
+    </objects>
+</document>

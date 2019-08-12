@@ -15,6 +15,8 @@
 		77BDD46D22FED07200A5FFEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77BDD46C22FED07200A5FFEB /* Assets.xcassets */; };
 		77BDD47022FED07200A5FFEB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77BDD46E22FED07200A5FFEB /* LaunchScreen.storyboard */; };
 		77BDD47822FED0EE00A5FFEB /* HexGrid.sks in Resources */ = {isa = PBXBuildFile; fileRef = 77BDD47722FED0EE00A5FFEB /* HexGrid.sks */; };
+		77BDD47F2301444900A5FFEB /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BDD47D2301444900A5FFEB /* ChatMessageCell.swift */; };
+		77BDD4802301444900A5FFEB /* ChatMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77BDD47E2301444900A5FFEB /* ChatMessageCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		77BDD46F22FED07200A5FFEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77BDD47122FED07200A5FFEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77BDD47722FED0EE00A5FFEB /* HexGrid.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HexGrid.sks; sourceTree = "<group>"; };
+		77BDD47D2301444900A5FFEB /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
+		77BDD47E2301444900A5FFEB /* ChatMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessageCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 				77BDD46122FED06F00A5FFEB /* GameScene.sks */,
 				77BDD46522FED06F00A5FFEB /* GameScene.swift */,
 				77BDD46722FED06F00A5FFEB /* GameViewController.swift */,
+				77BDD47D2301444900A5FFEB /* ChatMessageCell.swift */,
+				77BDD47E2301444900A5FFEB /* ChatMessageCell.xib */,
 				77BDD46922FED06F00A5FFEB /* Main.storyboard */,
 				77BDD46C22FED07200A5FFEB /* Assets.xcassets */,
 				77BDD46E22FED07200A5FFEB /* LaunchScreen.storyboard */,
@@ -136,6 +142,7 @@
 				77BDD46222FED06F00A5FFEB /* GameScene.sks in Resources */,
 				77BDD46D22FED07200A5FFEB /* Assets.xcassets in Resources */,
 				77BDD47022FED07200A5FFEB /* LaunchScreen.storyboard in Resources */,
+				77BDD4802301444900A5FFEB /* ChatMessageCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77BDD46622FED06F00A5FFEB /* GameScene.swift in Sources */,
+				77BDD47F2301444900A5FFEB /* ChatMessageCell.swift in Sources */,
 				77BDD46822FED06F00A5FFEB /* GameViewController.swift in Sources */,
 				77BDD46022FED06F00A5FFEB /* AppDelegate.swift in Sources */,
 			);

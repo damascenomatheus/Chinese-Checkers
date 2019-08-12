@@ -19,6 +19,7 @@ enum Side: String {
 }
 
 class GameScene: SKScene {
+    weak var viewController: GameViewController?
     
     var map: SKTileMapNode!
     var reds: [SKSpriteNode]!
@@ -28,6 +29,8 @@ class GameScene: SKScene {
     var totalMoves = -1
     
     var possibleMoves: [(Int, Int)] = []
+    
+    var predictionNodesToBeRemoved = [SKNode]()
     
     override func didMove(to view: SKView) {
         map = childNode(withName: "TileMapNode") as? SKTileMapNode
@@ -86,6 +89,7 @@ class GameScene: SKScene {
         if touchCount == 2 {
             touchCount = 0
             selectedPiece = SKSpriteNode()
+            removePredictionNodes()
         }
     }
     
@@ -253,16 +257,23 @@ class GameScene: SKScene {
         possibleMoves = []
     }
     
-    func showPossibleMovesInDirection() {
+    private func showPossibleMovesInDirection() {
         for move in possibleMoves {
-            let node = SKShapeNode(circleOfRadius: 10)
-            node.fillColor = .blue
+            let node = SKShapeNode(circleOfRadius: 20)
+            node.fillColor = .yellow
             map.addChild(node)
             node.position = map.centerOfTile(atColumn: move.0, row: move.1)
+            predictionNodesToBeRemoved.append(node)
         }
     }
     
-    func showPossibleMoves(atPos pos: CGPoint) {
+    private func removePredictionNodes() {
+        for node in predictionNodesToBeRemoved {
+            node.removeFromParent()
+        }
+    }
+    
+    private func showPossibleMoves(atPos pos: CGPoint) {
         checkNEMove(atPos: pos)
         checkNWMove(atPos: pos)
         checkSWMove(atPos: pos)
@@ -271,7 +282,7 @@ class GameScene: SKScene {
         checkSides(atPos: pos, side: .east)
     }
     
-    func validateMove(col: Int, row: Int) -> Bool {
+    private func validateMove(col: Int, row: Int) -> Bool {
         let nodes = map.nodes(at: map.centerOfTile(atColumn: col, row: row))
         let isPiece = checkIfIsPiece(nodes)
         let tileDefinition = map.tileDefinition(atColumn: col, row: row)
