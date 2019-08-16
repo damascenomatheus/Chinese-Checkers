@@ -15,6 +15,7 @@ class GameViewController: UIViewController {
     var currentGame: GameScene?
     
     @IBOutlet weak var chatTableView: UITableView!
+    @IBOutlet weak var messageView: TextMessageField!
     
     fileprivate let cellId = "CellId"
     
@@ -59,6 +60,13 @@ class GameViewController: UIViewController {
         chatTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         let chatMessageCellNib = UINib(nibName: "ChatMessageCell", bundle: nil)
         chatTableView.register(chatMessageCellNib, forCellReuseIdentifier: "ChatMessageCell")
+        
+        messageView.delegate = self
+        NetworkManager.shared.delegate = self
+        
+        // Join Chat
+        
+        NetworkManager.shared.joinChat()
     }
 
     override var shouldAutorotate: Bool {
@@ -114,6 +122,21 @@ extension GameViewController: UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
+}
+
+extension GameViewController: TextMessageFieldDelegate {
+    func didClickSendButton(text: String) {
+        let data = "iam:RED,msg:\(text)".data(using: .utf8)!
+        NetworkManager.shared.send(data: data)
+    }
+}
+
+extension GameViewController: NetworkManagerDelegate {
+    func didReceiveMessage(message: String) {
+        print("Server response: \(message)")
+    }
     
-    
+    func didStopSession() {
+        print("Session has stopped")
+    }
 }

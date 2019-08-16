@@ -92,6 +92,7 @@
                     </view>
                     <connections>
                         <outlet property="chatTableView" destination="o3u-aG-MJ4" id="r8E-oe-mGC"/>
+                        <outlet property="messageView" destination="eAK-i0-bop" id="0pS-Uk-WeL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>

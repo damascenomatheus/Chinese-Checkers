@@ -8,18 +8,16 @@
 
 import UIKit
 
+protocol TextMessageFieldDelegate: class {
+    func didClickSendButton(text: String)
+}
+
 class TextMessageField: UIView {
     
     let nibName = "TextMessageField"
-        
+    
     @IBOutlet weak var textMessageView: UITextView!
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+    weak var delegate: TextMessageFieldDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,6 +34,7 @@ class TextMessageField: UIView {
     }
     
     @IBAction func sendButtonClicked(_ sender: UIButton) {
+        self.delegate?.didClickSendButton(text: textMessageView.text ?? "No message")
     }
     
 }
