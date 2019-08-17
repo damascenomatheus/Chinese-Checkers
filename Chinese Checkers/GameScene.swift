@@ -23,6 +23,7 @@ class GameScene: SKScene {
     
     var map: SKTileMapNode!
     var reds: [SKSpriteNode]!
+    var blues: [SKSpriteNode]!
     var selectedPiece = SKSpriteNode()
     
     var touchCount = 0
@@ -36,6 +37,9 @@ class GameScene: SKScene {
         map = childNode(withName: "TileMapNode") as? SKTileMapNode
         reds = map.children
             .filter { ($0.userData?["isRed"] as! Bool) == true }
+            .map { $0 as! SKSpriteNode }
+        blues = map.children
+            .filter { ($0.userData?["isBlue"]) as! Bool == true }
             .map { $0 as! SKSpriteNode }
         
         setupGameBoard()
