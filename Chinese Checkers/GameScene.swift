@@ -33,6 +33,8 @@ class GameScene: SKScene {
     
     var predictionNodesToBeRemoved = [SKNode]()
     
+    var currentMove: [(Int, Int)] = []
+    
     override func didMove(to view: SKView) {
         map = childNode(withName: "TileMapNode") as? SKTileMapNode
         reds = map.children
@@ -62,6 +64,13 @@ class GameScene: SKScene {
         }
     }
     
+    func getPieceAt(col: Int, row: Int) -> SKSpriteNode {
+        let pos = map.centerOfTile(atColumn: col, row: row)
+        let piece = map.nodes(at: pos)
+            .filter { $0.userData?["isPiece"] as? Bool == true }.first as! SKSpriteNode
+        return piece
+    }
+    
     private func movePiece(atPos pos: CGPoint) {
         let mapPos = self.convert(pos, to: map)
         let col = map.tileColumnIndex(fromPosition: mapPos)
@@ -77,6 +86,8 @@ class GameScene: SKScene {
                 touchCount += 1
                 let pieceNode = tileNode as? SKSpriteNode
                 selectedPiece = pieceNode!
+                
+                currentMove.append((col: col, row: row))
             }
         } else {
             let hexTileCenter = map.centerOfTile(atColumn: col, row: row)
@@ -85,8 +96,15 @@ class GameScene: SKScene {
             if let isBoard = tileDefinition?.userData?["isBoard"] as? Bool,
                 tileNode?.userData?["isPiece"] == nil,
                 isBoard {
+                currentMove.append((col: col, row: row))
+                
+                // Send Move to oponent
+                let data = "iam:RED,msg:>MOVE \(currentMove[0].0)-\(currentMove[0].1);\(currentMove[1].0)-\(currentMove[1].1)".data(using: .utf8)!
+                NetworkManager.shared.send(data: data)
+                
                 selectedPiece.run(SKAction.move(to: hexTileCenter, duration: 0.5))
                 touchCount += 1
+                currentMove = []
             }
         }
         
@@ -95,6 +113,11 @@ class GameScene: SKScene {
             selectedPiece = SKSpriteNode()
             removePredictionNodes()
         }
+    }
+    
+    func movePieceTo(piece: SKSpriteNode, col: Int, row: Int) {
+        let hexTileCenter = map.centerOfTile(atColumn: col, row: row)
+        piece.run(SKAction.move(to: hexTileCenter, duration: 0.5))
     }
     
     private func checkNEMove(atPos pos: CGPoint) {

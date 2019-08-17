@@ -133,9 +133,35 @@ extension GameViewController: TextMessageFieldDelegate {
 
 extension GameViewController: NetworkManagerDelegate {
     func didReceiveMessage(message: String) {
-        print("Server response: \(message)")
-        let message = ChatMessage(text: message, isComing: true)
-        chatMessages.append(message)
+        print(message)
+        let chatMessage = ChatMessage(text: message, isComing: true)
+        chatMessages.append(chatMessage)
+        
+        // Split the message into two fragments
+        // The first one says who the player is and the second one contains the message content
+        // After this, check if message content is command by checking whether it contains '>' at beginning
+        let isCommand = message.components(separatedBy: ":").last?.first == ">"
+        
+        if isCommand {
+            guard let command = message.components(separatedBy: ">").last else {
+                print("INVALID COMMAND")
+                return
+            }
+            
+            if command.contains("MOVE") {
+                guard let positions = command
+                    .components(separatedBy: " ").last?
+                    .components(separatedBy: ";")
+                    else {
+                        return
+                }
+                let startPos = positions[0].components(separatedBy: "-")
+                let endPos = positions[1].components(separatedBy: "-")
+                
+                let piece = currentGame?.getPieceAt(col: Int(startPos[0])!, row: Int(startPos[1])!)
+                currentGame?.movePieceTo(piece: piece!, col: Int(endPos[0])!, row: Int(endPos[1])!)
+            }
+        }
         
         DispatchQueue.main.async { [weak self] in
             self?.chatTableView.reloadData()
