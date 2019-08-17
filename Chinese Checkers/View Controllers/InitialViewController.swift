@@ -12,10 +12,20 @@ class InitialViewController: UIViewController {
 
     @IBOutlet weak var hostTextField: UITextField!
     @IBOutlet weak var portTextField: UITextField!
+    @IBOutlet weak var statusView: UIView!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var connectButton: UIButton!
+    @IBOutlet weak var startButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        NetworkManager.shared.delegate = self
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
     
     @IBAction func blueColorSelected(_ sender: UIButton) {
@@ -26,9 +36,7 @@ class InitialViewController: UIViewController {
         
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
+    
     
     @IBAction func connectButtonClicked(_ sender: UIButton) {
         
@@ -50,4 +58,19 @@ class InitialViewController: UIViewController {
         }
     }
 
+}
+
+extension InitialViewController: NetworkManagerDelegate {
+    func didReceiveMessage(message: String) {
+        if message.contains(">JOIN") {
+            statusView.backgroundColor = .green
+            statusLabel.text = "Connected"
+            connectButton.isEnabled = false
+            startButton.isEnabled = true
+        }
+    }
+    
+    func didStopSession() {
+        print("Session did stop")
+    }
 }

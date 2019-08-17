@@ -21,6 +21,8 @@ class GameViewController: UIViewController {
     
     var chatMessages = [ChatMessage]()
     
+    var requestFlag = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,20 +45,43 @@ class GameViewController: UIViewController {
             view.showsNodeCount = true
         }
         
-        chatTableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        
-        chatTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         let chatMessageCellNib = UINib(nibName: "ChatMessageCell", bundle: nil)
+        
+        chatTableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        chatTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         chatTableView.register(chatMessageCellNib, forCellReuseIdentifier: "ChatMessageCell")
         
         messageView.delegate = self
         NetworkManager.shared.delegate = self
-        
-        // Join Chat
-        
-//        NetworkManager.shared.joinChat()
     }
-
+    
+    @IBAction func restartButtonClicked(_ sender: UIButton) {
+        let alert = Alert.showAlert(title: "Restart", message: "Are you sure of this?") { result in
+            if result {
+                let data = "iam:RED,msg:>RESTART".data(using: .utf8)!
+                NetworkManager.shared.send(data: data)
+                self.requestFlag = true
+                print("Yup, i want to restart the match!")
+            } else {
+                print("No, i don't want to restart the match!")
+            }
+        }
+        present(alert, animated: true)
+    }
+    
+    @IBAction func surrenderButtonClicked(_ sender: UIButton) {
+        let alert = Alert.showAlert(title: "Surrender", message: "Are you sure of this?") { result in
+            if result {
+                let data = "iam:RED,msg:>SURRENDER".data(using: .utf8)!
+                NetworkManager.shared.send(data: data)
+                print("Yup, i give up!")
+            } else {
+                print("No, i can win!")
+            }
+        }
+        present(alert, animated: true)
+    }
+    
     override var shouldAutorotate: Bool {
         return true
     }
@@ -99,7 +124,6 @@ extension GameViewController: TextMessageFieldDelegate {
         if text == "QUIT" {
             NetworkManager.shared.stopChatSession()
         }
-        
         NetworkManager.shared.send(data: data)
         messageView.textMessageView.text = ""
     }
@@ -134,6 +158,35 @@ extension GameViewController: NetworkManagerDelegate {
                 
                 let piece = currentGame?.getPieceAt(col: Int(startPos[0])!, row: Int(startPos[1])!)
                 currentGame?.movePieceTo(piece: piece!, col: Int(endPos[0])!, row: Int(endPos[1])!)
+            } else if command.contains("SURRENDER") {
+                print("YOU WON!")
+            } else if command.contains("RESTART") {
+                if !requestFlag {
+                    let alert = Alert.showAlert(title: "Restart", message: "Oponent has requested to restart the match") { [unowned self] result in
+                        if result {
+                            let data = "iam:RED,msg:>ACCEPT".data(using: .utf8)!
+                            NetworkManager.shared.send(data: data)
+                            self.currentGame?.restartGame()
+                            print("Yup, i want to restart the match!")
+                        } else {
+                            let data = "iam:RED,msg:>DECLINE".data(using: .utf8)!
+                            NetworkManager.shared.send(data: data)
+                            print("No, i don't want to restart the match!")
+                        }
+                    }
+                    present(alert, animated: true)
+                }
+            } else if command.contains("ACCEPT") {
+                if requestFlag {
+                    currentGame?.restartGame()
+                    requestFlag = false
+                }
+            } else if command.contains("DECLINE") {
+                if requestFlag {
+                    let alert = Alert.showAlert(title: "REQUEST DECLINED", message: "Oponent refused to restart the match")
+                    present(alert, animated: true)
+                    requestFlag = false
+                }
             }
         }
         

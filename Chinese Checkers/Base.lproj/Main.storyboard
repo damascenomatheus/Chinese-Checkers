@@ -26,8 +26,11 @@
                                     <constraint firstAttribute="width" constant="30" id="j6Q-0a-u1t"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disconnected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBC-KD-679">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disconnected" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBC-KD-679">
                                 <rect key="frame" x="755" y="100" width="178.5" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="178.5" id="AX6-cF-CVq"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -113,7 +116,7 @@
                                             <action selector="connectButtonClicked:" destination="uAB-sx-fNT" eventType="touchUpInside" id="9r4-Kg-ATz"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUb-4B-XTI">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUb-4B-XTI">
                                         <rect key="frame" x="452" y="0.0" width="392" height="84"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="60"/>
@@ -151,8 +154,12 @@
                         <viewLayoutGuide key="safeArea" id="V0h-49-mul"/>
                     </view>
                     <connections>
+                        <outlet property="connectButton" destination="dff-cm-JI3" id="GpR-Es-red"/>
                         <outlet property="hostTextField" destination="GEv-Kr-Oz7" id="pyU-Jc-O91"/>
                         <outlet property="portTextField" destination="VOa-fG-YQh" id="MJG-4I-3dZ"/>
+                        <outlet property="startButton" destination="tUb-4B-XTI" id="xNB-y2-yU1"/>
+                        <outlet property="statusLabel" destination="bBC-KD-679" id="3Uq-6h-4jY"/>
+                        <outlet property="statusView" destination="2wE-Yf-i17" id="waa-dQ-Qbf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Go-Em-0zs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -230,11 +237,40 @@
                                     <constraint firstItem="eAK-i0-bop" firstAttribute="leading" secondItem="err-3W-dbp" secondAttribute="leading" id="vXz-fa-dGt"/>
                                 </constraints>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="39" translatesAutoresizingMaskIntoConstraints="NO" id="WU6-1M-2oN">
+                                <rect key="frame" x="447" y="20" width="111" height="41"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chT-h5-RgR">
+                                        <rect key="frame" x="0.0" y="0.0" width="37" height="41"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="37" id="D4G-bh-nNg"/>
+                                            <constraint firstAttribute="height" constant="41" id="fNJ-i5-I4q"/>
+                                        </constraints>
+                                        <state key="normal" image="restart"/>
+                                        <connections>
+                                            <action selector="restartButtonClicked:" destination="BV1-FR-VrT" eventType="touchUpInside" id="O8d-ol-TK9"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xe6-3O-hLk">
+                                        <rect key="frame" x="76" y="0.0" width="35" height="41"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="41" id="HDL-TK-j1g"/>
+                                            <constraint firstAttribute="width" constant="35" id="RRw-8w-RgJ"/>
+                                        </constraints>
+                                        <state key="normal" image="surrender"/>
+                                        <connections>
+                                            <action selector="surrenderButtonClicked:" destination="BV1-FR-VrT" eventType="touchUpInside" id="oT1-vC-o5O"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="err-3W-dbp" firstAttribute="trailing" secondItem="4qk-I5-YsI" secondAttribute="trailing" id="K9m-zP-d2d"/>
+                            <constraint firstItem="WU6-1M-2oN" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="Sp0-IL-4JS"/>
                             <constraint firstItem="err-3W-dbp" firstAttribute="bottom" secondItem="4qk-I5-YsI" secondAttribute="bottom" id="qOW-ws-dKX"/>
+                            <constraint firstItem="o3u-aG-MJ4" firstAttribute="leading" secondItem="WU6-1M-2oN" secondAttribute="trailing" constant="31" id="uPq-eT-zAF"/>
                             <constraint firstItem="err-3W-dbp" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" id="zuI-Vh-zxb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
@@ -246,7 +282,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-203" y="197"/>
+            <point key="canvasLocation" x="-203.3203125" y="196.875"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="restart" width="86" height="96"/>
+        <image name="surrender" width="96" height="111"/>
+    </resources>
 </document>
