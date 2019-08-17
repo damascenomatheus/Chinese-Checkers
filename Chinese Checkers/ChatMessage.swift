@@ -11,6 +11,5 @@ import Foundation
 struct ChatMessage {
     var text: String
     var isComing: Bool
-    var date: Date
 }
 

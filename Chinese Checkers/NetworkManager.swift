@@ -36,7 +36,7 @@ final class NetworkManager: NSObject {
         var writeStream: Unmanaged<CFWriteStream>?
         
         CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault,
-                                           "192.168.0.4" as CFString,
+                                           "192.168.0.6" as CFString,
                                            1338,
                                            &readStream,
                                            &writeStream)
