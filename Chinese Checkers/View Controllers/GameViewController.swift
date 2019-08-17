@@ -54,7 +54,7 @@ class GameViewController: UIViewController {
         
         // Join Chat
         
-        NetworkManager.shared.joinChat()
+//        NetworkManager.shared.joinChat()
     }
 
     override var shouldAutorotate: Bool {
@@ -95,6 +95,11 @@ extension GameViewController: UITableViewDataSource, UITableViewDelegate {
 extension GameViewController: TextMessageFieldDelegate {
     func didClickSendButton(text: String) {
         let data = "iam:RED,msg:\(text)".data(using: .utf8)!
+        
+        if text == "QUIT" {
+            NetworkManager.shared.stopChatSession()
+        }
+        
         NetworkManager.shared.send(data: data)
         messageView.textMessageView.text = ""
     }

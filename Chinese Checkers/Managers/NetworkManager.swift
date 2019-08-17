@@ -18,7 +18,6 @@ final class NetworkManager: NSObject {
     
     static let shared = NetworkManager()
     
-    let port: Int32 = 1338
     var data = Data()
     var inputStream: InputStream!
     var outputStream: OutputStream!
@@ -28,16 +27,23 @@ final class NetworkManager: NSObject {
     
     private override init() {
         super.init()
-        self.setupNetworkCommunication()
+//        setupNetworkCommunication(host: "192.168.0.6", port: "1332")
     }
     
-    func setupNetworkCommunication() {
+    func setupNetworkCommunication(host: String, port: String) {
         var readStream: Unmanaged<CFReadStream>?
         var writeStream: Unmanaged<CFWriteStream>?
         
+//        CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault,
+//                                           "192.168.0.6" as CFString,
+//                                            1338,
+//                                           &readStream,
+//                                           &writeStream)
+
+        
         CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault,
-                                           "192.168.0.6" as CFString,
-                                           1338,
+                                           host as CFString,
+                                           UInt32(port)!,
                                            &readStream,
                                            &writeStream)
         

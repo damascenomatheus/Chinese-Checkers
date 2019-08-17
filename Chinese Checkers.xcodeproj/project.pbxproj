@@ -13,6 +13,7 @@
 		770AB9F72301DF43002B30B3 /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770AB9F62301DF43002B30B3 /* DateHeaderView.swift */; };
 		770ABA012301F59A002B30B3 /* TextMessageField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770ABA002301F59A002B30B3 /* TextMessageField.swift */; };
 		770ABA052301F932002B30B3 /* TextMessageField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 770ABA042301F932002B30B3 /* TextMessageField.xib */; };
+		7771AA58230865D400AFE105 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7771AA57230865D400AFE105 /* InitialViewController.swift */; };
 		779E15C2230700B0004D3304 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779E15C1230700B0004D3304 /* NetworkManager.swift */; };
 		77BDD46022FED06F00A5FFEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BDD45F22FED06F00A5FFEB /* AppDelegate.swift */; };
 		77BDD46222FED06F00A5FFEB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 77BDD46122FED06F00A5FFEB /* GameScene.sks */; };
@@ -33,6 +34,7 @@
 		770AB9F62301DF43002B30B3 /* DateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeaderView.swift; sourceTree = "<group>"; };
 		770ABA002301F59A002B30B3 /* TextMessageField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMessageField.swift; sourceTree = "<group>"; };
 		770ABA042301F932002B30B3 /* TextMessageField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextMessageField.xib; sourceTree = "<group>"; };
+		7771AA57230865D400AFE105 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		779E15C1230700B0004D3304 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		77BDD45C22FED06F00A5FFEB /* Chinese Checkers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chinese Checkers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77BDD45F22FED06F00A5FFEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7771AA512308647000AFE105 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				77BDD46122FED06F00A5FFEB /* GameScene.sks */,
+				77BDD46522FED06F00A5FFEB /* GameScene.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		7771AA522308647A00AFE105 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7771AA57230865D400AFE105 /* InitialViewController.swift */,
+				77BDD46722FED06F00A5FFEB /* GameViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		7771AA532308648900AFE105 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				770AB9F42301DDCC002B30B3 /* DateHeaderView.xib */,
+				770AB9F62301DF43002B30B3 /* DateHeaderView.swift */,
+				77BDD47D2301444900A5FFEB /* ChatMessageCell.swift */,
+				77BDD47E2301444900A5FFEB /* ChatMessageCell.xib */,
+				770ABA042301F932002B30B3 /* TextMessageField.xib */,
+				770ABA002301F59A002B30B3 /* TextMessageField.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7771AA54230864B500AFE105 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				770AB9F02301D5A1002B30B3 /* Date+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7771AA55230864C500AFE105 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				770AB9EE2301C163002B30B3 /* ChatMessage.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7771AA56230864FC00AFE105 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				779E15C1230700B0004D3304 /* NetworkManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		77BDD45322FED06F00A5FFEB = {
 			isa = PBXGroup;
 			children = (
@@ -78,24 +135,18 @@
 		77BDD45E22FED06F00A5FFEB /* Chinese Checkers */ = {
 			isa = PBXGroup;
 			children = (
+				7771AA56230864FC00AFE105 /* Managers */,
+				7771AA55230864C500AFE105 /* Models */,
+				7771AA54230864B500AFE105 /* Extensions */,
+				7771AA532308648900AFE105 /* Views */,
+				7771AA522308647A00AFE105 /* View Controllers */,
+				7771AA512308647000AFE105 /* Scenes */,
 				77BDD45F22FED06F00A5FFEB /* AppDelegate.swift */,
-				77BDD46122FED06F00A5FFEB /* GameScene.sks */,
-				77BDD46522FED06F00A5FFEB /* GameScene.swift */,
-				770AB9F02301D5A1002B30B3 /* Date+Extension.swift */,
-				770AB9EE2301C163002B30B3 /* ChatMessage.swift */,
-				77BDD46722FED06F00A5FFEB /* GameViewController.swift */,
-				77BDD47D2301444900A5FFEB /* ChatMessageCell.swift */,
-				77BDD47E2301444900A5FFEB /* ChatMessageCell.xib */,
+				77BDD47722FED0EE00A5FFEB /* HexGrid.sks */,
 				77BDD46922FED06F00A5FFEB /* Main.storyboard */,
-				770ABA042301F932002B30B3 /* TextMessageField.xib */,
-				770ABA002301F59A002B30B3 /* TextMessageField.swift */,
 				77BDD46C22FED07200A5FFEB /* Assets.xcassets */,
 				77BDD46E22FED07200A5FFEB /* LaunchScreen.storyboard */,
 				77BDD47122FED07200A5FFEB /* Info.plist */,
-				77BDD47722FED0EE00A5FFEB /* HexGrid.sks */,
-				770AB9F42301DDCC002B30B3 /* DateHeaderView.xib */,
-				770AB9F62301DF43002B30B3 /* DateHeaderView.swift */,
-				779E15C1230700B0004D3304 /* NetworkManager.swift */,
 			);
 			path = "Chinese Checkers";
 			sourceTree = "<group>";
@@ -181,6 +232,7 @@
 				77BDD47F2301444900A5FFEB /* ChatMessageCell.swift in Sources */,
 				77BDD46822FED06F00A5FFEB /* GameViewController.swift in Sources */,
 				770AB9EF2301C163002B30B3 /* ChatMessage.swift in Sources */,
+				7771AA58230865D400AFE105 /* InitialViewController.swift in Sources */,
 				77BDD46022FED06F00A5FFEB /* AppDelegate.swift in Sources */,
 				770AB9F12301D5A1002B30B3 /* Date+Extension.swift in Sources */,
 				770AB9F72301DF43002B30B3 /* DateHeaderView.swift in Sources */,
