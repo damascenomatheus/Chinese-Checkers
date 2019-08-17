@@ -33,6 +33,9 @@ class GameScene: SKScene {
     
     var predictionNodesToBeRemoved = [SKNode]()
     
+    var redsInitialPosition: [CGPoint] = []
+    var bluesInitialPosition: [CGPoint] = []
+    
     var currentMove: [(Int, Int)] = []
     
     override func didMove(to view: SKView) {
@@ -43,6 +46,9 @@ class GameScene: SKScene {
         blues = map.children
             .filter { ($0.userData?["isBlue"]) as! Bool == true }
             .map { $0 as! SKSpriteNode }
+        
+        redsInitialPosition = reds.map { $0.position }
+        bluesInitialPosition = blues.map { $0.position }
         
         setupGameBoard()
     }
@@ -61,6 +67,29 @@ class GameScene: SKScene {
                     tileDefinition?.userData?.setValue(true, forKey: "isBoard")
                 }
             }
+        }
+    }
+    
+    func restartGame() {
+        for i in stride(from: 0, to: reds.count, by: 1) {
+            reds[i].position = redsInitialPosition[i]
+            blues[i].position = bluesInitialPosition[i]
+        }
+    }
+    
+    func checkIfHasWinner() {
+        let blueCount = redsInitialPosition.filter {
+            (map.nodes(at: $0).first?.userData?["isBlue"] as? Bool) == true
+        }.count
+        
+        let redCount = bluesInitialPosition.filter {
+            (map.nodes(at: $0).first?.userData?["isRed"] as? Bool) == true
+            }.count
+        
+        if blueCount == blues.count {
+            print("Blue wins!")
+        } else if redCount == reds.count {
+            print("Red wins!")
         }
     }
     
@@ -102,7 +131,9 @@ class GameScene: SKScene {
                 let data = "iam:RED,msg:>MOVE \(currentMove[0].0)-\(currentMove[0].1);\(currentMove[1].0)-\(currentMove[1].1)".data(using: .utf8)!
                 NetworkManager.shared.send(data: data)
                 
-                selectedPiece.run(SKAction.move(to: hexTileCenter, duration: 0.5))
+                selectedPiece.run(SKAction.move(to: hexTileCenter, duration: 0.5)) {
+                    self.checkIfHasWinner()
+                }
                 touchCount += 1
                 currentMove = []
             }
