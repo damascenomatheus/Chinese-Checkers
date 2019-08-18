@@ -81,6 +81,8 @@ class GameScene: SKScene {
             blues[i].position = bluesInitialPosition[i]
         }
         viewController?.winnerLabel.isHidden = true
+        viewController?.turnLabel.text = "Red turn"
+        viewController?.turnLabel.textColor = UIColor(displayP3Red: 254/255, green: 2/255, blue: 0, alpha: 1)
     }
     
     func checkIfHasWinner()  {

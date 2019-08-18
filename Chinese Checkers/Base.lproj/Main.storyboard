@@ -13,7 +13,7 @@
         <!--Initial View Controller-->
         <scene sceneID="3Nh-01-jTg">
             <objects>
-                <viewController id="uAB-sx-fNT" customClass="InitialViewController" customModule="Chinese_Checkers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InitialViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uAB-sx-fNT" customClass="InitialViewController" customModule="Chinese_Checkers" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HWo-yW-6h3">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -229,14 +229,27 @@
                                 <color key="textColor" red="0.94901961089999998" green="0.10588235410000001" blue="0.24705882370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NtX-jX-Pgq">
+                                <rect key="frame" x="45" y="20" width="34" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="34" id="7cS-QM-221"/>
+                                    <constraint firstAttribute="height" constant="41" id="NFk-o2-aMV"/>
+                                </constraints>
+                                <state key="normal" image="quit"/>
+                                <connections>
+                                    <action selector="quitButtonClicked:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ATu-ax-wTg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="q8f-yg-ixM" firstAttribute="top" secondItem="xe6-3O-hLk" secondAttribute="bottom" constant="43" id="8OX-Tb-6R9"/>
+                            <constraint firstItem="NtX-jX-Pgq" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" constant="45" id="Eff-VQ-OR7"/>
                             <constraint firstItem="err-3W-dbp" firstAttribute="trailing" secondItem="4qk-I5-YsI" secondAttribute="trailing" id="K9m-zP-d2d"/>
                             <constraint firstItem="W3p-Gg-hc7" firstAttribute="top" secondItem="q8f-yg-ixM" secondAttribute="bottom" constant="19" id="NAT-PW-xat"/>
                             <constraint firstItem="WU6-1M-2oN" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="Sp0-IL-4JS"/>
                             <constraint firstItem="W3p-Gg-hc7" firstAttribute="leading" secondItem="chT-h5-RgR" secondAttribute="leading" id="YIz-u1-LCv"/>
+                            <constraint firstItem="NtX-jX-Pgq" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="dnO-Kv-Qqn"/>
                             <constraint firstItem="q8f-yg-ixM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4qk-I5-YsI" secondAttribute="leading" symbolic="YES" id="hPV-u0-Fws"/>
                             <constraint firstItem="o3u-aG-MJ4" firstAttribute="leading" secondItem="q8f-yg-ixM" secondAttribute="trailing" constant="31" id="mEX-aQ-NrQ"/>
                             <constraint firstItem="o3u-aG-MJ4" firstAttribute="leading" secondItem="W3p-Gg-hc7" secondAttribute="trailing" constant="31" id="nAB-2D-4Hf"/>
@@ -259,6 +272,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="quit" width="77" height="93"/>
         <image name="restart" width="86" height="96"/>
         <image name="surrender" width="96" height="111"/>
     </resources>

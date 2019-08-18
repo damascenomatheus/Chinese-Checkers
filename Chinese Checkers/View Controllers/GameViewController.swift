@@ -102,6 +102,14 @@ class GameViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    @IBAction func quitButtonClicked(_ sender: UIButton) {
+        let data = "iam:\(player!),msg:QUIT".data(using: .utf8)!
+        NetworkManager.shared.send(data: data)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController
+        present(vc, animated: true, completion: nil)
+    }
+    
     func showWinnerLabel(winner: Player) {
         let playerStr: String
         switch winner {
