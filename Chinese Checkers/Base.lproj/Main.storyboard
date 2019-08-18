@@ -156,25 +156,6 @@
                                             <constraint firstAttribute="width" constant="435" id="rQN-T6-eB0"/>
                                         </constraints>
                                         <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="E7o-2x-lqo" style="IBUITableViewCellStyleDefault" id="Bdz-23-Xxg">
-                                                <rect key="frame" x="0.0" y="34" width="435" height="44"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bdz-23-Xxg" id="mI2-TR-kdK">
-                                                    <rect key="frame" x="0.0" y="0.0" width="435" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="E7o-2x-lqo">
-                                                            <rect key="frame" x="15" y="0.0" width="405" height="44"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                        </prototypes>
                                         <connections>
                                             <outlet property="dataSource" destination="BV1-FR-VrT" id="KHA-6x-efu"/>
                                             <outlet property="delegate" destination="BV1-FR-VrT" id="FT5-hg-WrT"/>
@@ -238,11 +219,14 @@
                             </stackView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blue wins!" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8f-yg-ixM">
                                 <rect key="frame" x="438" y="104" width="120" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="GC3-lT-F7P"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <color key="textColor" red="0.1360912621" green="0.54564398530000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red Turn" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3p-Gg-hc7">
+                                <rect key="frame" x="447" y="153" width="111" height="27.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                                <color key="textColor" red="0.94901961089999998" green="0.10588235410000001" blue="0.24705882370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -250,9 +234,12 @@
                         <constraints>
                             <constraint firstItem="q8f-yg-ixM" firstAttribute="top" secondItem="xe6-3O-hLk" secondAttribute="bottom" constant="43" id="8OX-Tb-6R9"/>
                             <constraint firstItem="err-3W-dbp" firstAttribute="trailing" secondItem="4qk-I5-YsI" secondAttribute="trailing" id="K9m-zP-d2d"/>
+                            <constraint firstItem="W3p-Gg-hc7" firstAttribute="top" secondItem="q8f-yg-ixM" secondAttribute="bottom" constant="19" id="NAT-PW-xat"/>
                             <constraint firstItem="WU6-1M-2oN" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="Sp0-IL-4JS"/>
+                            <constraint firstItem="W3p-Gg-hc7" firstAttribute="leading" secondItem="chT-h5-RgR" secondAttribute="leading" id="YIz-u1-LCv"/>
                             <constraint firstItem="q8f-yg-ixM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4qk-I5-YsI" secondAttribute="leading" symbolic="YES" id="hPV-u0-Fws"/>
                             <constraint firstItem="o3u-aG-MJ4" firstAttribute="leading" secondItem="q8f-yg-ixM" secondAttribute="trailing" constant="31" id="mEX-aQ-NrQ"/>
+                            <constraint firstItem="o3u-aG-MJ4" firstAttribute="leading" secondItem="W3p-Gg-hc7" secondAttribute="trailing" constant="31" id="nAB-2D-4Hf"/>
                             <constraint firstItem="err-3W-dbp" firstAttribute="bottom" secondItem="4qk-I5-YsI" secondAttribute="bottom" id="qOW-ws-dKX"/>
                             <constraint firstItem="o3u-aG-MJ4" firstAttribute="leading" secondItem="WU6-1M-2oN" secondAttribute="trailing" constant="31" id="uPq-eT-zAF"/>
                             <constraint firstItem="err-3W-dbp" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" id="zuI-Vh-zxb"/>
@@ -262,6 +249,7 @@
                     <connections>
                         <outlet property="chatTableView" destination="o3u-aG-MJ4" id="r8E-oe-mGC"/>
                         <outlet property="messageView" destination="eAK-i0-bop" id="0pS-Uk-WeL"/>
+                        <outlet property="turnLabel" destination="W3p-Gg-hc7" id="hFm-VV-2V7"/>
                         <outlet property="winnerLabel" destination="q8f-yg-ixM" id="Dds-10-NtX"/>
                     </connections>
                 </viewController>

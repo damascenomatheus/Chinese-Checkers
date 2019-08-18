@@ -94,11 +94,11 @@ class GameScene: SKScene {
         
         if blueCount == blues.count {
             print("Blue wins!")
-            let data = "iam:\(String(describing: player!)),msg:>WINNER/BLUE".data(using: .utf8)!
+            let data = "iam:\(player!),msg:>WINNER/BLUE".data(using: .utf8)!
             NetworkManager.shared.send(data: data)
         } else if redCount == reds.count {
             print("Red wins!")
-            let data = "iam:\(String(describing: player!)),msg:>WINNER/RED".data(using: .utf8)!
+            let data = "iam:\(player!),msg:>WINNER/RED".data(using: .utf8)!
             NetworkManager.shared.send(data: data)
         }
     }
@@ -106,8 +106,17 @@ class GameScene: SKScene {
     func getPieceAt(col: Int, row: Int) -> SKSpriteNode {
         let pos = map.centerOfTile(atColumn: col, row: row)
         let piece = map.nodes(at: pos)
-            .filter { $0.userData?["isPiece"] as? Bool == true }.first as! SKSpriteNode
-        return piece
+            .filter { $0.userData?["isPiece"] as? Bool == true }.first
+        guard let pieceNode = piece as? SKSpriteNode else {
+//            closeSocketDuringError()
+            return SKSpriteNode()
+        }
+        return pieceNode
+    }
+    
+    func closeSocketDuringError() {
+        let data = "QUIT".data(using: .utf8)!
+        NetworkManager.shared.send(data: data)
     }
     
     private func movePiece(atPos pos: CGPoint) {
