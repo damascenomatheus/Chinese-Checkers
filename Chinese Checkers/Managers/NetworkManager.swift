@@ -27,19 +27,11 @@ final class NetworkManager: NSObject {
     
     private override init() {
         super.init()
-//        setupNetworkCommunication(host: "192.168.0.6", port: "1332")
     }
     
     func setupNetworkCommunication(host: String, port: String) {
         var readStream: Unmanaged<CFReadStream>?
         var writeStream: Unmanaged<CFWriteStream>?
-        
-//        CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault,
-//                                           "192.168.0.6" as CFString,
-//                                            1338,
-//                                           &readStream,
-//                                           &writeStream)
-
         
         CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault,
                                            host as CFString,

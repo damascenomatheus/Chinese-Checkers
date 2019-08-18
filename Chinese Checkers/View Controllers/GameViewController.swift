@@ -10,18 +10,27 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+enum Player: String {
+    case blue = "Blue"
+    case red = "Red"
+    case none
+}
+
 class GameViewController: UIViewController {
 
     var currentGame: GameScene?
     
     @IBOutlet weak var chatTableView: UITableView!
     @IBOutlet weak var messageView: TextMessageField!
+    @IBOutlet weak var winnerLabel: UILabel!
     
     fileprivate let cellId = "CellId"
     
     var chatMessages = [ChatMessage]()
     
     var requestFlag = false
+    
+    var player: Player = .blue
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +53,8 @@ class GameViewController: UIViewController {
             view.showsFPS = true
             view.showsNodeCount = true
         }
+        
+        winnerLabel.isHidden = true
         
         let chatMessageCellNib = UINib(nibName: "ChatMessageCell", bundle: nil)
         
@@ -74,12 +85,32 @@ class GameViewController: UIViewController {
             if result {
                 let data = "iam:RED,msg:>SURRENDER".data(using: .utf8)!
                 NetworkManager.shared.send(data: data)
+                self.requestFlag = true
                 print("Yup, i give up!")
             } else {
                 print("No, i can win!")
             }
         }
         present(alert, animated: true)
+    }
+    
+    func showWinnerLabel(winner: Player) {
+        let playerStr: String
+        switch winner {
+        case .blue:
+            playerStr = "Blue"
+            winnerLabel.textColor = UIColor(displayP3Red: 35/255, green: 139/255, blue:255, alpha: 1)
+            print("Blue wins!")
+        case .red:
+            playerStr = "Red"
+            winnerLabel.textColor = UIColor(displayP3Red: 254/255, green: 2/255, blue: 0, alpha: 1)
+            print("Red wins!")
+        case .none:
+            playerStr = ""
+            print("No winner")
+        }
+        winnerLabel.isHidden = false
+        winnerLabel.text = "\(playerStr) wins!"
     }
     
     override var shouldAutorotate: Bool {
@@ -160,6 +191,11 @@ extension GameViewController: NetworkManagerDelegate {
                 currentGame?.movePieceTo(piece: piece!, col: Int(endPos[0])!, row: Int(endPos[1])!)
             } else if command.contains("SURRENDER") {
                 print("YOU WON!")
+                if player == .blue {
+                    showWinnerLabel(winner: .red)
+                } else {
+                    showWinnerLabel(winner: .blue)
+                }
             } else if command.contains("RESTART") {
                 if !requestFlag {
                     let alert = Alert.showAlert(title: "Restart", message: "Oponent has requested to restart the match") { [unowned self] result in
@@ -186,6 +222,13 @@ extension GameViewController: NetworkManagerDelegate {
                     let alert = Alert.showAlert(title: "REQUEST DECLINED", message: "Oponent refused to restart the match")
                     present(alert, animated: true)
                     requestFlag = false
+                }
+            } else if command.contains("WINNER") {
+                let winner = command.components(separatedBy: "/")[1]
+                if winner == "RED" {
+                    showWinnerLabel(winner: .red)
+                } else if winner == "BLUE" {
+                    showWinnerLabel(winner: .blue)
                 }
             }
         }

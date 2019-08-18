@@ -71,25 +71,31 @@ class GameScene: SKScene {
     }
     
     func restartGame() {
+        map.isPaused = false
         for i in stride(from: 0, to: reds.count, by: 1) {
             reds[i].position = redsInitialPosition[i]
             blues[i].position = bluesInitialPosition[i]
         }
+        viewController?.winnerLabel.isHidden = true
     }
     
-    func checkIfHasWinner() {
+    func checkIfHasWinner()  {
         let blueCount = redsInitialPosition.filter {
             (map.nodes(at: $0).first?.userData?["isBlue"] as? Bool) == true
         }.count
         
         let redCount = bluesInitialPosition.filter {
             (map.nodes(at: $0).first?.userData?["isRed"] as? Bool) == true
-            }.count
+        }.count
         
         if blueCount == blues.count {
             print("Blue wins!")
+            let data = "iam:RED,msg:>WINNER/BLUE".data(using: .utf8)!
+            NetworkManager.shared.send(data: data)
         } else if redCount == reds.count {
             print("Red wins!")
+            let data = "iam:RED,msg:>WINNER/RED".data(using: .utf8)!
+            NetworkManager.shared.send(data: data)
         }
     }
     

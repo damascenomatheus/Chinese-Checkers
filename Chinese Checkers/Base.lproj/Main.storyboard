@@ -264,11 +264,23 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blue wins!" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8f-yg-ixM">
+                                <rect key="frame" x="438" y="104" width="120" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="GC3-lT-F7P"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <color key="textColor" red="0.1360912621" green="0.54564398530000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="q8f-yg-ixM" firstAttribute="top" secondItem="xe6-3O-hLk" secondAttribute="bottom" constant="43" id="8OX-Tb-6R9"/>
                             <constraint firstItem="err-3W-dbp" firstAttribute="trailing" secondItem="4qk-I5-YsI" secondAttribute="trailing" id="K9m-zP-d2d"/>
                             <constraint firstItem="WU6-1M-2oN" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="Sp0-IL-4JS"/>
+                            <constraint firstItem="q8f-yg-ixM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4qk-I5-YsI" secondAttribute="leading" symbolic="YES" id="hPV-u0-Fws"/>
+                            <constraint firstItem="o3u-aG-MJ4" firstAttribute="leading" secondItem="q8f-yg-ixM" secondAttribute="trailing" constant="31" id="mEX-aQ-NrQ"/>
                             <constraint firstItem="err-3W-dbp" firstAttribute="bottom" secondItem="4qk-I5-YsI" secondAttribute="bottom" id="qOW-ws-dKX"/>
                             <constraint firstItem="o3u-aG-MJ4" firstAttribute="leading" secondItem="WU6-1M-2oN" secondAttribute="trailing" constant="31" id="uPq-eT-zAF"/>
                             <constraint firstItem="err-3W-dbp" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" id="zuI-Vh-zxb"/>
@@ -278,6 +290,7 @@
                     <connections>
                         <outlet property="chatTableView" destination="o3u-aG-MJ4" id="r8E-oe-mGC"/>
                         <outlet property="messageView" destination="eAK-i0-bop" id="0pS-Uk-WeL"/>
+                        <outlet property="winnerLabel" destination="q8f-yg-ixM" id="Dds-10-NtX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
