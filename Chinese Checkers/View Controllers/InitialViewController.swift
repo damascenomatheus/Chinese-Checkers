@@ -16,6 +16,9 @@ class InitialViewController: UIViewController {
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var connectButton: UIButton!
     @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var activePlayersLabel: UILabel!
+    
+    var playerType: [Player] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,21 +31,11 @@ class InitialViewController: UIViewController {
         view.endEditing(true)
     }
     
-    @IBAction func blueColorSelected(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func redColorSelected(_ sender: UIButton) {
-        
-    }
-    
-    
-    
     @IBAction func connectButtonClicked(_ sender: UIButton) {
-        
         NetworkManager.shared.setupNetworkCommunication(host: hostTextField.text ?? "192.168.0.6", port: portTextField.text ?? "1338")
         NetworkManager.shared.joinChat()
     }
+    
     @IBAction func startButtonClicked(_ sender: UIButton) {
         
     }
@@ -53,7 +46,7 @@ class InitialViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toGameVC" {
             if let destination = segue.destination as? GameViewController {
-            
+                destination.player = playerType[0]
             }
         }
     }
@@ -62,11 +55,23 @@ class InitialViewController: UIViewController {
 
 extension InitialViewController: NetworkManagerDelegate {
     func didReceiveMessage(message: String) {
-        if message.contains(">JOIN") {
-            statusView.backgroundColor = .green
-            statusLabel.text = "Connected"
-            connectButton.isEnabled = false
-            startButton.isEnabled = true
+        if message.contains("JOIN") {
+            self.statusView.backgroundColor = .green
+            self.statusLabel.text = "Connected"
+        }
+        
+        if message.contains("SELECT") {
+            if message.contains("RED") {
+                playerType.append(.RED)
+            } else if message.contains("BLUE") {
+                playerType.append(.BLUE)
+            }
+            self.connectButton.isEnabled = false
+        }
+        
+        if message.contains("START") {
+            self.activePlayersLabel.text = "Opponent found"
+            self.startButton.isEnabled = true
         }
     }
     

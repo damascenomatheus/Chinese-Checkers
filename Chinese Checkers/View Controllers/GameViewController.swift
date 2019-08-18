@@ -11,9 +11,9 @@ import SpriteKit
 import GameplayKit
 
 enum Player: String {
-    case blue = "Blue"
-    case red = "Red"
-    case none
+    case BLUE = "BLUE"
+    case RED = "RED"
+    case NONE = "NONE"
 }
 
 class GameViewController: UIViewController {
@@ -30,7 +30,7 @@ class GameViewController: UIViewController {
     
     var requestFlag = false
     
-    var player: Player = .blue
+    var player: Player!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +46,7 @@ class GameViewController: UIViewController {
                 
                 currentGame = scene as? GameScene
                 currentGame?.viewController = self
+                currentGame?.player = player
             }
             
             view.ignoresSiblingOrder = true
@@ -69,7 +70,7 @@ class GameViewController: UIViewController {
     @IBAction func restartButtonClicked(_ sender: UIButton) {
         let alert = Alert.showAlert(title: "Restart", message: "Are you sure of this?") { result in
             if result {
-                let data = "iam:RED,msg:>RESTART".data(using: .utf8)!
+                let data = "iam:\(self.player!),msg:>RESTART".data(using: .utf8)!
                 NetworkManager.shared.send(data: data)
                 self.requestFlag = true
                 print("Yup, i want to restart the match!")
@@ -83,7 +84,7 @@ class GameViewController: UIViewController {
     @IBAction func surrenderButtonClicked(_ sender: UIButton) {
         let alert = Alert.showAlert(title: "Surrender", message: "Are you sure of this?") { result in
             if result {
-                let data = "iam:RED,msg:>SURRENDER".data(using: .utf8)!
+                let data = "iam:\(self.player!),msg:>SURRENDER".data(using: .utf8)!
                 NetworkManager.shared.send(data: data)
                 self.requestFlag = true
                 print("Yup, i give up!")
@@ -97,15 +98,15 @@ class GameViewController: UIViewController {
     func showWinnerLabel(winner: Player) {
         let playerStr: String
         switch winner {
-        case .blue:
+        case .BLUE:
             playerStr = "Blue"
             winnerLabel.textColor = UIColor(displayP3Red: 35/255, green: 139/255, blue:255, alpha: 1)
             print("Blue wins!")
-        case .red:
+        case .RED:
             playerStr = "Red"
             winnerLabel.textColor = UIColor(displayP3Red: 254/255, green: 2/255, blue: 0, alpha: 1)
             print("Red wins!")
-        case .none:
+        case .NONE:
             playerStr = ""
             print("No winner")
         }
@@ -150,7 +151,7 @@ extension GameViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension GameViewController: TextMessageFieldDelegate {
     func didClickSendButton(text: String) {
-        let data = "iam:RED,msg:\(text)".data(using: .utf8)!
+        let data = "iam:\(player!),msg:\(text)".data(using: .utf8)!
         
         if text == "QUIT" {
             NetworkManager.shared.stopChatSession()
@@ -163,10 +164,8 @@ extension GameViewController: TextMessageFieldDelegate {
 extension GameViewController: NetworkManagerDelegate {
     func didReceiveMessage(message: String) {
         print(message)
-        let chatMessage = ChatMessage(text: message, isComing: true)
-        chatMessages.append(chatMessage)
         
-        // Split the message into two fragments
+        // Split the message into two fragmenoits
         // The first one says who the player is and the second one contains the message content
         // After this, check if message content is command by checking whether it contains '>' at beginning
         let isCommand = message.components(separatedBy: ":").last?.first == ">"
@@ -184,6 +183,7 @@ extension GameViewController: NetworkManagerDelegate {
                     else {
                         return
                 }
+                
                 let startPos = positions[0].components(separatedBy: "-")
                 let endPos = positions[1].components(separatedBy: "-")
                 
@@ -191,21 +191,21 @@ extension GameViewController: NetworkManagerDelegate {
                 currentGame?.movePieceTo(piece: piece!, col: Int(endPos[0])!, row: Int(endPos[1])!)
             } else if command.contains("SURRENDER") {
                 print("YOU WON!")
-                if player == .blue {
-                    showWinnerLabel(winner: .red)
+                if player == .BLUE {
+                    showWinnerLabel(winner: .RED)
                 } else {
-                    showWinnerLabel(winner: .blue)
+                    showWinnerLabel(winner: .BLUE)
                 }
             } else if command.contains("RESTART") {
                 if !requestFlag {
-                    let alert = Alert.showAlert(title: "Restart", message: "Oponent has requested to restart the match") { [unowned self] result in
+                    let alert = Alert.showAlert(title: "Restart", message: "Opponent has requested to restart the match") { [unowned self] result in
                         if result {
-                            let data = "iam:RED,msg:>ACCEPT".data(using: .utf8)!
+                            let data = "iam:\(self.player!),msg:>ACCEPT".data(using: .utf8)!
                             NetworkManager.shared.send(data: data)
                             self.currentGame?.restartGame()
                             print("Yup, i want to restart the match!")
                         } else {
-                            let data = "iam:RED,msg:>DECLINE".data(using: .utf8)!
+                            let data = "iam:\(self.player!),msg:>DECLINE".data(using: .utf8)!
                             NetworkManager.shared.send(data: data)
                             print("No, i don't want to restart the match!")
                         }
@@ -219,18 +219,21 @@ extension GameViewController: NetworkManagerDelegate {
                 }
             } else if command.contains("DECLINE") {
                 if requestFlag {
-                    let alert = Alert.showAlert(title: "REQUEST DECLINED", message: "Oponent refused to restart the match")
+                    let alert = Alert.showAlert(title: "REQUEST DECLINED", message: "Opponent refused to restart the match")
                     present(alert, animated: true)
                     requestFlag = false
                 }
             } else if command.contains("WINNER") {
                 let winner = command.components(separatedBy: "/")[1]
                 if winner == "RED" {
-                    showWinnerLabel(winner: .red)
+                    showWinnerLabel(winner: .RED)
                 } else if winner == "BLUE" {
-                    showWinnerLabel(winner: .blue)
+                    showWinnerLabel(winner: .BLUE)
                 }
             }
+        } else {
+            let chatMessage = ChatMessage(text: message, isComing: true)
+            chatMessages.append(chatMessage)
         }
         
         DispatchQueue.main.async { [weak self] in

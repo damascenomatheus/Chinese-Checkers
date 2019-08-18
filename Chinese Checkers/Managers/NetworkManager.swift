@@ -52,7 +52,7 @@ final class NetworkManager: NSObject {
     }
     
     func joinChat() {
-        let data = "iam:RED,msg:>JOIN".data(using: .utf8)!
+        let data = "iam:NONE,msg:>JOIN".data(using: .utf8)!
         
         _ = data.withUnsafeBytes {
             guard let pointer = $0.baseAddress?.assumingMemoryBound(to: UInt8.self) else {

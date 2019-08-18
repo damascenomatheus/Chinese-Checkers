@@ -38,6 +38,10 @@ class GameScene: SKScene {
     
     var currentMove: [(Int, Int)] = []
     
+    var player: Player!
+    
+    var playerTurn: Player = .RED
+    
     override func didMove(to view: SKView) {
         map = childNode(withName: "TileMapNode") as? SKTileMapNode
         reds = map.children
@@ -90,11 +94,11 @@ class GameScene: SKScene {
         
         if blueCount == blues.count {
             print("Blue wins!")
-            let data = "iam:RED,msg:>WINNER/BLUE".data(using: .utf8)!
+            let data = "iam:\(String(describing: player!)),msg:>WINNER/BLUE".data(using: .utf8)!
             NetworkManager.shared.send(data: data)
         } else if redCount == reds.count {
             print("Red wins!")
-            let data = "iam:RED,msg:>WINNER/RED".data(using: .utf8)!
+            let data = "iam:\(String(describing: player!)),msg:>WINNER/RED".data(using: .utf8)!
             NetworkManager.shared.send(data: data)
         }
     }
@@ -115,41 +119,47 @@ class GameScene: SKScene {
         
         print("row:\(row) | col:\(col)")
         
-        if touchCount < 1 {
-            if let isPiece = tileNode?.userData?["isPiece"] as? Bool,
-                isPiece {
-                touchCount += 1
-                let pieceNode = tileNode as? SKSpriteNode
-                selectedPiece = pieceNode!
-                
-                currentMove.append((col: col, row: row))
-            }
-        } else {
-            let hexTileCenter = map.centerOfTile(atColumn: col, row: row)
-            let tileDefinition = map.tileDefinition(atColumn: col, row: row)
-            
-            if let isBoard = tileDefinition?.userData?["isBoard"] as? Bool,
-                tileNode?.userData?["isPiece"] == nil,
-                isBoard {
-                currentMove.append((col: col, row: row))
-                
-                // Send Move to oponent
-                let data = "iam:RED,msg:>MOVE \(currentMove[0].0)-\(currentMove[0].1);\(currentMove[1].0)-\(currentMove[1].1)".data(using: .utf8)!
-                NetworkManager.shared.send(data: data)
-                
-                selectedPiece.run(SKAction.move(to: hexTileCenter, duration: 0.5)) {
-                    self.checkIfHasWinner()
+//        if playerTurn == player {
+            if touchCount < 1 {
+                if let isPiece = tileNode?.userData?["isPiece"] as? Bool,
+                    isPiece {
+                    touchCount += 1
+                    let pieceNode = tileNode as? SKSpriteNode
+                    selectedPiece = pieceNode!
+                    
+                    currentMove.append((col: col, row: row))
                 }
-                touchCount += 1
-                currentMove = []
+            } else {
+                let hexTileCenter = map.centerOfTile(atColumn: col, row: row)
+                let tileDefinition = map.tileDefinition(atColumn: col, row: row)
+                
+                if let isBoard = tileDefinition?.userData?["isBoard"] as? Bool,
+                    tileNode?.userData?["isPiece"] == nil,
+                    isBoard {
+                    currentMove.append((col: col, row: row))
+                    
+                    // Send Move to opponent
+                    let data = "iam:\(player!),msg:>MOVE \(currentMove[0].0)-\(currentMove[0].1);\(currentMove[1].0)-\(currentMove[1].1)".data(using: .utf8)!
+                    NetworkManager.shared.send(data: data)
+                    
+                    // Change turn
+//                    let whosTurn = playerTurn == .red ? Player.blue : Player.red
+//                    NetworkManager.shared.send(data: whosTurn)
+                    
+                    selectedPiece.run(SKAction.move(to: hexTileCenter, duration: 0.5)) {
+                        self.checkIfHasWinner()
+                    }
+                    touchCount += 1
+                    currentMove = []
+                }
             }
-        }
-        
-        if touchCount == 2 {
-            touchCount = 0
-            selectedPiece = SKSpriteNode()
-            removePredictionNodes()
-        }
+            
+            if touchCount == 2 {
+                touchCount = 0
+                selectedPiece = SKSpriteNode()
+                removePredictionNodes()
+            }
+//        }
     }
     
     func movePieceTo(piece: SKSpriteNode, col: Int, row: Int) {
