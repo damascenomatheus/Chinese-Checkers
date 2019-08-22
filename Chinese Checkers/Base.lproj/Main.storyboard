@@ -118,15 +118,15 @@
                             <constraint firstItem="3aY-9F-Zqa" firstAttribute="leading" secondItem="V0h-49-mul" secondAttribute="leading" constant="90" id="Osl-Ka-DCw"/>
                             <constraint firstItem="bBC-KD-679" firstAttribute="leading" secondItem="2wE-Yf-i17" secondAttribute="trailing" constant="21" id="PFT-Ln-SYw"/>
                             <constraint firstItem="V0h-49-mul" firstAttribute="trailing" secondItem="WPJ-34-tYn" secondAttribute="trailing" constant="90" id="Q9y-eT-KPP"/>
+                            <constraint firstItem="97u-DF-Eny" firstAttribute="leading" secondItem="V0h-49-mul" secondAttribute="leading" constant="90" id="Rbb-6f-cMP"/>
                             <constraint firstItem="2wE-Yf-i17" firstAttribute="centerY" secondItem="bBC-KD-679" secondAttribute="centerY" id="S9m-fZ-vFu"/>
                             <constraint firstItem="tDD-TW-guZ" firstAttribute="leading" secondItem="V0h-49-mul" secondAttribute="leading" constant="90" id="SCl-n7-dh9"/>
                             <constraint firstItem="tDD-TW-guZ" firstAttribute="top" secondItem="3aY-9F-Zqa" secondAttribute="bottom" constant="44" id="SWm-rd-laa"/>
+                            <constraint firstItem="2wE-Yf-i17" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="97u-DF-Eny" secondAttribute="trailing" constant="8" symbolic="YES" id="VGq-mu-isE"/>
                             <constraint firstItem="V0h-49-mul" firstAttribute="trailing" secondItem="3aY-9F-Zqa" secondAttribute="trailing" constant="90" id="Xbx-C7-S2t"/>
                             <constraint firstItem="V0h-49-mul" firstAttribute="trailing" secondItem="tDD-TW-guZ" secondAttribute="trailing" constant="90" id="aSz-ak-QW9"/>
                             <constraint firstItem="3aY-9F-Zqa" firstAttribute="top" secondItem="bBC-KD-679" secondAttribute="bottom" constant="121" id="egK-8V-AZu"/>
-                            <constraint firstItem="2wE-Yf-i17" firstAttribute="leading" secondItem="97u-DF-Eny" secondAttribute="trailing" constant="190" id="fne-Cp-iNr"/>
                             <constraint firstItem="V0h-49-mul" firstAttribute="trailing" secondItem="bBC-KD-679" secondAttribute="trailing" constant="90.5" id="njo-YX-HPX"/>
-                            <constraint firstItem="97u-DF-Eny" firstAttribute="leading" secondItem="V0h-49-mul" secondAttribute="leading" constant="90" id="o9i-N0-FMc"/>
                             <constraint firstItem="WPJ-34-tYn" firstAttribute="top" secondItem="tDD-TW-guZ" secondAttribute="bottom" constant="120" id="oCc-g2-HFy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="V0h-49-mul"/>

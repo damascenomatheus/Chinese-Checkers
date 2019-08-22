@@ -31,7 +31,6 @@ class InitialViewController: UIViewController {
         super.viewWillLayoutSubviews()
         
         statusView.layer.cornerRadius = statusView.frame.width / 2
-        connectButton.isEnabled = true
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -73,12 +72,12 @@ extension InitialViewController: NetworkManagerDelegate {
             } else if message.contains("BLUE") {
                 playerType.append(.BLUE)
             }
+            self.connectButton.isEnabled = false
         }
         
         if message.contains("START") {
             self.activePlayersLabel.text = "Opponent found"
-            self.startButton.isEnabled = true
-            self.connectButton.isEnabled = false
+            startButton.isEnabled = true
         }
     }
     
