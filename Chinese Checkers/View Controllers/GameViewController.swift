@@ -35,6 +35,8 @@ class GameViewController: UIViewController {
     
     var playerTurn: Player = .RED
     
+    var previousMoves: [[(col: Int, row: Int)]] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -86,6 +88,18 @@ class GameViewController: UIViewController {
             }
         }
         present(alert, animated: true)
+    }
+    
+    @IBAction func redoButtonClicked(_ sender: UIButton) {
+        guard previousMoves.count > 0, let lastMove = previousMoves.last else {
+            return
+        }
+        
+        let piece = currentGame?.getPieceAt(col: Int(lastMove[0].col), row: Int(lastMove[0].row))
+        currentGame?.movePieceTo(piece: piece!, col: Int(lastMove[1].col), row: Int(lastMove[1].row))
+        
+        let data = "iam:\(player!),msg:>MOVE \(lastMove[0].0)-\(lastMove[0].1);\(lastMove[1].0)-\(lastMove[1].1)".data(using: .utf8)!
+        NetworkManager.shared.send(data: data)
     }
     
     @IBAction func surrenderButtonClicked(_ sender: UIButton) {
@@ -167,6 +181,12 @@ class GameViewController: UIViewController {
         }
         let startPos = positions[0].components(separatedBy: "-")
         let endPos = positions[1].components(separatedBy: "-")
+        
+        let previousMove = [
+            (col: Int(endPos[0])!, row: Int(endPos[1])!),
+            (col: Int(startPos[0])!, row: Int(startPos[1])!)
+        ]
+        previousMoves.append(previousMove)
         
         let piece = currentGame?.getPieceAt(col: Int(startPos[0])!, row: Int(startPos[1])!)
         currentGame?.movePieceTo(piece: piece!, col: Int(endPos[0])!, row: Int(endPos[1])!)
@@ -268,6 +288,8 @@ extension GameViewController: NetworkManagerDelegate {
                     currentGame?.restartGame()
                     requestFlag = false
                 }
+                currentGame?.playerTurn = .RED
+                previousMoves = []
             } else if command.contains("DECLINE") {
                 if requestFlag {
                     showDeclineAlert()

@@ -195,7 +195,9 @@ class GameScene: SKScene {
     
     func movePieceTo(piece: SKSpriteNode, col: Int, row: Int) {
         let hexTileCenter = map.centerOfTile(atColumn: col, row: row)
-        piece.run(SKAction.move(to: hexTileCenter, duration: 0.5))
+        let offset: CGFloat = 20
+        let position = CGPoint(x: hexTileCenter.x + offset, y: hexTileCenter.y)
+        piece.run(SKAction.move(to: position, duration: 0.5))
     }
     
     private func checkNEMove(atPos pos: CGPoint) {

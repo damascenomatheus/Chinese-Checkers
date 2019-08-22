@@ -221,6 +221,9 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="xe6-3O-hLk" firstAttribute="leading" secondItem="chT-h5-RgR" secondAttribute="trailing" constant="39" id="KS0-nQ-8Vj"/>
+                                </constraints>
                             </stackView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blue wins!" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8f-yg-ixM">
                                 <rect key="frame" x="438" y="104" width="120" height="30"/>
@@ -229,7 +232,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red Turn" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3p-Gg-hc7">
-                                <rect key="frame" x="447" y="153" width="111" height="27.5"/>
+                                <rect key="frame" x="465" y="153" width="93" height="27.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                 <color key="textColor" red="0.94901961089999998" green="0.10588235410000001" blue="0.24705882370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -245,20 +248,33 @@
                                     <action selector="quitButtonClicked:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ATu-ax-wTg"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RNl-JM-QNf">
+                                <rect key="frame" x="356" y="20" width="52" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="4dQ-Bc-Aw0"/>
+                                    <constraint firstAttribute="width" constant="52" id="57r-rU-ejT"/>
+                                </constraints>
+                                <state key="normal" image="redo"/>
+                                <connections>
+                                    <action selector="redoButtonClicked:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ZYL-4d-Fss"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="q8f-yg-ixM" firstAttribute="top" secondItem="xe6-3O-hLk" secondAttribute="bottom" constant="43" id="8OX-Tb-6R9"/>
+                            <constraint firstItem="W3p-Gg-hc7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4qk-I5-YsI" secondAttribute="leading" symbolic="YES" id="C7X-AN-EMH"/>
                             <constraint firstItem="NtX-jX-Pgq" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" constant="45" id="Eff-VQ-OR7"/>
                             <constraint firstItem="err-3W-dbp" firstAttribute="trailing" secondItem="4qk-I5-YsI" secondAttribute="trailing" id="K9m-zP-d2d"/>
                             <constraint firstItem="W3p-Gg-hc7" firstAttribute="top" secondItem="q8f-yg-ixM" secondAttribute="bottom" constant="19" id="NAT-PW-xat"/>
                             <constraint firstItem="WU6-1M-2oN" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="Sp0-IL-4JS"/>
-                            <constraint firstItem="W3p-Gg-hc7" firstAttribute="leading" secondItem="chT-h5-RgR" secondAttribute="leading" id="YIz-u1-LCv"/>
+                            <constraint firstItem="RNl-JM-QNf" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="cbK-oW-wFS"/>
                             <constraint firstItem="NtX-jX-Pgq" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="dnO-Kv-Qqn"/>
-                            <constraint firstItem="q8f-yg-ixM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4qk-I5-YsI" secondAttribute="leading" symbolic="YES" id="hPV-u0-Fws"/>
+                            <constraint firstItem="chT-h5-RgR" firstAttribute="leading" secondItem="RNl-JM-QNf" secondAttribute="trailing" constant="39" id="hcg-IS-VIG"/>
                             <constraint firstItem="o3u-aG-MJ4" firstAttribute="leading" secondItem="q8f-yg-ixM" secondAttribute="trailing" constant="31" id="mEX-aQ-NrQ"/>
                             <constraint firstItem="o3u-aG-MJ4" firstAttribute="leading" secondItem="W3p-Gg-hc7" secondAttribute="trailing" constant="31" id="nAB-2D-4Hf"/>
                             <constraint firstItem="err-3W-dbp" firstAttribute="bottom" secondItem="4qk-I5-YsI" secondAttribute="bottom" id="qOW-ws-dKX"/>
+                            <constraint firstItem="q8f-yg-ixM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4qk-I5-YsI" secondAttribute="leading" symbolic="YES" id="qYt-xn-xE2"/>
                             <constraint firstItem="o3u-aG-MJ4" firstAttribute="leading" secondItem="WU6-1M-2oN" secondAttribute="trailing" constant="31" id="uPq-eT-zAF"/>
                             <constraint firstItem="err-3W-dbp" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" id="zuI-Vh-zxb"/>
                         </constraints>
@@ -278,6 +294,7 @@
     </scenes>
     <resources>
         <image name="quit" width="77" height="93"/>
+        <image name="redo" width="480" height="382"/>
         <image name="restart" width="86" height="96"/>
         <image name="surrender" width="96" height="111"/>
     </resources>
