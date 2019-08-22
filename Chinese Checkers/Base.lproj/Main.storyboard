@@ -158,11 +158,11 @@
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="34" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="o3u-aG-MJ4">
                                         <rect key="frame" x="0.0" y="50" width="435" height="648"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.19607843137254902" green="0.20000000000000001" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="435" id="rQN-T6-eB0"/>
                                         </constraints>
-                                        <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="separatorColor" red="0.1960784314" green="0.20000000000000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <outlet property="dataSource" destination="BV1-FR-VrT" id="KHA-6x-efu"/>
                                             <outlet property="delegate" destination="BV1-FR-VrT" id="FT5-hg-WrT"/>
@@ -170,13 +170,14 @@
                                     </tableView>
                                     <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eep-00-rlz">
                                         <rect key="frame" x="0.0" y="0.0" width="435" height="50"/>
+                                        <color key="backgroundColor" red="0.19608014822006226" green="0.2000567615032196" blue="0.19607812166213989" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <items>
                                             <navigationItem title="Messages" id="T9C-F6-0AK"/>
                                         </items>
                                     </navigationBar>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAK-i0-bop" customClass="TextMessageField" customModule="Chinese_Checkers" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="698" width="435" height="70"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="7mt-Er-5eq"/>
                                         </constraints>
@@ -189,7 +190,6 @@
                                     <constraint firstAttribute="trailing" secondItem="Eep-00-rlz" secondAttribute="trailing" id="F4V-O0-C9k"/>
                                     <constraint firstAttribute="trailing" secondItem="eAK-i0-bop" secondAttribute="trailing" id="IMf-ai-SFI"/>
                                     <constraint firstItem="eAK-i0-bop" firstAttribute="top" secondItem="o3u-aG-MJ4" secondAttribute="bottom" id="ZdR-RC-bfg"/>
-                                    <constraint firstAttribute="width" constant="435" id="aLR-L9-fYS"/>
                                     <constraint firstAttribute="trailing" secondItem="o3u-aG-MJ4" secondAttribute="trailing" id="bUz-gn-da5"/>
                                     <constraint firstItem="Eep-00-rlz" firstAttribute="top" secondItem="err-3W-dbp" secondAttribute="top" id="hm2-MT-hAA"/>
                                     <constraint firstAttribute="bottom" secondItem="eAK-i0-bop" secondAttribute="bottom" id="mFv-UF-oB2"/>
@@ -285,6 +285,7 @@
                     <connections>
                         <outlet property="chatTableView" destination="o3u-aG-MJ4" id="r8E-oe-mGC"/>
                         <outlet property="messageView" destination="eAK-i0-bop" id="0pS-Uk-WeL"/>
+                        <outlet property="messagesNavigationBar" destination="Eep-00-rlz" id="hn3-vy-5gP"/>
                         <outlet property="turnLabel" destination="W3p-Gg-hc7" id="hFm-VV-2V7"/>
                         <outlet property="winnerLabel" destination="q8f-yg-ixM" id="Dds-10-NtX"/>
                     </connections>

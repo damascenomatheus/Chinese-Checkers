@@ -24,6 +24,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var messageView: TextMessageField!
     @IBOutlet weak var winnerLabel: UILabel!
     @IBOutlet weak var turnLabel: UILabel!
+    @IBOutlet weak var messagesNavigationBar: UINavigationBar!
     
     fileprivate let cellId = "CellId"
     
@@ -71,6 +72,10 @@ class GameViewController: UIViewController {
         chatTableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         chatTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         chatTableView.register(chatMessageCellNib, forCellReuseIdentifier: "ChatMessageCell")
+        chatTableView.backgroundColor = .darkGray
+        
+        messagesNavigationBar.barTintColor = UIColor(displayP3Red: 50/255, green: 51/255, blue: 50/255, alpha: 0.7)
+        messagesNavigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
         messageView.delegate = self
         NetworkManager.shared.delegate = self
@@ -212,10 +217,14 @@ class GameViewController: UIViewController {
     
     func addReceivedMessage(message: String) {
         var isComing = true
+        var playertype = player! == .RED ? Player.BLUE : .RED
         if message.contains("\(player!):") {
             isComing = false
+            playertype = player!
         }
-        let chatMessage = ChatMessage(text: message, isComing: isComing)
+        
+        let messageContent = message.components(separatedBy: ":")[1]
+        let chatMessage = ChatMessage(text: messageContent, isComing: isComing, playerType: playertype)
         chatMessages.append(chatMessage)
     }
     
@@ -249,6 +258,13 @@ extension GameViewController: UITableViewDataSource, UITableViewDelegate {
         
         let chatMessage = chatMessages[indexPath.row]
         cell.chatMessage = chatMessage
+        cell.messageLabel.textColor = .white
+        
+        if chatMessage.playerType == .RED {
+            cell.bubbleBackgroundView.backgroundColor = UIColor(displayP3Red: 135/255, green: 35/255, blue: 29/255, alpha: 0.8)
+        } else if chatMessage.playerType == .BLUE {
+            cell.bubbleBackgroundView.backgroundColor = UIColor(displayP3Red: 27/255, green: 51/255, blue: 181/255, alpha: 0.8)
+        }
         
         return cell
     }

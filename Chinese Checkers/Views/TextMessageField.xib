@@ -50,7 +50,7 @@
                     </userDefinedRuntimeAttributes>
                 </textView>
             </subviews>
-            <color key="backgroundColor" white="0.90000000000000002" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" red="0.19607843137254902" green="0.20000000000000001" blue="0.19607843137254902" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstItem="x2H-Zu-bTD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="KAD-y3-pv1"/>
                 <constraint firstAttribute="bottom" secondItem="x2H-Zu-bTD" secondAttribute="bottom" constant="8" id="aRq-2E-E91"/>
