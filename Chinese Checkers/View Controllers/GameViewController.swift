@@ -74,6 +74,8 @@ class GameViewController: UIViewController {
         
         messageView.delegate = self
         NetworkManager.shared.delegate = self
+        
+        changeTurnLabel(isFirstMove: true)
     }
     
     @IBAction func restartButtonClicked(_ sender: UIButton) {
@@ -159,15 +161,17 @@ class GameViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    func changeTurnLabel() {
-        playerTurn = playerTurn == .RED ? .BLUE : .RED
+    func changeTurnLabel(isFirstMove: Bool) {
+        if !isFirstMove {
+            playerTurn = playerTurn == .RED ? .BLUE : .RED
+        }
         if playerTurn == .RED {
             currentGame?.playerTurn = .RED
-            turnLabel.text = "Red turn"
+            turnLabel.text = currentGame?.player! == playerTurn ? "Your turn" : "Red turn"
             turnLabel.textColor = UIColor(displayP3Red: 254/255, green: 2/255, blue: 0, alpha: 1)
         } else if playerTurn == .BLUE {
             currentGame?.playerTurn = .BLUE
-            turnLabel.text = "Blue turn"
+            turnLabel.text = currentGame?.player! == playerTurn ? "Your turn" : "Blue turn"
             turnLabel.textColor = UIColor(displayP3Red: 35/255, green: 139/255, blue:255, alpha: 1)
         }
     }
@@ -278,7 +282,7 @@ extension GameViewController: NetworkManagerDelegate {
             }
             if command.contains("MOVE") {
                 movePieceBy(command: command)
-                changeTurnLabel()
+                changeTurnLabel(isFirstMove: false)
             } else if command.contains("RESTART") {
                 if !requestFlag {
                     showReceivedRestartMessage()

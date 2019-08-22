@@ -431,7 +431,20 @@ class GameScene: SKScene {
         movePiece(atPos: pos)
         
         if touchCount == 1 {
-            showPossibleMoves(atPos: pos)
+            let mapPos = self.convert(pos, to: map)
+            let tileNode = map.nodes(at: mapPos).first
+            
+            var key = ""
+            if player! == .RED {
+                key += "isRed"
+            } else if player! == .BLUE {
+                key += "isBlue"
+            }
+            
+            if let isOfPlayerType = tileNode?.userData?[key] as? Bool,
+                isOfPlayerType {
+                showPossibleMoves(atPos: pos)
+            }
         }
     }
     

@@ -103,9 +103,8 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Waiting for opponent..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97u-DF-Eny">
-                                <rect key="frame" x="90" y="100" width="398" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waiting for opponent..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97u-DF-Eny">
+                                <rect key="frame" x="90" y="100" width="383.5" height="40.5"/>
                                 <fontDescription key="fontDescription" name="Baskerville-Bold" family="Baskerville" pointSize="35"/>
                                 <color key="textColor" red="1" green="0.98431372549019602" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -113,6 +112,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="97u-DF-Eny" firstAttribute="top" secondItem="V0h-49-mul" secondAttribute="top" constant="80" id="52s-hC-Gdi"/>
                             <constraint firstItem="bBC-KD-679" firstAttribute="top" secondItem="V0h-49-mul" secondAttribute="top" constant="80" id="MKY-pM-cLY"/>
                             <constraint firstItem="WPJ-34-tYn" firstAttribute="leading" secondItem="V0h-49-mul" secondAttribute="leading" constant="90" id="MbG-cx-BG1"/>
                             <constraint firstItem="3aY-9F-Zqa" firstAttribute="leading" secondItem="V0h-49-mul" secondAttribute="leading" constant="90" id="Osl-Ka-DCw"/>
@@ -124,7 +124,9 @@
                             <constraint firstItem="V0h-49-mul" firstAttribute="trailing" secondItem="3aY-9F-Zqa" secondAttribute="trailing" constant="90" id="Xbx-C7-S2t"/>
                             <constraint firstItem="V0h-49-mul" firstAttribute="trailing" secondItem="tDD-TW-guZ" secondAttribute="trailing" constant="90" id="aSz-ak-QW9"/>
                             <constraint firstItem="3aY-9F-Zqa" firstAttribute="top" secondItem="bBC-KD-679" secondAttribute="bottom" constant="121" id="egK-8V-AZu"/>
+                            <constraint firstItem="2wE-Yf-i17" firstAttribute="leading" secondItem="97u-DF-Eny" secondAttribute="trailing" constant="190" id="fne-Cp-iNr"/>
                             <constraint firstItem="V0h-49-mul" firstAttribute="trailing" secondItem="bBC-KD-679" secondAttribute="trailing" constant="90.5" id="njo-YX-HPX"/>
+                            <constraint firstItem="97u-DF-Eny" firstAttribute="leading" secondItem="V0h-49-mul" secondAttribute="leading" constant="90" id="o9i-N0-FMc"/>
                             <constraint firstItem="WPJ-34-tYn" firstAttribute="top" secondItem="tDD-TW-guZ" secondAttribute="bottom" constant="120" id="oCc-g2-HFy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="V0h-49-mul"/>
