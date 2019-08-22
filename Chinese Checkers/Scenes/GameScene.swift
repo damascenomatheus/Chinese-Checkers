@@ -130,10 +130,22 @@ class GameScene: SKScene {
         
         print("row:\(row) | col:\(col)")
         
-//        if playerTurn == player {
+        if playerTurn == player! {
             if touchCount < 1 {
                 if let isPiece = tileNode?.userData?["isPiece"] as? Bool,
                     isPiece {
+                    var key = ""
+                    if player! == .RED {
+                        key += "isRed"
+                    } else if player! == .BLUE {
+                        key += "isBlue"
+                    }
+                    
+                    if let isOfPlayerType = tileNode?.userData?[key] as? Bool,
+                        !isOfPlayerType {
+                        return
+                    }
+                    
                     touchCount += 1
                     let pieceNode = tileNode as? SKSpriteNode
                     selectedPiece = pieceNode!
@@ -142,6 +154,14 @@ class GameScene: SKScene {
                 }
             } else {
                 let hexTileCenter = map.centerOfTile(atColumn: col, row: row)
+                let offset: CGFloat = 20
+                let position = CGPoint(x: hexTileCenter.x + offset, y: hexTileCenter.y)
+                
+                if let isPiece = tileNode?.userData?["isPiece"] as? Bool,
+                    isPiece {
+                    return
+                }
+                
                 let tileDefinition = map.tileDefinition(atColumn: col, row: row)
                 
                 if let isBoard = tileDefinition?.userData?["isBoard"] as? Bool,
@@ -157,7 +177,7 @@ class GameScene: SKScene {
 //                    let whosTurn = playerTurn == .red ? Player.blue : Player.red
 //                    NetworkManager.shared.send(data: whosTurn)
                     
-                    selectedPiece.run(SKAction.move(to: hexTileCenter, duration: 0.5)) {
+                    selectedPiece.run(SKAction.move(to: position, duration: 0.5)) {
                         self.checkIfHasWinner()
                     }
                     touchCount += 1
@@ -170,7 +190,7 @@ class GameScene: SKScene {
                 selectedPiece = SKSpriteNode()
                 removePredictionNodes()
             }
-//        }
+        }
     }
     
     func movePieceTo(piece: SKSpriteNode, col: Int, row: Int) {
@@ -344,10 +364,13 @@ class GameScene: SKScene {
     
     private func showPossibleMovesInDirection() {
         for move in possibleMoves {
-            let node = SKShapeNode(circleOfRadius: 20)
+            let node = SKShapeNode(circleOfRadius: 40)
             node.fillColor = .yellow
             map.addChild(node)
-            node.position = map.centerOfTile(atColumn: move.0, row: move.1)
+            let position = map.centerOfTile(atColumn: move.0, row: move.1)
+            let offset: CGFloat = 20
+            node.position = CGPoint(x: position.x + offset, y: position.y)
+            
             predictionNodesToBeRemoved.append(node)
         }
     }

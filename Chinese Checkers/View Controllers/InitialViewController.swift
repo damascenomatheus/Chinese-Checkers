@@ -27,6 +27,13 @@ class InitialViewController: UIViewController {
         NetworkManager.shared.delegate = self
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        statusView.layer.cornerRadius = statusView.frame.width / 2
+        connectButton.isEnabled = true
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
@@ -56,7 +63,7 @@ class InitialViewController: UIViewController {
 extension InitialViewController: NetworkManagerDelegate {
     func didReceiveMessage(message: String) {
         if message.contains("JOIN") {
-            self.statusView.backgroundColor = .green
+            self.statusView.backgroundColor = UIColor(displayP3Red: 28/255, green: 254/255, blue: 186/255, alpha: 1)
             self.statusLabel.text = "Connected"
         }
         
@@ -66,12 +73,12 @@ extension InitialViewController: NetworkManagerDelegate {
             } else if message.contains("BLUE") {
                 playerType.append(.BLUE)
             }
-            self.connectButton.isEnabled = false
         }
         
         if message.contains("START") {
             self.activePlayersLabel.text = "Opponent found"
             self.startButton.isEnabled = true
+            self.connectButton.isEnabled = false
         }
     }
     

@@ -148,9 +148,11 @@ class GameViewController: UIViewController {
     func changeTurnLabel() {
         playerTurn = playerTurn == .RED ? .BLUE : .RED
         if playerTurn == .RED {
+            currentGame?.playerTurn = .RED
             turnLabel.text = "Red turn"
             turnLabel.textColor = UIColor(displayP3Red: 254/255, green: 2/255, blue: 0, alpha: 1)
         } else if playerTurn == .BLUE {
+            currentGame?.playerTurn = .BLUE
             turnLabel.text = "Blue turn"
             turnLabel.textColor = UIColor(displayP3Red: 35/255, green: 139/255, blue:255, alpha: 1)
         }
@@ -244,9 +246,9 @@ extension GameViewController: NetworkManagerDelegate {
     func didReceiveMessage(message: String) {
         print(message)
         
-        // Split the message into two fragmenoits
+        // Split the message into two fragments
         // The first one says who the player is and the second one contains the message content
-        // After this, check if message content is command by checking whether it contains '>' at beginning
+        // After this, check if message content is command by checking if it contains '>' at beginning
         let isCommand = message.components(separatedBy: ":").last?.first == ">"
         
         if isCommand {
