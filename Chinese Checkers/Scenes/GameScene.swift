@@ -180,6 +180,7 @@ class GameScene: SKScene {
         checkPiece(tileNode: tileNode)
         checkIfIsValidArea(tileNode: tileNode, col: col, row: row)
         currentMove.append((col: col, row: row))
+        viewController?.previousMoves.append([currentMove[1], currentMove[0]])
         movePieceTo(piece: selectedPiece, col: col, row: row)
         moveOpponentPiece()
     }

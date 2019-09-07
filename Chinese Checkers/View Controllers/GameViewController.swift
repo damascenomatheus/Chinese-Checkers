@@ -100,13 +100,12 @@ class GameViewController: UIViewController {
             return
         }
         
-        let piece = currentGame?.getPieceAt(col: Int(lastMove[0].col), row: Int(lastMove[0].row))
-        currentGame?.movePieceTo(piece: piece!, col: Int(lastMove[1].col), row: Int(lastMove[1].row))
-        
-        let data = "iam:\(player!),msg:>MOVE \(lastMove[0].0)-\(lastMove[0].1);\(lastMove[1].0)-\(lastMove[1].1)".data(using: .utf8)!
-        
         let previousMove = (col: Int(lastMove[0].col), row: Int(lastMove[0].row))
         let currentMove = (col: Int(lastMove[1].col), row: Int(lastMove[1].row))
+        let piece = currentGame?.getPieceAt(col: previousMove.col, row: previousMove.row)
+        
+        currentGame?.movePieceTo(piece: piece!, col: currentMove.col, row: currentMove.row)
+        Client.shared.movePiece(previousMove: previousMove, currentMove: currentMove)
     }
     
     @IBAction func surrenderButtonClicked(_ sender: UIButton) {

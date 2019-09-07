@@ -23,8 +23,12 @@ class CCGameProvider: GameProvider {
     }
     
     func movePiceTo(request: Move, session: GamemovePiceToSession) throws -> Empty {
-        let piece = scene?.getPieceAt(col: Int(request.previousPosition.col), row: Int(request.previousPosition.row))
-        scene?.movePieceTo(piece: piece!, col: Int(request.currentPosition.col), row: Int(request.currentPosition.row))
+        let previousMove = (col: Int(request.previousPosition.col), row: Int(request.previousPosition.row))
+        let currentMove = (col: Int(request.currentPosition.col), row: Int(request.currentPosition.row))
+
+        let piece = scene?.getPieceAt(col: Int(previousMove.col), row: Int(previousMove.row))
+        scene?.movePieceTo(piece: piece!, col: Int(currentMove.col), row: Int(currentMove.row))
+        controller?.previousMoves.append([currentMove, previousMove])
         
         return Empty()
     }

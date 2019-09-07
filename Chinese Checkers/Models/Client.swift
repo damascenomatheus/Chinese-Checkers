@@ -43,25 +43,21 @@ class Client {
         }
     }
     
-    func movePiece(previousMove: Movement, currentMove: Movement) {        
-        do {
-            if clientExists {
-                var move = Move()
-                move.previousPosition.col = Int32(previousMove.col)
-                move.previousPosition.row = Int32(previousMove.row)
-                move.currentPosition.col = Int32(currentMove.col)
-                move.currentPosition.row = Int32(currentMove.row)
-                
-                do {
-                    try client?.movePiceTo(move, completion: { (_, _) in
-                        print("Deu bom!")
-                    })
-                } catch {
-                    print("Failed at movePiece:")
-                }
+    func movePiece(previousMove: Movement, currentMove: Movement) {
+        if clientExists {
+            var move = Move()
+            move.previousPosition.col = Int32(previousMove.col)
+            move.previousPosition.row = Int32(previousMove.row)
+            move.currentPosition.col = Int32(currentMove.col)
+            move.currentPosition.row = Int32(currentMove.row)
+            
+            do {
+                try client?.movePiceTo(move, completion: { (_, _) in
+                    print("Deu bom!")
+                })
+            } catch {
+                print("Failed at movePiece:")
             }
-        } catch {
-            print(error)
         }
     }
     

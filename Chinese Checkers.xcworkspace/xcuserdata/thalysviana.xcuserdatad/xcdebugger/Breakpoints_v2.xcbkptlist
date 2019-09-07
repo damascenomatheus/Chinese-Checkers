@@ -2,4 +2,70 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chinese Checkers/View Controllers/GameViewController.swift"
+            timestampString = "589592540.850632"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "surrenderButtonClicked(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chinese_Checkers.GameViewController.surrenderButtonClicked(__C.UIButton) -&gt; ()"
+                  moduleName = "Chinese Checkers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thalysviana/Desktop/Chinese-Checkers/Chinese%20Checkers/View%20Controllers/GameViewController.swift"
+                  timestampString = "589591510.311275"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
+                  offsetFromSymbolStart = "41">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool) -&gt; () in Chinese_Checkers.GameViewController.surrenderButtonClicked(__C.UIButton) -&gt; ()"
+                  moduleName = "Chinese Checkers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thalysviana/Desktop/Chinese-Checkers/Chinese%20Checkers/View%20Controllers/GameViewController.swift"
+                  timestampString = "589591510.313475"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
+                  offsetFromSymbolStart = "109">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chinese Checkers/View Controllers/GameViewController.swift"
+            timestampString = "589592540.850722"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
+            landmarkName = "movePieceBy(command:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
