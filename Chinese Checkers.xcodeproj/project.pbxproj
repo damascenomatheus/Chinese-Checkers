@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,9 +13,13 @@
 		770AB9F72301DF43002B30B3 /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770AB9F62301DF43002B30B3 /* DateHeaderView.swift */; };
 		770ABA012301F59A002B30B3 /* TextMessageField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770ABA002301F59A002B30B3 /* TextMessageField.swift */; };
 		770ABA052301F932002B30B3 /* TextMessageField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 770ABA042301F932002B30B3 /* TextMessageField.xib */; };
+		771C913B2323F8E4001DF2F7 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771C913A2323F8E4001DF2F7 /* Server.swift */; };
+		771C91462323FB05001DF2F7 /* CCGameProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771C91452323FB05001DF2F7 /* CCGameProvider.swift */; };
+		771C91482324030C001DF2F7 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771C91472324030C001DF2F7 /* Client.swift */; };
+		771C9167232454FD001DF2F7 /* gameservice.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771C9165232454FC001DF2F7 /* gameservice.grpc.swift */; };
+		771C9168232454FD001DF2F7 /* gameservice.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771C9166232454FD001DF2F7 /* gameservice.pb.swift */; };
 		7771AA58230865D400AFE105 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7771AA57230865D400AFE105 /* InitialViewController.swift */; };
 		778412432308AEF600CD06BD /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778412422308AEF600CD06BD /* Alert.swift */; };
-		779E15C2230700B0004D3304 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779E15C1230700B0004D3304 /* NetworkManager.swift */; };
 		77BDD46022FED06F00A5FFEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BDD45F22FED06F00A5FFEB /* AppDelegate.swift */; };
 		77BDD46222FED06F00A5FFEB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 77BDD46122FED06F00A5FFEB /* GameScene.sks */; };
 		77BDD46622FED06F00A5FFEB /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BDD46522FED06F00A5FFEB /* GameScene.swift */; };
@@ -26,18 +30,24 @@
 		77BDD47822FED0EE00A5FFEB /* HexGrid.sks in Resources */ = {isa = PBXBuildFile; fileRef = 77BDD47722FED0EE00A5FFEB /* HexGrid.sks */; };
 		77BDD47F2301444900A5FFEB /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BDD47D2301444900A5FFEB /* ChatMessageCell.swift */; };
 		77BDD4802301444900A5FFEB /* ChatMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77BDD47E2301444900A5FFEB /* ChatMessageCell.xib */; };
+		D92601109FB3C1687DC08287 /* Pods_Chinese_Checkers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6842B3C10FDE14337C974F21 /* Pods_Chinese_Checkers.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6842B3C10FDE14337C974F21 /* Pods_Chinese_Checkers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chinese_Checkers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		770AB9EE2301C163002B30B3 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		770AB9F02301D5A1002B30B3 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		770AB9F42301DDCC002B30B3 /* DateHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateHeaderView.xib; sourceTree = "<group>"; };
 		770AB9F62301DF43002B30B3 /* DateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeaderView.swift; sourceTree = "<group>"; };
 		770ABA002301F59A002B30B3 /* TextMessageField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMessageField.swift; sourceTree = "<group>"; };
 		770ABA042301F932002B30B3 /* TextMessageField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextMessageField.xib; sourceTree = "<group>"; };
+		771C913A2323F8E4001DF2F7 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		771C91452323FB05001DF2F7 /* CCGameProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCGameProvider.swift; sourceTree = "<group>"; };
+		771C91472324030C001DF2F7 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		771C9165232454FC001DF2F7 /* gameservice.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gameservice.grpc.swift; sourceTree = SOURCE_ROOT; };
+		771C9166232454FD001DF2F7 /* gameservice.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gameservice.pb.swift; sourceTree = SOURCE_ROOT; };
 		7771AA57230865D400AFE105 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		778412422308AEF600CD06BD /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
-		779E15C1230700B0004D3304 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		77BDD45C22FED06F00A5FFEB /* Chinese Checkers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chinese Checkers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77BDD45F22FED06F00A5FFEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77BDD46122FED06F00A5FFEB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -50,6 +60,8 @@
 		77BDD47722FED0EE00A5FFEB /* HexGrid.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HexGrid.sks; sourceTree = "<group>"; };
 		77BDD47D2301444900A5FFEB /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		77BDD47E2301444900A5FFEB /* ChatMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessageCell.xib; sourceTree = "<group>"; };
+		9AD61F91D5D42FD1D5914A58 /* Pods-Chinese Checkers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chinese Checkers.debug.xcconfig"; path = "Target Support Files/Pods-Chinese Checkers/Pods-Chinese Checkers.debug.xcconfig"; sourceTree = "<group>"; };
+		C97F8D168C2F1CA545A3C4C1 /* Pods-Chinese Checkers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chinese Checkers.release.xcconfig"; path = "Target Support Files/Pods-Chinese Checkers/Pods-Chinese Checkers.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,12 +69,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D92601109FB3C1687DC08287 /* Pods_Chinese_Checkers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6656D7E71950029A82627C08 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6842B3C10FDE14337C974F21 /* Pods_Chinese_Checkers.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		771C91422323FA2E001DF2F7 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				771C91452323FB05001DF2F7 /* CCGameProvider.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
 		7771AA512308647000AFE105 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,16 +136,10 @@
 			isa = PBXGroup;
 			children = (
 				770AB9EE2301C163002B30B3 /* ChatMessage.swift */,
+				771C913A2323F8E4001DF2F7 /* Server.swift */,
+				771C91472324030C001DF2F7 /* Client.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		7771AA56230864FC00AFE105 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				779E15C1230700B0004D3304 /* NetworkManager.swift */,
-			);
-			path = Managers;
 			sourceTree = "<group>";
 		};
 		77BDD45322FED06F00A5FFEB = {
@@ -124,6 +147,8 @@
 			children = (
 				77BDD45E22FED06F00A5FFEB /* Chinese Checkers */,
 				77BDD45D22FED06F00A5FFEB /* Products */,
+				DF5EB09BD8C79109EE705C56 /* Pods */,
+				6656D7E71950029A82627C08 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,7 +163,9 @@
 		77BDD45E22FED06F00A5FFEB /* Chinese Checkers */ = {
 			isa = PBXGroup;
 			children = (
-				7771AA56230864FC00AFE105 /* Managers */,
+				771C9165232454FC001DF2F7 /* gameservice.grpc.swift */,
+				771C9166232454FD001DF2F7 /* gameservice.pb.swift */,
+				771C91422323FA2E001DF2F7 /* Providers */,
 				7771AA55230864C500AFE105 /* Models */,
 				7771AA54230864B500AFE105 /* Extensions */,
 				7771AA532308648900AFE105 /* Views */,
@@ -154,6 +181,15 @@
 			path = "Chinese Checkers";
 			sourceTree = "<group>";
 		};
+		DF5EB09BD8C79109EE705C56 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9AD61F91D5D42FD1D5914A58 /* Pods-Chinese Checkers.debug.xcconfig */,
+				C97F8D168C2F1CA545A3C4C1 /* Pods-Chinese Checkers.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -161,9 +197,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 77BDD47422FED07200A5FFEB /* Build configuration list for PBXNativeTarget "Chinese Checkers" */;
 			buildPhases = (
+				2C127DBA5D01F114D2589C35 /* [CP] Check Pods Manifest.lock */,
 				77BDD45822FED06F00A5FFEB /* Sources */,
 				77BDD45922FED06F00A5FFEB /* Frameworks */,
 				77BDD45A22FED06F00A5FFEB /* Resources */,
+				1E5D4EAA033BB9E1DA6D228B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -225,21 +263,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1E5D4EAA033BB9E1DA6D228B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Chinese Checkers/Pods-Chinese Checkers-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Chinese Checkers/Pods-Chinese Checkers-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Chinese Checkers/Pods-Chinese Checkers-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2C127DBA5D01F114D2589C35 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Chinese Checkers-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		77BDD45822FED06F00A5FFEB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				779E15C2230700B0004D3304 /* NetworkManager.swift in Sources */,
+				771C91462323FB05001DF2F7 /* CCGameProvider.swift in Sources */,
 				77BDD46622FED06F00A5FFEB /* GameScene.swift in Sources */,
 				77BDD47F2301444900A5FFEB /* ChatMessageCell.swift in Sources */,
+				771C9168232454FD001DF2F7 /* gameservice.pb.swift in Sources */,
 				77BDD46822FED06F00A5FFEB /* GameViewController.swift in Sources */,
 				770AB9EF2301C163002B30B3 /* ChatMessage.swift in Sources */,
 				7771AA58230865D400AFE105 /* InitialViewController.swift in Sources */,
 				77BDD46022FED06F00A5FFEB /* AppDelegate.swift in Sources */,
+				771C91482324030C001DF2F7 /* Client.swift in Sources */,
 				770AB9F12301D5A1002B30B3 /* Date+Extension.swift in Sources */,
 				778412432308AEF600CD06BD /* Alert.swift in Sources */,
+				771C9167232454FD001DF2F7 /* gameservice.grpc.swift in Sources */,
 				770AB9F72301DF43002B30B3 /* DateHeaderView.swift in Sources */,
+				771C913B2323F8E4001DF2F7 /* Server.swift in Sources */,
 				770ABA012301F59A002B30B3 /* TextMessageField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,6 +468,7 @@
 		};
 		77BDD47522FED07200A5FFEB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9AD61F91D5D42FD1D5914A58 /* Pods-Chinese Checkers.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -402,6 +487,7 @@
 		};
 		77BDD47622FED07200A5FFEB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C97F8D168C2F1CA545A3C4C1 /* Pods-Chinese Checkers.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

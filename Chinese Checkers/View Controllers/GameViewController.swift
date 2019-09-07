@@ -10,14 +10,16 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-enum Player: String {
+enum PlayerType: String {
     case BLUE = "BLUE"
     case RED = "RED"
     case NONE = "NONE"
 }
 
-class GameViewController: UIViewController {
+typealias Movement = (col: Int, row: Int)
 
+class GameViewController: UIViewController {
+    
     var currentGame: GameScene?
     
     @IBOutlet weak var chatTableView: UITableView!
@@ -32,11 +34,11 @@ class GameViewController: UIViewController {
     
     var requestFlag = false
     
-    var player: Player!
+    var player: PlayerType!
     
-    var playerTurn: Player = .RED
+    var playerTurn: PlayerType = .RED
     
-    var previousMoves: [[(col: Int, row: Int)]] = []
+    var previousMoves: [[Movement]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +55,7 @@ class GameViewController: UIViewController {
                 currentGame = scene as? GameScene
                 currentGame?.viewController = self
                 currentGame?.player = player
+                Server.shared.setProviderController(controller: self)
             }
             
             view.ignoresSiblingOrder = true
@@ -78,20 +81,15 @@ class GameViewController: UIViewController {
         messagesNavigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
         messageView.delegate = self
-        NetworkManager.shared.delegate = self
         
         changeTurnLabel(isFirstMove: true)
     }
     
     @IBAction func restartButtonClicked(_ sender: UIButton) {
         let alert = Alert.showAlert(title: "Restart", message: "Are you sure of this?") { result in
+            // Restart button clicked
             if result {
-                let data = "iam:\(self.player!),msg:>RESTART".data(using: .utf8)!
-                NetworkManager.shared.send(data: data)
-                self.requestFlag = true
-                print("Yup, i want to restart the match!")
-            } else {
-                print("No, i don't want to restart the match!")
+                Client.shared.requestToRestart()
             }
         }
         present(alert, animated: true)
@@ -106,15 +104,16 @@ class GameViewController: UIViewController {
         currentGame?.movePieceTo(piece: piece!, col: Int(lastMove[1].col), row: Int(lastMove[1].row))
         
         let data = "iam:\(player!),msg:>MOVE \(lastMove[0].0)-\(lastMove[0].1);\(lastMove[1].0)-\(lastMove[1].1)".data(using: .utf8)!
-        NetworkManager.shared.send(data: data)
+        
+        let previousMove = (col: Int(lastMove[0].col), row: Int(lastMove[0].row))
+        let currentMove = (col: Int(lastMove[1].col), row: Int(lastMove[1].row))
     }
     
     @IBAction func surrenderButtonClicked(_ sender: UIButton) {
         let alert = Alert.showAlert(title: "Surrender", message: "Are you sure of this?") { [weak self] result in
             if result {
-                let winner = self?.player == .BLUE ? Player.RED : Player.BLUE
+                let winner = self?.player == .BLUE ? PlayerType.RED : PlayerType.BLUE
                 let data = "iam:\(String(describing: self?.player!)),msg:>WINNER/\(winner.rawValue)".data(using: .utf8)!
-                NetworkManager.shared.send(data: data)
                 print("Yup, i give up!")
             } else {
                 print("No, i can win!")
@@ -125,13 +124,12 @@ class GameViewController: UIViewController {
     
     @IBAction func quitButtonClicked(_ sender: UIButton) {
         let data = "iam:\(player!),msg:QUIT".data(using: .utf8)!
-        NetworkManager.shared.send(data: data)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController
         present(vc, animated: true, completion: nil)
     }
     
-    func showWinnerLabel(winner: Player) {
+    func showWinnerLabel(winner: PlayerType) {
         let playerStr: String
         switch winner {
         case .BLUE:
@@ -152,16 +150,10 @@ class GameViewController: UIViewController {
     
     func showReceivedRestartMessage() {
         let alert = Alert.showAlert(title: "Restart", message: "Opponent has requested to restart the match") { [unowned self] result in
-            if result {
-                let data = "iam:\(self.player!),msg:>ACCEPT".data(using: .utf8)!
-                NetworkManager.shared.send(data: data)
+            if result == true {
                 self.currentGame?.restartGame()
-                print("Yup, i want to restart the match!")
-            } else {
-                let data = "iam:\(self.player!),msg:>DECLINE".data(using: .utf8)!
-                NetworkManager.shared.send(data: data)
-                print("No, i don't want to restart the match!")
             }
+            Client.shared.responseToRestart(value: result)
         }
         present(alert, animated: true)
     }
@@ -217,7 +209,7 @@ class GameViewController: UIViewController {
     
     func addReceivedMessage(message: String) {
         var isComing = true
-        var playertype = player! == .RED ? Player.BLUE : .RED
+        var playertype = player! == .RED ? PlayerType.BLUE : .RED
         if message.contains("\(player!):") {
             isComing = false
             playertype = player!
@@ -275,59 +267,8 @@ extension GameViewController: TextMessageFieldDelegate {
         let data = "iam:\(player!),msg:\(text)".data(using: .utf8)!
         
         if text == "QUIT" {
-            NetworkManager.shared.stopChatSession()
+            // QUIT
         }
-        NetworkManager.shared.send(data: data)
         messageView.textMessageView.text = ""
-    }
-}
-
-extension GameViewController: NetworkManagerDelegate {
-    func didReceiveMessage(message: String) {
-        print(message)
-        
-        // Split the message into two fragments
-        // The first one says who the player is and the second one contains the message content
-        // After this, check if message content is command by checking if it contains '>' at beginning
-        let isCommand = message.components(separatedBy: ":").last?.first == ">"
-        
-        if isCommand {
-            guard let command = message.components(separatedBy: ">").last else {
-                print("INVALID COMMAND")
-                return
-            }
-            if command.contains("MOVE") {
-                movePieceBy(command: command)
-                changeTurnLabel(isFirstMove: false)
-            } else if command.contains("RESTART") {
-                if !requestFlag {
-                    showReceivedRestartMessage()
-                }
-            } else if command.contains("ACCEPT") {
-                if requestFlag {
-                    currentGame?.restartGame()
-                    requestFlag = false
-                }
-                currentGame?.playerTurn = .RED
-                previousMoves = []
-            } else if command.contains("DECLINE") {
-                if requestFlag {
-                    showDeclineAlert()
-                    requestFlag = false
-                }
-            } else if command.contains("WINNER") {
-                showWinnerBy(command: command)
-            }
-        } else {
-            addReceivedMessage(message: message)
-        }
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.chatTableView.reloadData()
-        }
-    }
-    
-    func didStopSession() {
-        print("Session has stopped")
     }
 }

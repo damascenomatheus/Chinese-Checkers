@@ -11,6 +11,6 @@ import Foundation
 struct ChatMessage {
     var text: String
     var isComing: Bool
-    var playerType: Player
+    var playerType: PlayerType
 }
 

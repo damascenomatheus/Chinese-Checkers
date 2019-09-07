@@ -1,0 +1,6 @@
+framework module Pods_Chinese_Checkers {
+  umbrella header "Pods-Chinese Checkers-umbrella.h"
+
+  export *
+  module * { export * }
+}

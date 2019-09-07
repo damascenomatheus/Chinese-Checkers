@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+service Game {
+  rpc movePiceTo (Move) returns (Empty);
+  rpc requestToRestartGame (Empty) returns (Bool);
+  rpc responseToRestartGame (Bool) returns (Empty);
+}
+
+message Empty {}
+
+message Player {
+  string username = 1;
+  repeated Message messages = 2;
+}
+
+message Message {
+  string content = 1;
+  Player owner = 2;
+}
+
+message Move {
+  bytes scene = 1;
+  PiecePosition previousPosition = 2;
+  PiecePosition currentPosition = 3;
+}
+
+message PiecePosition {
+  int32 col = 1;
+  int32 row = 2;
+}
+
+message Bool {
+  bool value = 1;
+}

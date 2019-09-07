@@ -38,11 +38,13 @@ class GameScene: SKScene {
     
     var currentMove: [(Int, Int)] = []
     
-    var player: Player!
+    var player: PlayerType!
     
-    var playerTurn: Player = .RED
+    var playerTurn: PlayerType = .RED
     
     override func didMove(to view: SKView) {
+        Server.shared.setProviderScene(scene: self)
+        
         map = childNode(withName: "TileMapNode") as? SKTileMapNode
         reds = map.children
             .filter { ($0.userData?["isRed"] as! Bool) == true }
@@ -80,9 +82,11 @@ class GameScene: SKScene {
             reds[i].position = redsInitialPosition[i]
             blues[i].position = bluesInitialPosition[i]
         }
-        viewController?.winnerLabel.isHidden = true
-        viewController?.turnLabel.text = "Red turn"
-        viewController?.turnLabel.textColor = UIColor(displayP3Red: 254/255, green: 2/255, blue: 0, alpha: 1)
+        DispatchQueue.main.async { [weak self] in
+            self?.viewController?.winnerLabel.isHidden = true
+            self?.viewController?.turnLabel.text = "Red turn"
+            self?.viewController?.turnLabel.textColor = UIColor(displayP3Red: 254/255, green: 2/255, blue: 0, alpha: 1)
+        }
     }
     
     func checkIfHasWinner()  {
@@ -97,11 +101,9 @@ class GameScene: SKScene {
         if blueCount == blues.count {
             print("Blue wins!")
             let data = "iam:\(player!),msg:>WINNER/BLUE".data(using: .utf8)!
-            NetworkManager.shared.send(data: data)
         } else if redCount == reds.count {
             print("Red wins!")
             let data = "iam:\(player!),msg:>WINNER/RED".data(using: .utf8)!
-            NetworkManager.shared.send(data: data)
         }
     }
     
@@ -118,71 +120,25 @@ class GameScene: SKScene {
     
     func closeSocketDuringError() {
         let data = "QUIT".data(using: .utf8)!
-        NetworkManager.shared.send(data: data)
     }
     
     private func movePiece(atPos pos: CGPoint) {
         let mapPos = self.convert(pos, to: map)
         let col = map.tileColumnIndex(fromPosition: mapPos)
         let row = map.tileRowIndex(fromPosition: mapPos)
-        
         let tileNode = map.nodes(at: mapPos).first
         
         print("row:\(row) | col:\(col)")
         
         if playerTurn == player! {
             if touchCount < 1 {
-                if let isPiece = tileNode?.userData?["isPiece"] as? Bool,
-                    isPiece {
-                    var key = ""
-                    if player! == .RED {
-                        key += "isRed"
-                    } else if player! == .BLUE {
-                        key += "isBlue"
-                    }
-                    
-                    if let isOfPlayerType = tileNode?.userData?[key] as? Bool,
-                        !isOfPlayerType {
-                        return
-                    }
-                    
-                    touchCount += 1
-                    let pieceNode = tileNode as? SKSpriteNode
-                    selectedPiece = pieceNode!
-                    
-                    currentMove.append((col: col, row: row))
-                }
+                movePreview(tileNode: tileNode)
+                touchCount += 1
+                currentMove.append((col: col, row: row))
             } else {
-                let hexTileCenter = map.centerOfTile(atColumn: col, row: row)
-                let offset: CGFloat = 20
-                let position = CGPoint(x: hexTileCenter.x + offset, y: hexTileCenter.y)
-                
-                if let isPiece = tileNode?.userData?["isPiece"] as? Bool,
-                    isPiece {
-                    return
-                }
-                
-                let tileDefinition = map.tileDefinition(atColumn: col, row: row)
-                
-                if let isBoard = tileDefinition?.userData?["isBoard"] as? Bool,
-                    tileNode?.userData?["isPiece"] == nil,
-                    isBoard {
-                    currentMove.append((col: col, row: row))
-                    
-                    // Send Move to opponent
-                    let data = "iam:\(player!),msg:>MOVE \(currentMove[0].0)-\(currentMove[0].1);\(currentMove[1].0)-\(currentMove[1].1)".data(using: .utf8)!
-                    NetworkManager.shared.send(data: data)
-                    
-                    // Change turn
-//                    let whosTurn = playerTurn == .red ? Player.blue : Player.red
-//                    NetworkManager.shared.send(data: whosTurn)
-                    
-                    selectedPiece.run(SKAction.move(to: position, duration: 0.5)) {
-                        self.checkIfHasWinner()
-                    }
-                    touchCount += 1
-                    currentMove = []
-                }
+                move(tileNode: tileNode, col: col, row: row)
+                touchCount += 1
+                currentMove = []
             }
             
             if touchCount == 2 {
@@ -193,11 +149,71 @@ class GameScene: SKScene {
         }
     }
     
+    func movePreview(tileNode: SKNode?) {
+        checkPiece(tileNode: tileNode)
+        
+        let key = getPlayerType()
+        checkPlayerTurn(tileNode: tileNode, key: key)
+        
+        let pieceNode = tileNode as? SKSpriteNode
+        selectedPiece = pieceNode!
+    }
+    
+    func checkPiece(tileNode: SKNode?) {
+        if let isPiece = tileNode?.userData?["isPiece"] as? Bool,
+            isPiece {
+            return
+        }
+    }
+    
+    func checkIfIsValidArea(tileNode: SKNode?, col: Int, row: Int) {
+        let tileDefinition = map.tileDefinition(atColumn: col, row: row)
+        guard let isBoard = tileDefinition?.userData?["isBoard"] as? Bool,
+            tileNode?.userData?["isPiece"] == nil,
+            isBoard == true else {
+                return
+        }
+    }
+    
+    // MARK: - Move piece Action
+    func move(tileNode: SKNode?, col: Int, row: Int) {
+        checkPiece(tileNode: tileNode)
+        checkIfIsValidArea(tileNode: tileNode, col: col, row: row)
+        currentMove.append((col: col, row: row))
+        movePieceTo(piece: selectedPiece, col: col, row: row)
+        moveOpponentPiece()
+    }
+    
+    func getPlayerType() -> String {
+        var key = ""
+        if player! == .RED {
+            key += "isRed"
+        } else if player! == .BLUE {
+            key += "isBlue"
+        }
+        return key
+    }
+    
+    func checkPlayerTurn(tileNode: SKNode?, key: String) {
+        if let isOfPlayerType = tileNode?.userData?[key] as? Bool,
+            !isOfPlayerType {
+            return
+        }
+    }
+    
+    func moveOpponentPiece() {
+        let prevMove = (col: currentMove[0].0, row: currentMove[0].1)
+        let curMove = (col: currentMove[1].0, row: currentMove[1].1)
+        Client.shared.movePiece(previousMove: prevMove, currentMove: curMove)
+    }
+    
     func movePieceTo(piece: SKSpriteNode, col: Int, row: Int) {
         let hexTileCenter = map.centerOfTile(atColumn: col, row: row)
         let offset: CGFloat = 20
         let position = CGPoint(x: hexTileCenter.x + offset, y: hexTileCenter.y)
-        piece.run(SKAction.move(to: position, duration: 0.5))
+        piece.run(SKAction.move(to: position, duration: 0.5)) {
+            self.checkIfHasWinner()
+        }
     }
     
     private func checkNEMove(atPos pos: CGPoint) {

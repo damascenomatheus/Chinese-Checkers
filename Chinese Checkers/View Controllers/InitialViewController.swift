@@ -7,24 +7,26 @@
 //
 
 import UIKit
+import SwiftGRPC
 
 class InitialViewController: UIViewController {
 
-    @IBOutlet weak var hostTextField: UITextField!
-    @IBOutlet weak var portTextField: UITextField!
+    
+    @IBOutlet weak var hostPortTextField: UITextField!
+    @IBOutlet weak var clientAddressTextField: UITextField!
+    @IBOutlet weak var clientPortTextField: UITextField!
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var connectButton: UIButton!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var activePlayersLabel: UILabel!
     
-    var playerType: [Player] = []
+    var playerType: [PlayerType] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        NetworkManager.shared.delegate = self
     }
     
     override func viewWillLayoutSubviews() {
@@ -38,12 +40,14 @@ class InitialViewController: UIViewController {
     }
     
     @IBAction func connectButtonClicked(_ sender: UIButton) {
-        NetworkManager.shared.setupNetworkCommunication(host: hostTextField.text ?? "192.168.0.6", port: portTextField.text ?? "1338")
-        NetworkManager.shared.joinChat()
+        Server.shared
+            .setPort(hostPortTextField.text!)
+            .start()
+        startButton.isEnabled = true
     }
     
     @IBAction func startButtonClicked(_ sender: UIButton) {
-        
+        Client.shared.connect(address: clientAddressTextField.text ?? "127.0.0.1", port: clientPortTextField.text!)
     }
     
     // MARK: - Navigation
@@ -52,36 +56,9 @@ class InitialViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toGameVC" {
             if let destination = segue.destination as? GameViewController {
-                destination.player = playerType[0]
+                destination.player = .RED
             }
         }
     }
 
-}
-
-extension InitialViewController: NetworkManagerDelegate {
-    func didReceiveMessage(message: String) {
-        if message.contains("JOIN") {
-            self.statusView.backgroundColor = UIColor(displayP3Red: 28/255, green: 254/255, blue: 186/255, alpha: 1)
-            self.statusLabel.text = "Connected"
-        }
-        
-        if message.contains("SELECT") {
-            if message.contains("RED") {
-                playerType.append(.RED)
-            } else if message.contains("BLUE") {
-                playerType.append(.BLUE)
-            }
-            self.connectButton.isEnabled = false
-        }
-        
-        if message.contains("START") {
-            self.activePlayersLabel.text = "Opponent found"
-            startButton.isEnabled = true
-        }
-    }
-    
-    func didStopSession() {
-        print("Session did stop")
-    }
 }
