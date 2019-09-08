@@ -90,4 +90,12 @@ class CCGameProvider: GameProvider {
         }
         return Empty()
     }
+    
+    func showWinner(request: PlayerSide, session: GameshowWinnerSession) throws -> Empty {
+        let winner: PlayerType = request.value == "RED" ? .RED : .BLUE
+        DispatchQueue.main.async { [weak self] in
+            self?.controller?.showWinnerLabel(winner: winner)
+        }
+        return Empty()
+    }
 }

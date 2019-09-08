@@ -99,11 +99,9 @@ class GameScene: SKScene {
         }.count
         
         if blueCount == blues.count {
-            print("Blue wins!")
-            let data = "iam:\(player),msg:>WINNER/BLUE".data(using: .utf8)!
+            viewController?.showWinnerLabel(winner: PlayerType.BLUE)
         } else if redCount == reds.count {
-            print("Red wins!")
-            let data = "iam:\(player),msg:>WINNER/RED".data(using: .utf8)!
+            viewController?.showWinnerLabel(winner: PlayerType.RED)
         }
     }
     
@@ -112,14 +110,9 @@ class GameScene: SKScene {
         let piece = map.nodes(at: pos)
             .filter { $0.userData?["isPiece"] as? Bool == true }.first
         guard let pieceNode = piece as? SKSpriteNode else {
-//            closeSocketDuringError()
             return SKSpriteNode()
         }
         return pieceNode
-    }
-    
-    func closeSocketDuringError() {
-        let data = "QUIT".data(using: .utf8)!
     }
     
     private func movePiece(atPos pos: CGPoint) {

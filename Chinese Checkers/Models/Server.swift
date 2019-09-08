@@ -57,6 +57,10 @@ class Server {
         }
     }
     
+    func stop() {
+        self.server?.server.stop()
+    }
+    
     // Return IP address of WiFi interface (en0) as a String, or `nil`
     private func getWiFiAddress() -> String? {
         var address : String?

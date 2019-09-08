@@ -67,6 +67,12 @@ fileprivate final class GamesurrenderCallBase: ClientCallUnaryBase<PlayerSide, E
   override class var method: String { return "/Game/surrender" }
 }
 
+internal protocol GameshowWinnerCall: ClientCallUnary {}
+
+fileprivate final class GameshowWinnerCallBase: ClientCallUnaryBase<PlayerSide, Empty>, GameshowWinnerCall {
+  override class var method: String { return "/Game/showWinner" }
+}
+
 
 /// Instantiate GameServiceClient, then call methods of this protocol to make API calls.
 internal protocol GameService: ServiceClient {
@@ -111,6 +117,12 @@ internal protocol GameService: ServiceClient {
   /// Asynchronous. Unary.
   @discardableResult
   func surrender(_ request: PlayerSide, metadata customMetadata: Metadata, completion: @escaping (Empty?, CallResult) -> Void) throws -> GamesurrenderCall
+
+  /// Synchronous. Unary.
+  func showWinner(_ request: PlayerSide, metadata customMetadata: Metadata) throws -> Empty
+  /// Asynchronous. Unary.
+  @discardableResult
+  func showWinner(_ request: PlayerSide, metadata customMetadata: Metadata, completion: @escaping (Empty?, CallResult) -> Void) throws -> GameshowWinnerCall
 
 }
 
@@ -183,6 +195,16 @@ internal extension GameService {
   @discardableResult
   func surrender(_ request: PlayerSide, completion: @escaping (Empty?, CallResult) -> Void) throws -> GamesurrenderCall {
     return try self.surrender(request, metadata: self.metadata, completion: completion)
+  }
+
+  /// Synchronous. Unary.
+  func showWinner(_ request: PlayerSide) throws -> Empty {
+    return try self.showWinner(request, metadata: self.metadata)
+  }
+  /// Asynchronous. Unary.
+  @discardableResult
+  func showWinner(_ request: PlayerSide, completion: @escaping (Empty?, CallResult) -> Void) throws -> GameshowWinnerCall {
+    return try self.showWinner(request, metadata: self.metadata, completion: completion)
   }
 
 }
@@ -272,6 +294,18 @@ internal final class GameServiceClient: ServiceClientBase, GameService {
       .start(request: request, metadata: customMetadata, completion: completion)
   }
 
+  /// Synchronous. Unary.
+  internal func showWinner(_ request: PlayerSide, metadata customMetadata: Metadata) throws -> Empty {
+    return try GameshowWinnerCallBase(channel)
+      .run(request: request, metadata: customMetadata)
+  }
+  /// Asynchronous. Unary.
+  @discardableResult
+  internal func showWinner(_ request: PlayerSide, metadata customMetadata: Metadata, completion: @escaping (Empty?, CallResult) -> Void) throws -> GameshowWinnerCall {
+    return try GameshowWinnerCallBase(channel)
+      .start(request: request, metadata: customMetadata, completion: completion)
+  }
+
 }
 
 /// To build a server, implement a class that conforms to this protocol.
@@ -285,6 +319,7 @@ internal protocol GameProvider: ServiceProvider {
   func identifyPlayer(request: PlayerSide, session: GameidentifyPlayerSession) throws -> PlayerSide
   func changeTurn(request: Empty, session: GamechangeTurnSession) throws -> Empty
   func surrender(request: PlayerSide, session: GamesurrenderSession) throws -> Empty
+  func showWinner(request: PlayerSide, session: GameshowWinnerSession) throws -> Empty
 }
 
 extension GameProvider {
@@ -329,6 +364,11 @@ extension GameProvider {
         handler: handler,
         providerBlock: { try self.surrender(request: $0, session: $1 as! GamesurrenderSessionBase) })
           .run()
+    case "/Game/showWinner":
+      return try GameshowWinnerSessionBase(
+        handler: handler,
+        providerBlock: { try self.showWinner(request: $0, session: $1 as! GameshowWinnerSessionBase) })
+          .run()
     default:
       throw HandleMethodError.unknownMethod
     }
@@ -362,4 +402,8 @@ fileprivate final class GamechangeTurnSessionBase: ServerSessionUnaryBase<Empty,
 internal protocol GamesurrenderSession: ServerSessionUnary {}
 
 fileprivate final class GamesurrenderSessionBase: ServerSessionUnaryBase<PlayerSide, Empty>, GamesurrenderSession {}
+
+internal protocol GameshowWinnerSession: ServerSessionUnary {}
+
+fileprivate final class GameshowWinnerSessionBase: ServerSessionUnaryBase<PlayerSide, Empty>, GameshowWinnerSession {}
 

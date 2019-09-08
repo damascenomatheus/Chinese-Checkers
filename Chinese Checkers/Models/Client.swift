@@ -17,11 +17,11 @@ class Client {
     
     var changed = false
     
-    private init() {}
-    
     var clientExists: Bool {
         return client != nil
     }
+    
+    private init() {}
     
     func connect(address: String, port: String, completion: @escaping () -> Void) {
         client = GameServiceClient.init(address: "\(address):\(port)", secure: false, arguments: [])
@@ -107,6 +107,16 @@ class Client {
             try client?.surrender(winnerPlayer, completion: {(_,_) in})
         } catch {
             print("Failed at surrender:")
+        }
+    }
+    
+    func showWinner(winner: PlayerType) {
+        var winnerPlayer = PlayerSide()
+        winnerPlayer.value = winner == .RED ? "RED" : "BLUE"
+        do {
+            try client?.showWinner(winnerPlayer, completion: {(_,_) in})
+        } catch {
+            print("Failed at showWinner:")
         }
     }
 }

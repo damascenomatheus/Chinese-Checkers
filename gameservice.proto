@@ -8,6 +8,7 @@ service Game {
   rpc identifyPlayer (PlayerSide) returns (PlayerSide);
   rpc changeTurn (Empty) returns (Empty);
   rpc surrender (PlayerSide) returns (Empty);
+  rpc showWinner (PlayerSide) returns (Empty);
 }
 
 message Empty {}

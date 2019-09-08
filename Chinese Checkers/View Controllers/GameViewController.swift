@@ -128,7 +128,7 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func quitButtonClicked(_ sender: UIButton) {
-        let data = "iam:\(player),msg:QUIT".data(using: .utf8)!
+        Server.shared.stop()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController
         present(vc, animated: true, completion: nil)
