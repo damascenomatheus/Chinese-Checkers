@@ -27,22 +27,31 @@ class CCGameProvider: GameProvider {
         let currentMove = (col: Int(request.currentPosition.col), row: Int(request.currentPosition.row))
 
         let piece = scene?.getPieceAt(col: Int(previousMove.col), row: Int(previousMove.row))
-        scene?.movePieceTo(piece: piece!, col: Int(currentMove.col), row: Int(currentMove.row))
-        controller?.previousMoves.append([currentMove, previousMove])
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.scene?.movePieceTo(piece: piece!, col: Int(currentMove.col), row: Int(currentMove.row))
+            self?.controller?.previousMoves.append([currentMove, previousMove])
+        }
         
         return Empty()
     }
     
     func requestToRestartGame(request: Empty, session: GamerequestToRestartGameSession) throws -> BoolMessage {
-        controller?.showReceivedRestartMessage()
+        DispatchQueue.main.async { [weak self] in
+            self?.controller?.showReceivedRestartMessage()
+        }
         return BoolMessage()
     }
     
     func responseToRestartGame(request: BoolMessage, session: GameresponseToRestartGameSession) throws -> Empty {
         if request.value == true {
-            scene?.restartGame()
+            DispatchQueue.main.async { [weak self] in
+                self?.scene?.restartGame()
+            }
         } else {
-            controller?.showDeclineAlert()
+            DispatchQueue.main.async { [weak self] in
+                self?.controller?.showDeclineAlert()
+            }
         }
         return Empty()
     }
@@ -70,6 +79,14 @@ class CCGameProvider: GameProvider {
     func changeTurn(request: Empty, session: GamechangeTurnSession) throws -> Empty {
         DispatchQueue.main.async { [weak self] in
             self?.controller?.changeTurnLabel(isFirstMove: false)
+        }
+        return Empty()
+    }
+    
+    func surrender(request: PlayerSide, session: GamesurrenderSession) throws -> Empty {
+        let winner: PlayerType = request.value == "RED" ? .RED : .BLUE
+        DispatchQueue.main.async { [weak self] in
+            self?.controller?.showWinnerLabel(winner: winner)
         }
         return Empty()
     }

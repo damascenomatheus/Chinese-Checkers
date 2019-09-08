@@ -61,6 +61,12 @@ fileprivate final class GamechangeTurnCallBase: ClientCallUnaryBase<Empty, Empty
   override class var method: String { return "/Game/changeTurn" }
 }
 
+internal protocol GamesurrenderCall: ClientCallUnary {}
+
+fileprivate final class GamesurrenderCallBase: ClientCallUnaryBase<PlayerSide, Empty>, GamesurrenderCall {
+  override class var method: String { return "/Game/surrender" }
+}
+
 
 /// Instantiate GameServiceClient, then call methods of this protocol to make API calls.
 internal protocol GameService: ServiceClient {
@@ -99,6 +105,12 @@ internal protocol GameService: ServiceClient {
   /// Asynchronous. Unary.
   @discardableResult
   func changeTurn(_ request: Empty, metadata customMetadata: Metadata, completion: @escaping (Empty?, CallResult) -> Void) throws -> GamechangeTurnCall
+
+  /// Synchronous. Unary.
+  func surrender(_ request: PlayerSide, metadata customMetadata: Metadata) throws -> Empty
+  /// Asynchronous. Unary.
+  @discardableResult
+  func surrender(_ request: PlayerSide, metadata customMetadata: Metadata, completion: @escaping (Empty?, CallResult) -> Void) throws -> GamesurrenderCall
 
 }
 
@@ -161,6 +173,16 @@ internal extension GameService {
   @discardableResult
   func changeTurn(_ request: Empty, completion: @escaping (Empty?, CallResult) -> Void) throws -> GamechangeTurnCall {
     return try self.changeTurn(request, metadata: self.metadata, completion: completion)
+  }
+
+  /// Synchronous. Unary.
+  func surrender(_ request: PlayerSide) throws -> Empty {
+    return try self.surrender(request, metadata: self.metadata)
+  }
+  /// Asynchronous. Unary.
+  @discardableResult
+  func surrender(_ request: PlayerSide, completion: @escaping (Empty?, CallResult) -> Void) throws -> GamesurrenderCall {
+    return try self.surrender(request, metadata: self.metadata, completion: completion)
   }
 
 }
@@ -238,6 +260,18 @@ internal final class GameServiceClient: ServiceClientBase, GameService {
       .start(request: request, metadata: customMetadata, completion: completion)
   }
 
+  /// Synchronous. Unary.
+  internal func surrender(_ request: PlayerSide, metadata customMetadata: Metadata) throws -> Empty {
+    return try GamesurrenderCallBase(channel)
+      .run(request: request, metadata: customMetadata)
+  }
+  /// Asynchronous. Unary.
+  @discardableResult
+  internal func surrender(_ request: PlayerSide, metadata customMetadata: Metadata, completion: @escaping (Empty?, CallResult) -> Void) throws -> GamesurrenderCall {
+    return try GamesurrenderCallBase(channel)
+      .start(request: request, metadata: customMetadata, completion: completion)
+  }
+
 }
 
 /// To build a server, implement a class that conforms to this protocol.
@@ -250,6 +284,7 @@ internal protocol GameProvider: ServiceProvider {
   func send(request: Message, session: GamesendSession) throws -> Empty
   func identifyPlayer(request: PlayerSide, session: GameidentifyPlayerSession) throws -> PlayerSide
   func changeTurn(request: Empty, session: GamechangeTurnSession) throws -> Empty
+  func surrender(request: PlayerSide, session: GamesurrenderSession) throws -> Empty
 }
 
 extension GameProvider {
@@ -289,6 +324,11 @@ extension GameProvider {
         handler: handler,
         providerBlock: { try self.changeTurn(request: $0, session: $1 as! GamechangeTurnSessionBase) })
           .run()
+    case "/Game/surrender":
+      return try GamesurrenderSessionBase(
+        handler: handler,
+        providerBlock: { try self.surrender(request: $0, session: $1 as! GamesurrenderSessionBase) })
+          .run()
     default:
       throw HandleMethodError.unknownMethod
     }
@@ -318,4 +358,8 @@ fileprivate final class GameidentifyPlayerSessionBase: ServerSessionUnaryBase<Pl
 internal protocol GamechangeTurnSession: ServerSessionUnary {}
 
 fileprivate final class GamechangeTurnSessionBase: ServerSessionUnaryBase<Empty, Empty>, GamechangeTurnSession {}
+
+internal protocol GamesurrenderSession: ServerSessionUnary {}
+
+fileprivate final class GamesurrenderSessionBase: ServerSessionUnaryBase<PlayerSide, Empty>, GamesurrenderSession {}
 

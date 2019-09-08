@@ -104,7 +104,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="startButtonClicked:" destination="uAB-sx-fNT" eventType="touchUpInside" id="yh9-MJ-4id"/>
-                                            <segue destination="BV1-FR-VrT" kind="modal" modalTransitionStyle="crossDissolve" id="bI6-IL-5HB"/>
+                                            <segue destination="BV1-FR-VrT" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="bI6-IL-5HB"/>
                                         </connections>
                                     </button>
                                 </subviews>

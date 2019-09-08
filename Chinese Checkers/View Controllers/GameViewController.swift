@@ -118,8 +118,8 @@ class GameViewController: UIViewController {
         let alert = Alert.showAlert(title: "Surrender", message: "Are you sure of this?") { [weak self] result in
             if result {
                 let winner = self?.player == .BLUE ? PlayerType.RED : PlayerType.BLUE
-                let data = "iam:\(String(describing: self?.player)),msg:>WINNER/\(winner.rawValue)".data(using: .utf8)!
-                print("Yup, i give up!")
+                self?.showWinnerLabel(winner: winner)
+                Client.shared.surrender(winner: winner)
             } else {
                 print("No, i can win!")
             }
@@ -250,7 +250,6 @@ extension GameViewController: TextMessageFieldDelegate {
     func didClickSendButton(text: String) {
         let message = ChatMessage(content: text, owner: player, isComing: false)
         chatMessages.append(message)
-        
         Client.shared.sendMessage(content: text, owner: player)
         messageView.textMessageView.text = ""
     }

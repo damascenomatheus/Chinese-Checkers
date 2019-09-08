@@ -99,4 +99,14 @@ class Client {
             print("Failed at changeTurn:")
         }
     }
+    
+    func surrender(winner: PlayerType) {
+        var winnerPlayer = PlayerSide()
+        winnerPlayer.value = winner == .RED ? "RED" : "BLUE"
+        do {
+            try client?.surrender(winnerPlayer, completion: {(_,_) in})
+        } catch {
+            print("Failed at surrender:")
+        }
+    }
 }
