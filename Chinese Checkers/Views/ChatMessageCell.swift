@@ -21,7 +21,7 @@ class ChatMessageCell: UITableViewCell {
         didSet {
             bubbleBackgroundView.backgroundColor = chatMessage.isComing ? .white : .darkGray
             messageLabel.textColor = chatMessage.isComing ? .black : .white
-            messageLabel.text = chatMessage.text
+            messageLabel.text = chatMessage.content
             
             if chatMessage.isComing {
                 messageLabelLeadingConstraint.isActive = true

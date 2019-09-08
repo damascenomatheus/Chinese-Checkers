@@ -4,18 +4,15 @@ service Game {
   rpc movePiceTo (Move) returns (Empty);
   rpc requestToRestartGame (Empty) returns (Bool);
   rpc responseToRestartGame (Bool) returns (Empty);
+  rpc send (Message) returns (Empty);
 }
 
 message Empty {}
 
-message Player {
-  string username = 1;
-  repeated Message messages = 2;
-}
-
 message Message {
   string content = 1;
-  Player owner = 2;
+  string owner = 2;
+  bool isComing = 3;
 }
 
 message Move {

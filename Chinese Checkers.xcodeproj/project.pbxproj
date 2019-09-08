@@ -16,8 +16,8 @@
 		771C913B2323F8E4001DF2F7 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771C913A2323F8E4001DF2F7 /* Server.swift */; };
 		771C91462323FB05001DF2F7 /* CCGameProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771C91452323FB05001DF2F7 /* CCGameProvider.swift */; };
 		771C91482324030C001DF2F7 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771C91472324030C001DF2F7 /* Client.swift */; };
-		771C9167232454FD001DF2F7 /* gameservice.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771C9165232454FC001DF2F7 /* gameservice.grpc.swift */; };
-		771C9168232454FD001DF2F7 /* gameservice.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771C9166232454FD001DF2F7 /* gameservice.pb.swift */; };
+		771C917323248698001DF2F7 /* gameservice.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771C917123248698001DF2F7 /* gameservice.pb.swift */; };
+		771C917423248698001DF2F7 /* gameservice.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771C917223248698001DF2F7 /* gameservice.grpc.swift */; };
 		7771AA58230865D400AFE105 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7771AA57230865D400AFE105 /* InitialViewController.swift */; };
 		778412432308AEF600CD06BD /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778412422308AEF600CD06BD /* Alert.swift */; };
 		77BDD46022FED06F00A5FFEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BDD45F22FED06F00A5FFEB /* AppDelegate.swift */; };
@@ -44,8 +44,8 @@
 		771C913A2323F8E4001DF2F7 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		771C91452323FB05001DF2F7 /* CCGameProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCGameProvider.swift; sourceTree = "<group>"; };
 		771C91472324030C001DF2F7 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
-		771C9165232454FC001DF2F7 /* gameservice.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gameservice.grpc.swift; sourceTree = SOURCE_ROOT; };
-		771C9166232454FD001DF2F7 /* gameservice.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gameservice.pb.swift; sourceTree = SOURCE_ROOT; };
+		771C917123248698001DF2F7 /* gameservice.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gameservice.pb.swift; sourceTree = SOURCE_ROOT; };
+		771C917223248698001DF2F7 /* gameservice.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gameservice.grpc.swift; sourceTree = SOURCE_ROOT; };
 		7771AA57230865D400AFE105 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		778412422308AEF600CD06BD /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		77BDD45C22FED06F00A5FFEB /* Chinese Checkers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chinese Checkers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,8 +163,8 @@
 		77BDD45E22FED06F00A5FFEB /* Chinese Checkers */ = {
 			isa = PBXGroup;
 			children = (
-				771C9165232454FC001DF2F7 /* gameservice.grpc.swift */,
-				771C9166232454FD001DF2F7 /* gameservice.pb.swift */,
+				771C917223248698001DF2F7 /* gameservice.grpc.swift */,
+				771C917123248698001DF2F7 /* gameservice.pb.swift */,
 				771C91422323FA2E001DF2F7 /* Providers */,
 				7771AA55230864C500AFE105 /* Models */,
 				7771AA54230864B500AFE105 /* Extensions */,
@@ -310,10 +310,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				771C917323248698001DF2F7 /* gameservice.pb.swift in Sources */,
 				771C91462323FB05001DF2F7 /* CCGameProvider.swift in Sources */,
 				77BDD46622FED06F00A5FFEB /* GameScene.swift in Sources */,
 				77BDD47F2301444900A5FFEB /* ChatMessageCell.swift in Sources */,
-				771C9168232454FD001DF2F7 /* gameservice.pb.swift in Sources */,
 				77BDD46822FED06F00A5FFEB /* GameViewController.swift in Sources */,
 				770AB9EF2301C163002B30B3 /* ChatMessage.swift in Sources */,
 				7771AA58230865D400AFE105 /* InitialViewController.swift in Sources */,
@@ -321,9 +321,9 @@
 				771C91482324030C001DF2F7 /* Client.swift in Sources */,
 				770AB9F12301D5A1002B30B3 /* Date+Extension.swift in Sources */,
 				778412432308AEF600CD06BD /* Alert.swift in Sources */,
-				771C9167232454FD001DF2F7 /* gameservice.grpc.swift in Sources */,
 				770AB9F72301DF43002B30B3 /* DateHeaderView.swift in Sources */,
 				771C913B2323F8E4001DF2F7 /* Server.swift in Sources */,
+				771C917423248698001DF2F7 /* gameservice.grpc.swift in Sources */,
 				770ABA012301F59A002B30B3 /* TextMessageField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

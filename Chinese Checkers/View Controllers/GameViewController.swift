@@ -30,7 +30,13 @@ class GameViewController: UIViewController {
     
     fileprivate let cellId = "CellId"
     
-    var chatMessages = [ChatMessage]()
+    var chatMessages = [ChatMessage]() {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.chatTableView.reloadData()
+            }
+        }
+    }
     
     var requestFlag = false
     
@@ -215,7 +221,7 @@ class GameViewController: UIViewController {
         }
         
         let messageContent = message.components(separatedBy: ":")[1]
-        let chatMessage = ChatMessage(text: messageContent, isComing: isComing, playerType: playertype)
+        let chatMessage = ChatMessage(content: messageContent, owner: playertype, isComing: isComing)
         chatMessages.append(chatMessage)
     }
     
@@ -251,9 +257,9 @@ extension GameViewController: UITableViewDataSource, UITableViewDelegate {
         cell.chatMessage = chatMessage
         cell.messageLabel.textColor = .white
         
-        if chatMessage.playerType == .RED {
+        if chatMessage.owner == .RED {
             cell.bubbleBackgroundView.backgroundColor = UIColor(displayP3Red: 135/255, green: 35/255, blue: 29/255, alpha: 0.8)
-        } else if chatMessage.playerType == .BLUE {
+        } else if chatMessage.owner == .BLUE {
             cell.bubbleBackgroundView.backgroundColor = UIColor(displayP3Red: 27/255, green: 51/255, blue: 181/255, alpha: 0.8)
         }
         
@@ -263,11 +269,10 @@ extension GameViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension GameViewController: TextMessageFieldDelegate {
     func didClickSendButton(text: String) {
-        let data = "iam:\(player!),msg:\(text)".data(using: .utf8)!
+        let message = ChatMessage(content: text, owner: player!, isComing: false)
+        chatMessages.append(message)
         
-        if text == "QUIT" {
-            // QUIT
-        }
+        Client.shared.sendMessage(content: text, owner: player!)
         messageView.textMessageView.text = ""
     }
 }

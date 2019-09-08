@@ -29,44 +29,20 @@ struct Empty {
   init() {}
 }
 
-struct Player {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var username: String = String()
-
-  var messages: [Message] = []
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
 struct Message {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var content: String {
-    get {return _storage._content}
-    set {_uniqueStorage()._content = newValue}
-  }
+  var content: String = String()
 
-  var owner: Player {
-    get {return _storage._owner ?? Player()}
-    set {_uniqueStorage()._owner = newValue}
-  }
-  /// Returns true if `owner` has been explicitly set.
-  var hasOwner: Bool {return _storage._owner != nil}
-  /// Clears the value of `owner`. Subsequent reads from it will return its default value.
-  mutating func clearOwner() {_uniqueStorage()._owner = nil}
+  var owner: String = String()
+
+  var isComing: Bool = false
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 struct Move {
@@ -151,105 +127,42 @@ extension Empty: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase
   }
 }
 
-extension Player: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = "Player"
+extension Message: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "Message"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "username"),
-    2: .same(proto: "messages"),
+    1: .same(proto: "content"),
+    2: .same(proto: "owner"),
+    3: .same(proto: "isComing"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.username)
-      case 2: try decoder.decodeRepeatedMessageField(value: &self.messages)
+      case 1: try decoder.decodeSingularStringField(value: &self.content)
+      case 2: try decoder.decodeSingularStringField(value: &self.owner)
+      case 3: try decoder.decodeSingularBoolField(value: &self.isComing)
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.username.isEmpty {
-      try visitor.visitSingularStringField(value: self.username, fieldNumber: 1)
+    if !self.content.isEmpty {
+      try visitor.visitSingularStringField(value: self.content, fieldNumber: 1)
     }
-    if !self.messages.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.messages, fieldNumber: 2)
+    if !self.owner.isEmpty {
+      try visitor.visitSingularStringField(value: self.owner, fieldNumber: 2)
     }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Player, rhs: Player) -> Bool {
-    if lhs.username != rhs.username {return false}
-    if lhs.messages != rhs.messages {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Message: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = "Message"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "content"),
-    2: .same(proto: "owner"),
-  ]
-
-  fileprivate class _StorageClass {
-    var _content: String = String()
-    var _owner: Player? = nil
-
-    static let defaultInstance = _StorageClass()
-
-    private init() {}
-
-    init(copying source: _StorageClass) {
-      _content = source._content
-      _owner = source._owner
-    }
-  }
-
-  fileprivate mutating func _uniqueStorage() -> _StorageClass {
-    if !isKnownUniquelyReferenced(&_storage) {
-      _storage = _StorageClass(copying: _storage)
-    }
-    return _storage
-  }
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        switch fieldNumber {
-        case 1: try decoder.decodeSingularStringField(value: &_storage._content)
-        case 2: try decoder.decodeSingularMessageField(value: &_storage._owner)
-        default: break
-        }
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if !_storage._content.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._content, fieldNumber: 1)
-      }
-      if let v = _storage._owner {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-      }
+    if self.isComing != false {
+      try visitor.visitSingularBoolField(value: self.isComing, fieldNumber: 3)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Message, rhs: Message) -> Bool {
-    if lhs._storage !== rhs._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
-        let _storage = _args.0
-        let rhs_storage = _args.1
-        if _storage._content != rhs_storage._content {return false}
-        if _storage._owner != rhs_storage._owner {return false}
-        return true
-      }
-      if !storagesAreEqual {return false}
-    }
+    if lhs.content != rhs.content {return false}
+    if lhs.owner != rhs.owner {return false}
+    if lhs.isComing != rhs.isComing {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

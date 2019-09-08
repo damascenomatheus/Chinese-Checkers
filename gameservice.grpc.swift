@@ -43,6 +43,12 @@ fileprivate final class GameresponseToRestartGameCallBase: ClientCallUnaryBase<B
   override class var method: String { return "/Game/responseToRestartGame" }
 }
 
+internal protocol GamesendCall: ClientCallUnary {}
+
+fileprivate final class GamesendCallBase: ClientCallUnaryBase<Message, Empty>, GamesendCall {
+  override class var method: String { return "/Game/send" }
+}
+
 
 /// Instantiate GameServiceClient, then call methods of this protocol to make API calls.
 internal protocol GameService: ServiceClient {
@@ -63,6 +69,12 @@ internal protocol GameService: ServiceClient {
   /// Asynchronous. Unary.
   @discardableResult
   func responseToRestartGame(_ request: BoolMessage, metadata customMetadata: Metadata, completion: @escaping (Empty?, CallResult) -> Void) throws -> GameresponseToRestartGameCall
+
+  /// Synchronous. Unary.
+  func send(_ request: Message, metadata customMetadata: Metadata) throws -> Empty
+  /// Asynchronous. Unary.
+  @discardableResult
+  func send(_ request: Message, metadata customMetadata: Metadata, completion: @escaping (Empty?, CallResult) -> Void) throws -> GamesendCall
 
 }
 
@@ -95,6 +107,16 @@ internal extension GameService {
   @discardableResult
   func responseToRestartGame(_ request: BoolMessage, completion: @escaping (Empty?, CallResult) -> Void) throws -> GameresponseToRestartGameCall {
     return try self.responseToRestartGame(request, metadata: self.metadata, completion: completion)
+  }
+
+  /// Synchronous. Unary.
+  func send(_ request: Message) throws -> Empty {
+    return try self.send(request, metadata: self.metadata)
+  }
+  /// Asynchronous. Unary.
+  @discardableResult
+  func send(_ request: Message, completion: @escaping (Empty?, CallResult) -> Void) throws -> GamesendCall {
+    return try self.send(request, metadata: self.metadata, completion: completion)
   }
 
 }
@@ -136,6 +158,18 @@ internal final class GameServiceClient: ServiceClientBase, GameService {
       .start(request: request, metadata: customMetadata, completion: completion)
   }
 
+  /// Synchronous. Unary.
+  internal func send(_ request: Message, metadata customMetadata: Metadata) throws -> Empty {
+    return try GamesendCallBase(channel)
+      .run(request: request, metadata: customMetadata)
+  }
+  /// Asynchronous. Unary.
+  @discardableResult
+  internal func send(_ request: Message, metadata customMetadata: Metadata, completion: @escaping (Empty?, CallResult) -> Void) throws -> GamesendCall {
+    return try GamesendCallBase(channel)
+      .start(request: request, metadata: customMetadata, completion: completion)
+  }
+
 }
 
 /// To build a server, implement a class that conforms to this protocol.
@@ -145,6 +179,7 @@ internal protocol GameProvider: ServiceProvider {
   func movePiceTo(request: Move, session: GamemovePiceToSession) throws -> Empty
   func requestToRestartGame(request: Empty, session: GamerequestToRestartGameSession) throws -> BoolMessage
   func responseToRestartGame(request: BoolMessage, session: GameresponseToRestartGameSession) throws -> Empty
+  func send(request: Message, session: GamesendSession) throws -> Empty
 }
 
 extension GameProvider {
@@ -169,6 +204,11 @@ extension GameProvider {
         handler: handler,
         providerBlock: { try self.responseToRestartGame(request: $0, session: $1 as! GameresponseToRestartGameSessionBase) })
           .run()
+    case "/Game/send":
+      return try GamesendSessionBase(
+        handler: handler,
+        providerBlock: { try self.send(request: $0, session: $1 as! GamesendSessionBase) })
+          .run()
     default:
       throw HandleMethodError.unknownMethod
     }
@@ -186,4 +226,8 @@ fileprivate final class GamerequestToRestartGameSessionBase: ServerSessionUnaryB
 internal protocol GameresponseToRestartGameSession: ServerSessionUnary {}
 
 fileprivate final class GameresponseToRestartGameSessionBase: ServerSessionUnaryBase<BoolMessage, Empty>, GameresponseToRestartGameSession {}
+
+internal protocol GamesendSession: ServerSessionUnary {}
+
+fileprivate final class GamesendSessionBase: ServerSessionUnaryBase<Message, Empty>, GamesendSession {}
 

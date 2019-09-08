@@ -61,4 +61,16 @@ class Client {
         }
     }
     
+    func sendMessage(content: String, owner: PlayerType) {
+        var message = Message()
+        message.content = content
+        message.owner = owner == .RED ? "RED" : "BLUE"
+        message.isComing = true
+        do {
+            try client?.send(message, completion: { (_,_) in })
+        } catch {
+            print("Failed at sendMessage:")
+        }
+    }
+    
 }

@@ -46,4 +46,10 @@ class CCGameProvider: GameProvider {
         }
         return Empty()
     }
+    
+    func send(request: Message, session: GamesendSession) throws -> Empty {
+        let message = ChatMessage(content: request.content, owner: PlayerType(rawValue: request.owner)!, isComing: request.isComing)
+        controller?.chatMessages.append(message)
+        return Empty()
+    }
 }
