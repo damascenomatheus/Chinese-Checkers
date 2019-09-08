@@ -15,14 +15,17 @@ class Client {
     
     private(set) var client: GameServiceClient?
     
+    var changed = false
+    
     private init() {}
     
     var clientExists: Bool {
         return client != nil
     }
     
-    func connect(address: String, port: String) {
+    func connect(address: String, port: String, completion: @escaping () -> Void) {
         client = GameServiceClient.init(address: "\(address):\(port)", secure: false, arguments: [])
+        completion()
     }
     
     func requestToRestart() {
@@ -67,10 +70,33 @@ class Client {
         message.owner = owner == .RED ? "RED" : "BLUE"
         message.isComing = true
         do {
-            try client?.send(message, completion: { (_,_) in })
+            try client?.send(message, completion: {(_,_) in })
         } catch {
             print("Failed at sendMessage:")
         }
     }
     
+    func identifyPlayer(playerType: String) {
+        var playerSide = PlayerSide()
+        playerSide.value = playerType
+        do {
+            if !changed {
+                changed = true
+                try client?.identifyPlayer(playerSide, completion: { (result,_) in
+                    let player: PlayerType = result?.value == "BLUE" ? .BLUE : .RED
+                    Server.shared.player = player
+                })
+            }
+        } catch {
+            print("Failed at identifyPlayer:(playerType)")
+        }
+    }
+    
+    func changeTurn() {
+        do {
+           try client?.changeTurn(Empty(), completion: {(_,_) in})
+        } catch {
+            print("Failed at changeTurn:")
+        }
+    }
 }

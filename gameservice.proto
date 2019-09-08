@@ -5,9 +5,15 @@ service Game {
   rpc requestToRestartGame (Empty) returns (Bool);
   rpc responseToRestartGame (Bool) returns (Empty);
   rpc send (Message) returns (Empty);
+  rpc identifyPlayer (PlayerSide) returns (PlayerSide);
+  rpc changeTurn (Empty) returns (Empty);
 }
 
 message Empty {}
+
+message PlayerSide {
+  string value = 1;
+}
 
 message Message {
   string content = 1;
@@ -16,7 +22,6 @@ message Message {
 }
 
 message Move {
-  bytes scene = 1;
   PiecePosition previousPosition = 2;
   PiecePosition currentPosition = 3;
 }

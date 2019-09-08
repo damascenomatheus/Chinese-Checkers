@@ -38,7 +38,7 @@ class GameScene: SKScene {
     
     var currentMove: [(Int, Int)] = []
     
-    var player: PlayerType!
+    var player: PlayerType = Server.shared.player
     
     var playerTurn: PlayerType = .RED
     
@@ -100,10 +100,10 @@ class GameScene: SKScene {
         
         if blueCount == blues.count {
             print("Blue wins!")
-            let data = "iam:\(player!),msg:>WINNER/BLUE".data(using: .utf8)!
+            let data = "iam:\(player),msg:>WINNER/BLUE".data(using: .utf8)!
         } else if redCount == reds.count {
             print("Red wins!")
-            let data = "iam:\(player!),msg:>WINNER/RED".data(using: .utf8)!
+            let data = "iam:\(player),msg:>WINNER/RED".data(using: .utf8)!
         }
     }
     
@@ -130,8 +130,10 @@ class GameScene: SKScene {
         
         print("row:\(row) | col:\(col)")
         
-        if playerTurn == player! {
+        if playerTurn == player {
             if touchCount < 1 {
+                if !isPlayerPieceType(tileNode: tileNode) { return }
+                
                 movePreview(tileNode: tileNode)
                 touchCount += 1
                 currentMove.append((col: col, row: row))
@@ -144,9 +146,31 @@ class GameScene: SKScene {
             if touchCount == 2 {
                 touchCount = 0
                 selectedPiece = SKSpriteNode()
+                changeTurn()
                 removePredictionNodes()
             }
         }
+    }
+    
+    func isPlayerPieceType(tileNode: SKNode?) -> Bool {
+        var key = ""
+        if player == .RED {
+            key += "isRed"
+        } else if player == .BLUE {
+            key += "isBlue"
+        }
+        
+        if let isOfPlayerType = tileNode?.userData?[key] as? Bool,
+            isOfPlayerType {
+            return true
+        }
+        return false
+    }
+    
+    func changeTurn() {
+        playerTurn = playerTurn == .RED ? .BLUE : .RED
+        viewController?.changeTurnLabel(isFirstMove: false)
+        Client.shared.changeTurn()
     }
     
     func movePreview(tileNode: SKNode?) {
@@ -187,9 +211,9 @@ class GameScene: SKScene {
     
     func getPlayerType() -> String {
         var key = ""
-        if player! == .RED {
+        if player == .RED {
             key += "isRed"
-        } else if player! == .BLUE {
+        } else if player == .BLUE {
             key += "isBlue"
         }
         return key
@@ -452,9 +476,9 @@ class GameScene: SKScene {
             let tileNode = map.nodes(at: mapPos).first
             
             var key = ""
-            if player! == .RED {
+            if player == .RED {
                 key += "isRed"
-            } else if player! == .BLUE {
+            } else if player == .BLUE {
                 key += "isBlue"
             }
             

@@ -104,7 +104,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="startButtonClicked:" destination="uAB-sx-fNT" eventType="touchUpInside" id="yh9-MJ-4id"/>
-                                            <segue destination="BV1-FR-VrT" kind="presentation" identifier="toGameVC" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="AOa-xv-sZh"/>
+                                            <segue destination="BV1-FR-VrT" kind="modal" modalTransitionStyle="crossDissolve" id="bI6-IL-5HB"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -259,14 +259,14 @@
                                 </constraints>
                             </stackView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blue wins!" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8f-yg-ixM">
-                                <rect key="frame" x="438" y="104" width="120" height="30"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <rect key="frame" x="440" y="104" width="118" height="28"/>
+                                <fontDescription key="fontDescription" name="Baskerville-Bold" family="Baskerville" pointSize="24"/>
                                 <color key="textColor" red="0.1360912621" green="0.54564398530000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red Turn" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3p-Gg-hc7">
-                                <rect key="frame" x="465" y="153" width="93" height="27.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                                <rect key="frame" x="460" y="151" width="98" height="25.5"/>
+                                <fontDescription key="fontDescription" name="Baskerville-Bold" family="Baskerville" pointSize="22"/>
                                 <color key="textColor" red="0.94901961089999998" green="0.10588235410000001" blue="0.24705882370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -313,6 +313,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                     </view>
+                    <navigationItem key="navigationItem" id="siz-Zl-C3z"/>
                     <connections>
                         <outlet property="chatTableView" destination="o3u-aG-MJ4" id="r8E-oe-mGC"/>
                         <outlet property="messageView" destination="eAK-i0-bop" id="0pS-Uk-WeL"/>

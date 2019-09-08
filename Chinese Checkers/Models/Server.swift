@@ -19,7 +19,9 @@ class Server {
     
     var scene: GameScene?
     
-    var controller: UIViewController?
+    var controller: GameViewController?
+    
+    var player: PlayerType = .NONE
     
     private(set) var gameProvider = CCGameProvider()
     

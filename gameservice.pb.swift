@@ -29,6 +29,18 @@ struct Empty {
   init() {}
 }
 
+struct PlayerSide {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var value: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 struct Message {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -49,11 +61,6 @@ struct Move {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
-
-  var scene: Data {
-    get {return _storage._scene}
-    set {_uniqueStorage()._scene = newValue}
-  }
 
   var previousPosition: PiecePosition {
     get {return _storage._previousPosition ?? PiecePosition()}
@@ -127,6 +134,35 @@ extension Empty: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase
   }
 }
 
+extension PlayerSide: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "PlayerSide"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "value"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.value)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.value.isEmpty {
+      try visitor.visitSingularStringField(value: self.value, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: PlayerSide, rhs: PlayerSide) -> Bool {
+    if lhs.value != rhs.value {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Message: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = "Message"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -171,13 +207,11 @@ extension Message: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBa
 extension Move: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = "Move"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "scene"),
     2: .same(proto: "previousPosition"),
     3: .same(proto: "currentPosition"),
   ]
 
   fileprivate class _StorageClass {
-    var _scene: Data = SwiftProtobuf.Internal.emptyData
     var _previousPosition: PiecePosition? = nil
     var _currentPosition: PiecePosition? = nil
 
@@ -186,7 +220,6 @@ extension Move: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
     private init() {}
 
     init(copying source: _StorageClass) {
-      _scene = source._scene
       _previousPosition = source._previousPosition
       _currentPosition = source._currentPosition
     }
@@ -204,7 +237,6 @@ extension Move: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
         switch fieldNumber {
-        case 1: try decoder.decodeSingularBytesField(value: &_storage._scene)
         case 2: try decoder.decodeSingularMessageField(value: &_storage._previousPosition)
         case 3: try decoder.decodeSingularMessageField(value: &_storage._currentPosition)
         default: break
@@ -215,9 +247,6 @@ extension Move: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if !_storage._scene.isEmpty {
-        try visitor.visitSingularBytesField(value: _storage._scene, fieldNumber: 1)
-      }
       if let v = _storage._previousPosition {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
       }
@@ -233,7 +262,6 @@ extension Move: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
       let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
         let _storage = _args.0
         let rhs_storage = _args.1
-        if _storage._scene != rhs_storage._scene {return false}
         if _storage._previousPosition != rhs_storage._previousPosition {return false}
         if _storage._currentPosition != rhs_storage._currentPosition {return false}
         return true

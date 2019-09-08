@@ -52,4 +52,25 @@ class CCGameProvider: GameProvider {
         controller?.chatMessages.append(message)
         return Empty()
     }
+    
+    func identifyPlayer(request: PlayerSide, session: GameidentifyPlayerSession) throws -> PlayerSide {
+        let player = request.value
+        var playerSide = PlayerSide()
+        
+        if player == "RED" {
+            playerSide.value = "BLUE"
+        } else {
+            playerSide.value = "RED"
+        }
+        
+        Client.shared.changed = true
+        return playerSide
+    }
+    
+    func changeTurn(request: Empty, session: GamechangeTurnSession) throws -> Empty {
+        DispatchQueue.main.async { [weak self] in
+            self?.controller?.changeTurnLabel(isFirstMove: false)
+        }
+        return Empty()
+    }
 }

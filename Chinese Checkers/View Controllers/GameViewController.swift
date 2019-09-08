@@ -40,7 +40,7 @@ class GameViewController: UIViewController {
     
     var requestFlag = false
     
-    var player: PlayerType!
+    var player: PlayerType = Server.shared.player
     
     var playerTurn: PlayerType = .RED
     
@@ -48,20 +48,18 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
                 
-                // Present the scene
-                view.presentScene(scene)
-                
                 currentGame = scene as? GameScene
                 currentGame?.viewController = self
                 currentGame?.player = player
                 Server.shared.setProviderController(controller: self)
+                // Present the scene
+                view.presentScene(scene)
             }
             
             view.ignoresSiblingOrder = true
@@ -112,13 +110,15 @@ class GameViewController: UIViewController {
         
         currentGame?.movePieceTo(piece: piece!, col: currentMove.col, row: currentMove.row)
         Client.shared.movePiece(previousMove: previousMove, currentMove: currentMove)
+        changeTurnLabel(isFirstMove: false)
+        Client.shared.changeTurn()
     }
     
     @IBAction func surrenderButtonClicked(_ sender: UIButton) {
         let alert = Alert.showAlert(title: "Surrender", message: "Are you sure of this?") { [weak self] result in
             if result {
                 let winner = self?.player == .BLUE ? PlayerType.RED : PlayerType.BLUE
-                let data = "iam:\(String(describing: self?.player!)),msg:>WINNER/\(winner.rawValue)".data(using: .utf8)!
+                let data = "iam:\(String(describing: self?.player)),msg:>WINNER/\(winner.rawValue)".data(using: .utf8)!
                 print("Yup, i give up!")
             } else {
                 print("No, i can win!")
@@ -128,7 +128,7 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func quitButtonClicked(_ sender: UIButton) {
-        let data = "iam:\(player!),msg:QUIT".data(using: .utf8)!
+        let data = "iam:\(player),msg:QUIT".data(using: .utf8)!
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController
         present(vc, animated: true, completion: nil)
@@ -169,33 +169,13 @@ class GameViewController: UIViewController {
         }
         if playerTurn == .RED {
             currentGame?.playerTurn = .RED
-            turnLabel.text = currentGame?.player! == playerTurn ? "Your turn" : "Red turn"
+            turnLabel.text = currentGame?.player == playerTurn ? "Your turn" : "Red turn"
             turnLabel.textColor = UIColor(displayP3Red: 254/255, green: 2/255, blue: 0, alpha: 1)
         } else if playerTurn == .BLUE {
             currentGame?.playerTurn = .BLUE
-            turnLabel.text = currentGame?.player! == playerTurn ? "Your turn" : "Blue turn"
+            turnLabel.text = currentGame?.player == playerTurn ? "Your turn" : "Blue turn"
             turnLabel.textColor = UIColor(displayP3Red: 35/255, green: 139/255, blue:255, alpha: 1)
         }
-    }
-    
-    func movePieceBy(command: String) {
-        guard let positions = command
-            .components(separatedBy: " ").last?
-            .components(separatedBy: ";")
-            else {
-                return
-        }
-        let startPos = positions[0].components(separatedBy: "-")
-        let endPos = positions[1].components(separatedBy: "-")
-        
-        let previousMove = [
-            (col: Int(endPos[0])!, row: Int(endPos[1])!),
-            (col: Int(startPos[0])!, row: Int(startPos[1])!)
-        ]
-        previousMoves.append(previousMove)
-        
-        let piece = currentGame?.getPieceAt(col: Int(startPos[0])!, row: Int(startPos[1])!)
-        currentGame?.movePieceTo(piece: piece!, col: Int(endPos[0])!, row: Int(endPos[1])!)
     }
     
     func showWinnerBy(command: String) {
@@ -214,10 +194,10 @@ class GameViewController: UIViewController {
     
     func addReceivedMessage(message: String) {
         var isComing = true
-        var playertype = player! == .RED ? PlayerType.BLUE : .RED
-        if message.contains("\(player!):") {
+        var playertype = player == .RED ? PlayerType.BLUE : .RED
+        if message.contains("\(player):") {
             isComing = false
-            playertype = player!
+            playertype = player
         }
         
         let messageContent = message.components(separatedBy: ":")[1]
@@ -243,7 +223,6 @@ class GameViewController: UIViewController {
 }
 
 extension GameViewController: UITableViewDataSource, UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatMessages.count
     }
@@ -269,10 +248,10 @@ extension GameViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension GameViewController: TextMessageFieldDelegate {
     func didClickSendButton(text: String) {
-        let message = ChatMessage(content: text, owner: player!, isComing: false)
+        let message = ChatMessage(content: text, owner: player, isComing: false)
         chatMessages.append(message)
         
-        Client.shared.sendMessage(content: text, owner: player!)
+        Client.shared.sendMessage(content: text, owner: player)
         messageView.textMessageView.text = ""
     }
 }

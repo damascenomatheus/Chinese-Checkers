@@ -23,6 +23,8 @@ class InitialViewController: UIViewController {
     
     var playerType: [PlayerType] = []
     
+    var changed = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,10 +46,14 @@ class InitialViewController: UIViewController {
             .setPort(hostPortTextField.text!)
             .start()
         startButton.isEnabled = true
+        
+        Client.shared.connect(address: clientAddressTextField.text ?? "127.0.0.1", port: clientPortTextField.text!) {
+            Client.shared.identifyPlayer(playerType: "RED")
+        }
     }
     
     @IBAction func startButtonClicked(_ sender: UIButton) {
-        Client.shared.connect(address: clientAddressTextField.text ?? "127.0.0.1", port: clientPortTextField.text!)
+        
     }
     
     // MARK: - Navigation
@@ -56,7 +62,7 @@ class InitialViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toGameVC" {
             if let destination = segue.destination as? GameViewController {
-                destination.player = .RED
+                destination.player = Server.shared.player
             }
         }
     }
