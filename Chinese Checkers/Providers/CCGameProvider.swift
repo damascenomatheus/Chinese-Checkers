@@ -46,6 +46,8 @@ class CCGameProvider: GameProvider {
     func responseToRestartGame(request: BoolMessage, session: GameresponseToRestartGameSession) throws -> Empty {
         if request.value == true {
             DispatchQueue.main.async { [weak self] in
+                self?.scene?.playerTurn = .RED
+                self?.controller?.changeTurnLabel(isFirstMove: true)
                 self?.scene?.restartGame()
             }
         } else {

@@ -168,6 +168,8 @@ class GameViewController: UIViewController {
     func changeTurnLabel(isFirstMove: Bool) {
         if !isFirstMove {
             playerTurn = playerTurn == .RED ? .BLUE : .RED
+        } else {
+            playerTurn = .RED
         }
         if playerTurn == .RED {
             currentGame?.playerTurn = .RED

@@ -85,6 +85,7 @@ class GameScene: SKScene {
         playerTurn = .RED
         DispatchQueue.main.async { [weak self] in
             self?.viewController?.winnerLabel.isHidden = true
+            self?.viewController?.changeTurnLabel(isFirstMove: true)
         }
     }
     
