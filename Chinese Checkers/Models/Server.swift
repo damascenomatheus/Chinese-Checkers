@@ -61,8 +61,12 @@ class Server {
         self.server?.server.stop()
     }
     
+    deinit {
+        self.stop()
+    }
+    
     // Return IP address of WiFi interface (en0) as a String, or `nil`
-    private func getWiFiAddress() -> String? {
+    func getWiFiAddress() -> String? {
         var address : String?
         
         // Get list of all interfaces on the local machine:

@@ -18,57 +18,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2wE-Yf-i17">
-                                <rect key="frame" x="663.5" y="108" width="25" height="25"/>
-                                <color key="backgroundColor" red="0.47843137254901957" green="0.49019607843137253" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="Xze-bR-urW"/>
-                                    <constraint firstAttribute="width" constant="25" id="j6Q-0a-u1t"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disconnected" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBC-KD-679">
-                                <rect key="frame" x="709.5" y="100" width="224" height="40.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="178.5" id="AX6-cF-CVq"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Baskerville-Bold" family="Baskerville" pointSize="35"/>
-                                <color key="textColor" red="1" green="0.98431372549019602" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="3aY-9F-Zqa">
-                                <rect key="frame" x="90" y="204" width="844" height="64"/>
+                                <rect key="frame" x="90" y="203.5" width="844" height="64"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Host Port" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k8c-cL-wwI">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="64"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Port" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k8c-cL-wwI">
+                                        <rect key="frame" x="0.0" y="0.0" width="449.5" height="64"/>
                                         <fontDescription key="fontDescription" name="Baskerville-Bold" family="Baskerville" pointSize="50"/>
                                         <color key="textColor" red="1" green="0.98431372549019602" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GEv-Kr-Oz7">
-                                        <rect key="frame" x="444" y="0.0" width="400" height="64"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="400" id="uGl-62-5Dv"/>
-                                        </constraints>
+                                        <rect key="frame" x="489.5" y="0.0" width="354.5" height="64"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="GEv-Kr-Oz7" firstAttribute="width" secondItem="3aY-9F-Zqa" secondAttribute="width" multiplier="0.42" id="hL5-mc-8Gf"/>
+                                </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="55" translatesAutoresizingMaskIntoConstraints="NO" id="tDD-TW-guZ">
-                                <rect key="frame" x="90" y="314" width="844" height="64"/>
+                                <rect key="frame" x="90" y="313.5" width="844" height="64"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Client Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mee-Rq-vCi">
-                                        <rect key="frame" x="0.0" y="0.0" width="389" height="64"/>
-                                        <fontDescription key="fontDescription" name="Baskerville-Bold" family="Baskerville" pointSize="50"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opponent Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mee-Rq-vCi">
+                                        <rect key="frame" x="0.0" y="0.0" width="434.5" height="64"/>
+                                        <fontDescription key="fontDescription" name="Baskerville-Bold" family="Baskerville" pointSize="48"/>
                                         <color key="textColor" red="1" green="0.98431372549019602" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VOa-fG-YQh">
-                                        <rect key="frame" x="444" y="0.0" width="400" height="64"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="400" id="XsQ-yg-aoq"/>
-                                        </constraints>
+                                        <rect key="frame" x="489.5" y="0.0" width="354.5" height="64"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -76,10 +56,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="WPJ-34-tYn">
-                                <rect key="frame" x="90" y="553.5" width="844" height="64"/>
+                                <rect key="frame" x="90" y="603.5" width="844" height="64.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dff-cm-JI3">
-                                        <rect key="frame" x="0.0" y="0.0" width="392" height="64"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="392" height="64.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Baskerville-Bold" family="Baskerville" pointSize="45"/>
                                         <state key="normal" title="Connect"/>
@@ -93,7 +73,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUb-4B-XTI">
-                                        <rect key="frame" x="452" y="0.0" width="392" height="64"/>
+                                        <rect key="frame" x="452" y="0.0" width="392" height="64.5"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Baskerville-Bold" family="Baskerville" pointSize="45"/>
                                         <state key="normal" title="Start"/>
@@ -108,27 +88,27 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="tUb-4B-XTI" firstAttribute="height" secondItem="dff-cm-JI3" secondAttribute="height" id="Qoe-s2-ucE"/>
+                                </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waiting for opponent..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97u-DF-Eny">
-                                <rect key="frame" x="90" y="100" width="383.5" height="40.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current address:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97u-DF-Eny">
+                                <rect key="frame" x="90" y="100" width="844" height="40.5"/>
                                 <fontDescription key="fontDescription" name="Baskerville-Bold" family="Baskerville" pointSize="35"/>
                                 <color key="textColor" red="1" green="0.98431372549019602" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="55" translatesAutoresizingMaskIntoConstraints="NO" id="UOr-tj-NFl">
-                                <rect key="frame" x="90" y="419" width="844" height="64"/>
+                                <rect key="frame" x="90" y="418.5" width="844" height="64"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Client Port" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FrY-5a-C7W">
-                                        <rect key="frame" x="0.0" y="0.0" width="389" height="64"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opponent Port" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FrY-5a-C7W">
+                                        <rect key="frame" x="0.0" y="0.0" width="434.5" height="64"/>
                                         <fontDescription key="fontDescription" name="Baskerville-Bold" family="Baskerville" pointSize="50"/>
                                         <color key="textColor" red="1" green="0.98431372549999996" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sJW-p9-GmT">
-                                        <rect key="frame" x="444" y="0.0" width="400" height="64"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="400" id="7AA-dU-z52"/>
-                                        </constraints>
+                                        <rect key="frame" x="489.5" y="0.0" width="354.5" height="64"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -139,37 +119,33 @@
                         <color key="backgroundColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="3aY-9F-Zqa" firstAttribute="leading" secondItem="V0h-49-mul" secondAttribute="leading" constant="90" id="01x-Y6-RvC"/>
-                            <constraint firstItem="V0h-49-mul" firstAttribute="bottom" secondItem="WPJ-34-tYn" secondAttribute="bottom" constant="150.5" id="3cz-Ms-u3D"/>
-                            <constraint firstItem="97u-DF-Eny" firstAttribute="top" secondItem="V0h-49-mul" secondAttribute="top" constant="80" id="52s-hC-Gdi"/>
+                            <constraint firstItem="97u-DF-Eny" firstAttribute="top" relation="lessThanOrEqual" secondItem="V0h-49-mul" secondAttribute="top" constant="80" id="52s-hC-Gdi"/>
                             <constraint firstItem="V0h-49-mul" firstAttribute="trailing" secondItem="tDD-TW-guZ" secondAttribute="trailing" constant="90" id="Bew-7A-fm4"/>
-                            <constraint firstItem="tDD-TW-guZ" firstAttribute="top" secondItem="3aY-9F-Zqa" secondAttribute="bottom" constant="46" id="CcO-Qp-q2m"/>
+                            <constraint firstItem="3aY-9F-Zqa" firstAttribute="top" relation="lessThanOrEqual" secondItem="97u-DF-Eny" secondAttribute="bottom" constant="63" id="BgO-ZD-Lh8"/>
+                            <constraint firstItem="tDD-TW-guZ" firstAttribute="top" relation="lessThanOrEqual" secondItem="3aY-9F-Zqa" secondAttribute="bottom" constant="46" id="CcO-Qp-q2m"/>
                             <constraint firstItem="V0h-49-mul" firstAttribute="trailing" secondItem="UOr-tj-NFl" secondAttribute="trailing" constant="90" id="FlJ-aV-1rU"/>
-                            <constraint firstItem="WPJ-34-tYn" firstAttribute="top" secondItem="UOr-tj-NFl" secondAttribute="bottom" constant="70.5" id="KaJ-Hn-PTS"/>
-                            <constraint firstItem="bBC-KD-679" firstAttribute="top" secondItem="V0h-49-mul" secondAttribute="top" constant="80" id="MKY-pM-cLY"/>
+                            <constraint firstItem="sJW-p9-GmT" firstAttribute="width" secondItem="VOa-fG-YQh" secondAttribute="width" id="Gov-at-oIU"/>
+                            <constraint firstItem="WPJ-34-tYn" firstAttribute="top" relation="lessThanOrEqual" secondItem="UOr-tj-NFl" secondAttribute="bottom" constant="121" id="JBx-Au-OdR"/>
                             <constraint firstItem="WPJ-34-tYn" firstAttribute="leading" secondItem="V0h-49-mul" secondAttribute="leading" constant="90" id="MbG-cx-BG1"/>
-                            <constraint firstItem="bBC-KD-679" firstAttribute="leading" secondItem="2wE-Yf-i17" secondAttribute="trailing" constant="21" id="PFT-Ln-SYw"/>
+                            <constraint firstItem="V0h-49-mul" firstAttribute="trailing" secondItem="97u-DF-Eny" secondAttribute="trailing" constant="90" id="Oz4-nM-ohZ"/>
                             <constraint firstItem="V0h-49-mul" firstAttribute="trailing" secondItem="WPJ-34-tYn" secondAttribute="trailing" constant="90" id="Q9y-eT-KPP"/>
                             <constraint firstItem="97u-DF-Eny" firstAttribute="leading" secondItem="V0h-49-mul" secondAttribute="leading" constant="90" id="Rbb-6f-cMP"/>
-                            <constraint firstItem="2wE-Yf-i17" firstAttribute="centerY" secondItem="bBC-KD-679" secondAttribute="centerY" id="S9m-fZ-vFu"/>
-                            <constraint firstItem="2wE-Yf-i17" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="97u-DF-Eny" secondAttribute="trailing" constant="8" symbolic="YES" id="VGq-mu-isE"/>
+                            <constraint firstItem="V0h-49-mul" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="WPJ-34-tYn" secondAttribute="bottom" constant="100" id="Vf6-LX-uUU"/>
                             <constraint firstItem="UOr-tj-NFl" firstAttribute="leading" secondItem="V0h-49-mul" secondAttribute="leading" constant="90" id="YAh-un-opw"/>
+                            <constraint firstItem="VOa-fG-YQh" firstAttribute="width" secondItem="GEv-Kr-Oz7" secondAttribute="width" id="bjE-sR-RUg"/>
                             <constraint firstItem="tDD-TW-guZ" firstAttribute="leading" secondItem="V0h-49-mul" secondAttribute="leading" constant="90" id="jrm-9R-L4S"/>
-                            <constraint firstItem="3aY-9F-Zqa" firstAttribute="top" secondItem="97u-DF-Eny" secondAttribute="bottom" constant="63.5" id="mWJ-1Y-P0h"/>
-                            <constraint firstItem="V0h-49-mul" firstAttribute="trailing" secondItem="bBC-KD-679" secondAttribute="trailing" constant="90.5" id="njo-YX-HPX"/>
                             <constraint firstItem="V0h-49-mul" firstAttribute="trailing" secondItem="3aY-9F-Zqa" secondAttribute="trailing" constant="90" id="oFt-tb-24D"/>
-                            <constraint firstItem="UOr-tj-NFl" firstAttribute="top" secondItem="tDD-TW-guZ" secondAttribute="bottom" constant="41" id="rXM-c3-mJf"/>
+                            <constraint firstItem="UOr-tj-NFl" firstAttribute="top" relation="lessThanOrEqual" secondItem="tDD-TW-guZ" secondAttribute="bottom" constant="41" id="rXM-c3-mJf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="V0h-49-mul"/>
                     </view>
                     <connections>
-                        <outlet property="activePlayersLabel" destination="97u-DF-Eny" id="yos-OB-Hv8"/>
                         <outlet property="clientAddressTextField" destination="VOa-fG-YQh" id="5aV-oE-jX2"/>
                         <outlet property="clientPortTextField" destination="sJW-p9-GmT" id="w2O-jh-fVB"/>
                         <outlet property="connectButton" destination="dff-cm-JI3" id="GpR-Es-red"/>
                         <outlet property="hostPortTextField" destination="GEv-Kr-Oz7" id="lZc-2a-DBn"/>
+                        <outlet property="hostWifiAddressLabel" destination="97u-DF-Eny" id="Sae-WE-dQv"/>
                         <outlet property="startButton" destination="tUb-4B-XTI" id="xNB-y2-yU1"/>
-                        <outlet property="statusLabel" destination="bBC-KD-679" id="3Uq-6h-4jY"/>
-                        <outlet property="statusView" destination="2wE-Yf-i17" id="waa-dQ-Qbf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Go-Em-0zs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -185,14 +161,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="err-3W-dbp">
-                                <rect key="frame" x="589" y="0.0" width="435" height="768"/>
+                                <rect key="frame" x="614.5" y="0.0" width="409.5" height="768"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="34" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="o3u-aG-MJ4">
-                                        <rect key="frame" x="0.0" y="50" width="435" height="648"/>
+                                        <rect key="frame" x="0.0" y="50" width="409.5" height="648"/>
                                         <color key="backgroundColor" red="0.19607843137254902" green="0.20000000000000001" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="435" id="rQN-T6-eB0"/>
-                                        </constraints>
                                         <color key="separatorColor" red="0.1960784314" green="0.20000000000000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <outlet property="dataSource" destination="BV1-FR-VrT" id="KHA-6x-efu"/>
@@ -200,14 +173,14 @@
                                         </connections>
                                     </tableView>
                                     <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eep-00-rlz">
-                                        <rect key="frame" x="0.0" y="0.0" width="435" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="409.5" height="50"/>
                                         <color key="backgroundColor" red="0.19608014822006226" green="0.2000567615032196" blue="0.19607812166213989" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <items>
                                             <navigationItem title="Messages" id="T9C-F6-0AK"/>
                                         </items>
                                     </navigationBar>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAK-i0-bop" customClass="TextMessageField" customModule="Chinese_Checkers" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="698" width="435" height="70"/>
+                                        <rect key="frame" x="0.0" y="698" width="409.5" height="70"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="7mt-Er-5eq"/>
@@ -228,11 +201,22 @@
                                     <constraint firstItem="eAK-i0-bop" firstAttribute="leading" secondItem="err-3W-dbp" secondAttribute="leading" id="vXz-fa-dGt"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="39" translatesAutoresizingMaskIntoConstraints="NO" id="WU6-1M-2oN">
-                                <rect key="frame" x="447" y="20" width="111" height="41"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="39" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WU6-1M-2oN">
+                                <rect key="frame" x="381.5" y="40" width="202" height="41"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RNl-JM-QNf">
+                                        <rect key="frame" x="0.0" y="0.0" width="52" height="41"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="41" id="4dQ-Bc-Aw0"/>
+                                            <constraint firstAttribute="width" constant="52" id="57r-rU-ejT"/>
+                                        </constraints>
+                                        <state key="normal" image="redo"/>
+                                        <connections>
+                                            <action selector="redoButtonClicked:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ZYL-4d-Fss"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chT-h5-RgR">
-                                        <rect key="frame" x="0.0" y="0.0" width="37" height="41"/>
+                                        <rect key="frame" x="91" y="0.0" width="37" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="37" id="D4G-bh-nNg"/>
                                             <constraint firstAttribute="height" constant="41" id="fNJ-i5-I4q"/>
@@ -243,7 +227,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xe6-3O-hLk">
-                                        <rect key="frame" x="76" y="0.0" width="35" height="41"/>
+                                        <rect key="frame" x="167" y="0.0" width="35" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="41" id="HDL-TK-j1g"/>
                                             <constraint firstAttribute="width" constant="35" id="RRw-8w-RgJ"/>
@@ -254,24 +238,21 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="xe6-3O-hLk" firstAttribute="leading" secondItem="chT-h5-RgR" secondAttribute="trailing" constant="39" id="KS0-nQ-8Vj"/>
-                                </constraints>
                             </stackView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blue wins!" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8f-yg-ixM">
-                                <rect key="frame" x="440" y="104" width="118" height="28"/>
+                                <rect key="frame" x="465.5" y="124" width="118" height="28"/>
                                 <fontDescription key="fontDescription" name="Baskerville-Bold" family="Baskerville" pointSize="24"/>
                                 <color key="textColor" red="0.1360912621" green="0.54564398530000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red Turn" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3p-Gg-hc7">
-                                <rect key="frame" x="460" y="151" width="98" height="25.5"/>
+                                <rect key="frame" x="485.5" y="171" width="98" height="25.5"/>
                                 <fontDescription key="fontDescription" name="Baskerville-Bold" family="Baskerville" pointSize="22"/>
                                 <color key="textColor" red="0.94901961089999998" green="0.10588235410000001" blue="0.24705882370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NtX-jX-Pgq">
-                                <rect key="frame" x="45" y="20" width="34" height="41"/>
+                                <rect key="frame" x="45" y="40" width="34" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="34" id="7cS-QM-221"/>
                                     <constraint firstAttribute="height" constant="41" id="NFk-o2-aMV"/>
@@ -279,17 +260,6 @@
                                 <state key="normal" image="quit"/>
                                 <connections>
                                     <action selector="quitButtonClicked:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ATu-ax-wTg"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RNl-JM-QNf">
-                                <rect key="frame" x="356" y="20" width="52" height="41"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="41" id="4dQ-Bc-Aw0"/>
-                                    <constraint firstAttribute="width" constant="52" id="57r-rU-ejT"/>
-                                </constraints>
-                                <state key="normal" image="redo"/>
-                                <connections>
-                                    <action selector="redoButtonClicked:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ZYL-4d-Fss"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -300,12 +270,11 @@
                             <constraint firstItem="NtX-jX-Pgq" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" constant="45" id="Eff-VQ-OR7"/>
                             <constraint firstItem="err-3W-dbp" firstAttribute="trailing" secondItem="4qk-I5-YsI" secondAttribute="trailing" id="K9m-zP-d2d"/>
                             <constraint firstItem="W3p-Gg-hc7" firstAttribute="top" secondItem="q8f-yg-ixM" secondAttribute="bottom" constant="19" id="NAT-PW-xat"/>
-                            <constraint firstItem="WU6-1M-2oN" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="Sp0-IL-4JS"/>
-                            <constraint firstItem="RNl-JM-QNf" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="cbK-oW-wFS"/>
-                            <constraint firstItem="NtX-jX-Pgq" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="dnO-Kv-Qqn"/>
-                            <constraint firstItem="chT-h5-RgR" firstAttribute="leading" secondItem="RNl-JM-QNf" secondAttribute="trailing" constant="39" id="hcg-IS-VIG"/>
+                            <constraint firstItem="NtX-jX-Pgq" firstAttribute="top" secondItem="WU6-1M-2oN" secondAttribute="top" id="NNM-mZ-BeA"/>
+                            <constraint firstItem="WU6-1M-2oN" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" constant="20" id="Sp0-IL-4JS"/>
                             <constraint firstItem="o3u-aG-MJ4" firstAttribute="leading" secondItem="q8f-yg-ixM" secondAttribute="trailing" constant="31" id="mEX-aQ-NrQ"/>
                             <constraint firstItem="o3u-aG-MJ4" firstAttribute="leading" secondItem="W3p-Gg-hc7" secondAttribute="trailing" constant="31" id="nAB-2D-4Hf"/>
+                            <constraint firstItem="err-3W-dbp" firstAttribute="width" secondItem="3se-qz-xqx" secondAttribute="width" multiplier="0.4" id="nTK-3C-lu2"/>
                             <constraint firstItem="err-3W-dbp" firstAttribute="bottom" secondItem="4qk-I5-YsI" secondAttribute="bottom" id="qOW-ws-dKX"/>
                             <constraint firstItem="q8f-yg-ixM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4qk-I5-YsI" secondAttribute="leading" symbolic="YES" id="qYt-xn-xE2"/>
                             <constraint firstItem="o3u-aG-MJ4" firstAttribute="leading" secondItem="WU6-1M-2oN" secondAttribute="trailing" constant="31" id="uPq-eT-zAF"/>

@@ -23,6 +23,14 @@ class Client {
     
     private init() {}
     
+    deinit {
+        self.stop()
+    }
+    
+    func stop() {
+        client?.channel.shutdown()
+    }
+    
     func connect(address: String, port: String, completion: @escaping () -> Void) {
         client = GameServiceClient.init(address: "\(address):\(port)", secure: false, arguments: [])
         completion()

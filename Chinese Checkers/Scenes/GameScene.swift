@@ -125,12 +125,14 @@ class GameScene: SKScene {
         
         if playerTurn == player {
             if touchCount < 1 {
-                if !isPlayerPieceType(tileNode: tileNode) { return }
-                
+                if !isPlayerPieceType(tileNode: tileNode) { return }                
                 movePreview(tileNode: tileNode)
                 touchCount += 1
                 currentMove.append((col: col, row: row))
             } else {
+                let validArea = checkIfIsValidArea(tileNode: tileNode, col: col, row: row)
+                if !validArea { return }
+                
                 move(tileNode: tileNode, col: col, row: row)
                 touchCount += 1
                 currentMove = []
@@ -183,13 +185,14 @@ class GameScene: SKScene {
         }
     }
     
-    func checkIfIsValidArea(tileNode: SKNode?, col: Int, row: Int) {
+    func checkIfIsValidArea(tileNode: SKNode?, col: Int, row: Int) -> Bool {
         let tileDefinition = map.tileDefinition(atColumn: col, row: row)
         guard let isBoard = tileDefinition?.userData?["isBoard"] as? Bool,
             tileNode?.userData?["isPiece"] == nil,
             isBoard == true else {
-                return
+                return false
         }
+        return true
     }
     
     // MARK: - Move piece Action

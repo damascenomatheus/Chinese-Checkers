@@ -110,6 +110,7 @@ class GameViewController: UIViewController {
         
         currentGame?.movePieceTo(piece: piece!, col: currentMove.col, row: currentMove.row)
         Client.shared.movePiece(previousMove: previousMove, currentMove: currentMove)
+        
         changeTurnLabel(isFirstMove: false)
         Client.shared.changeTurn()
     }
@@ -129,6 +130,7 @@ class GameViewController: UIViewController {
     
     @IBAction func quitButtonClicked(_ sender: UIButton) {
         Server.shared.stop()
+        Client.shared.stop()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController
         present(vc, animated: true, completion: nil)

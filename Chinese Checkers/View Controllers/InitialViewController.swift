@@ -15,11 +15,9 @@ class InitialViewController: UIViewController {
     @IBOutlet weak var hostPortTextField: UITextField!
     @IBOutlet weak var clientAddressTextField: UITextField!
     @IBOutlet weak var clientPortTextField: UITextField!
-    @IBOutlet weak var statusView: UIView!
-    @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var connectButton: UIButton!
     @IBOutlet weak var startButton: UIButton!
-    @IBOutlet weak var activePlayersLabel: UILabel!
+    @IBOutlet weak var hostWifiAddressLabel: UILabel!
     
     var playerType: [PlayerType] = []
     
@@ -29,17 +27,22 @@ class InitialViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        statusView.layer.cornerRadius = statusView.frame.width / 2
+        getHostIpAddress()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+    
+    func getHostIpAddress() {
+        guard let wifiAddress = Server.shared.getWiFiAddress() else {
+            print("Could not get wifi address.")
+            return
+        }
+        hostWifiAddressLabel.text = "Current Address: \(wifiAddress)"
+    }
+    
+    // MARK: - Actions
     
     @IBAction func connectButtonClicked(_ sender: UIButton) {
         Server.shared
@@ -53,7 +56,6 @@ class InitialViewController: UIViewController {
     }
     
     @IBAction func startButtonClicked(_ sender: UIButton) {
-        
     }
     
     // MARK: - Navigation
