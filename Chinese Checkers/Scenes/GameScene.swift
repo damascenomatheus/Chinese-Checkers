@@ -82,10 +82,9 @@ class GameScene: SKScene {
             reds[i].position = redsInitialPosition[i]
             blues[i].position = bluesInitialPosition[i]
         }
+        playerTurn = .RED
         DispatchQueue.main.async { [weak self] in
             self?.viewController?.winnerLabel.isHidden = true
-            self?.viewController?.turnLabel.text = "Red turn"
-            self?.viewController?.turnLabel.textColor = UIColor(displayP3Red: 254/255, green: 2/255, blue: 0, alpha: 1)
         }
     }
     
@@ -198,7 +197,6 @@ class GameScene: SKScene {
     // MARK: - Move piece Action
     func move(tileNode: SKNode?, col: Int, row: Int) {
         checkPiece(tileNode: tileNode)
-        checkIfIsValidArea(tileNode: tileNode, col: col, row: row)
         currentMove.append((col: col, row: row))
         viewController?.previousMoves.append([currentMove[1], currentMove[0]])
         movePieceTo(piece: selectedPiece, col: col, row: row)

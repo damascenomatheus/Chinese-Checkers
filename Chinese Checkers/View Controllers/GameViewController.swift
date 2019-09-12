@@ -171,11 +171,11 @@ class GameViewController: UIViewController {
         }
         if playerTurn == .RED {
             currentGame?.playerTurn = .RED
-            turnLabel.text = currentGame?.player == playerTurn ? "Your turn" : "Red turn"
+            turnLabel.text = currentGame?.player == playerTurn ? "Your turn" : "Opponent turn"
             turnLabel.textColor = UIColor(displayP3Red: 254/255, green: 2/255, blue: 0, alpha: 1)
         } else if playerTurn == .BLUE {
             currentGame?.playerTurn = .BLUE
-            turnLabel.text = currentGame?.player == playerTurn ? "Your turn" : "Blue turn"
+            turnLabel.text = currentGame?.player == playerTurn ? "Your turn" : "Opponent turn"
             turnLabel.textColor = UIColor(displayP3Red: 35/255, green: 139/255, blue:255, alpha: 1)
         }
     }
@@ -205,6 +205,13 @@ class GameViewController: UIViewController {
         let messageContent = message.components(separatedBy: ":")[1]
         let chatMessage = ChatMessage(content: messageContent, owner: playertype, isComing: isComing)
         chatMessages.append(chatMessage)
+    }
+    
+    func isTextEmpty(text: String) -> Bool {
+        if text == "" {
+            return true
+        }
+        return false
     }
     
     override var shouldAutorotate: Bool {
@@ -250,6 +257,8 @@ extension GameViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension GameViewController: TextMessageFieldDelegate {
     func didClickSendButton(text: String) {
+        if isTextEmpty(text: text) { return }
+        
         let message = ChatMessage(content: text, owner: player, isComing: false)
         chatMessages.append(message)
         Client.shared.sendMessage(content: text, owner: player)

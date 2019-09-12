@@ -23,6 +23,8 @@ class InitialViewController: UIViewController {
     
     var changed = false
     
+    var clientAddress: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,14 +47,27 @@ class InitialViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func connectButtonClicked(_ sender: UIButton) {
+        let address = getAddress()
         Server.shared
             .setPort(hostPortTextField.text!)
             .start()
         startButton.isEnabled = true
         
-        Client.shared.connect(address: clientAddressTextField.text ?? "127.0.0.1", port: clientPortTextField.text!) {
+        Client.shared.connect(address: address, port: clientPortTextField.text!) {
             Client.shared.identifyPlayer(playerType: "RED")
         }
+    }
+    
+    func getAddress() -> String {
+        let wifiAddress = Server.shared.getWiFiAddress()
+        var address = ""
+        if let clientAddress = clientAddressTextField.text,
+            clientAddress.lowercased() == "localhost" {
+            address = wifiAddress!
+        } else {
+            address = clientAddressTextField.text!
+        }
+        return address
     }
     
     @IBAction func startButtonClicked(_ sender: UIButton) {

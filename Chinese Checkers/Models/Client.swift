@@ -63,9 +63,7 @@ class Client {
             move.currentPosition.row = Int32(currentMove.row)
             
             do {
-                try client?.movePiceTo(move, completion: { (_, _) in
-                    print("Deu bom!")
-                })
+                try client?.movePiceTo(move, completion: { (_, _) in })
             } catch {
                 print("Failed at movePiece:")
             }
